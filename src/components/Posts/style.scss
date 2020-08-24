@@ -1,0 +1,61 @@
+.posts {
+  flex: 1;
+  overflow: auto;
+
+  h1 {
+    color: #444;
+    text-align: center;
+  }
+
+  hr {
+    margin: 3% auto;
+    width: 10%;
+    border: none;
+    border-top: 5px dotted #ddd;
+  }
+}
+
+.card {
+  margin: 2% auto;
+  width: 55%;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 1%;
+  box-shadow: 0 0 5px #999;
+  text-align: right;
+
+  h2 {
+    text-align: center;
+    color: #555;
+  }
+
+  p {
+    text-align: left;
+    color: #555;
+  }
+
+  button {
+    cursor: pointer;
+    outline: none;
+    font-size: 1.2rem;
+    color: #f85d4c;
+    background-color: #fff;
+    border: 1px solid #f85d4c;
+    border-radius: 10px;
+    padding: 7px 12px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: #fff;
+      background-color: #f85d4c;
+      border: 1px solid #f85d4c;
+    }
+  }
+
+  @media (max-width: 450px) {
+    width: 80%;
+    padding: 2%;
+    text-align: center;
+    margin: 5% auto;
+  }
+}

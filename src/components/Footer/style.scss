@@ -1,0 +1,43 @@
+.footer {
+  text-align: center;
+  width: 100%;
+  height: auto;   
+  padding: 1% 0;
+  background-color: #333;
+  color: #fff;
+  flex: 0 0 auto;
+
+  span {
+    cursor: default;
+    font-weight: bolder;
+    font-size: 2rem;
+  }
+
+  p:last-of-type {
+    margin: 2px;
+    color: #ccc;
+    font-size: 0.8rem;
+  }
+}
+
+.button {
+  margin: 5px 10px;
+  background-color: transparent;
+  border: 1.5px solid #ca5714;
+  border-radius: 50%;
+  font-size: 2rem;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  outline: none;
+  color: #ccc;
+  transition: all 0.2s ease-out;
+}
+
+.subtract:hover {
+  border-color: #ca1414;
+}
+
+.add:hover {
+  border-color: #14ca41;
+}

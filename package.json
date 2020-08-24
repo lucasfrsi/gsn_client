@@ -1,0 +1,68 @@
+{
+  "name": "react-boilerplate",
+  "version": "1.0.0",
+  "description": "React boilerplate for modern web projects.",
+  "main": "src/index.jsx",
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "npm run lint && cross-env NODE_ENV=production webpack --config webpack.config.js --mode production",
+    "build:nocheck": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode production",
+    "serve": "http-server ./dist -g",
+    "clean": "rm -rf node_modules",
+    "lint": "eslint \"**/*.{js,jsx}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasfrsi/react-boilerplate"
+  },
+  "keywords": [
+    "axios",
+    "boilerplate",
+    "jsx",
+    "prop-types",
+    "react",
+    "redux",
+    "redux-saga",
+    "router",
+    "webpack"
+  ],
+  "author": "Lucas F. Simoni",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^4.1.1",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "fibers": "^5.0.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^3.0.8",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  }
+}
