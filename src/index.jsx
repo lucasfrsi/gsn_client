@@ -7,8 +7,8 @@ import appStore from './store';
 
 import Layout from './components/Layout';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const Posts = React.lazy(() => import('./pages/Posts'));
+// const Home = React.lazy(() => import('./pages/Home'));
+// Route component={Home}
 
 const App = () => (
   <Provider store={appStore}>
@@ -16,8 +16,7 @@ const App = () => (
       <Layout>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/posts" component={Posts} />
+            <Route exact path="/" render={() => <div>Test</div>} />
           </Switch>
         </Suspense>
       </Layout>
