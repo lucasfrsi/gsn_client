@@ -1,0 +1,10 @@
+@use '../abstracts/members.scss' as *;
+
+body {
+  // font-family: "";
+  font-weight: 400; // browser default
+  line-height: 1.2; // browser default
+  color: black;
+}
+
+// headings, paragraphs, etc...
