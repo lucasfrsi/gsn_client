@@ -1,26 +1,22 @@
-// COLORS
-$color-primary: #55c57a;
-$color-primary-light: #7ed56f;
-$color-primary-dark: #28b485;
+// Colors ($c-)
+$c-primary: #eb2f64;
+$c-primary-light: #FF3366;
+$c-primary-dark: #BA265D;
 
-$color-secondary-light: #ffb900;
-$color-secondary-dark: #ff7730;
+$c-grey-light-1: #faf9f9;
+$c-grey-light-2: #f4f2f2;
+$c-grey-light-3: #f0eeee;
+$c-grey-light-4: #ccc;
 
-$color-tertiary-light: #2998ff;
-$color-tertiary-dark: #5643fa;
+$c-grey-dark-1: #333;
+$c-grey-dark-2: #777;
+$c-grey-dark-3: #999;
 
-$color-grey-light-1: #f7f7f7;
-$color-grey-light-2: #eee;
-
-$color-grey-dark: #777;
-$color-grey-dark-2: #999;
-$color-grey-dark-3: #333;
-
-$color-white: #fff;
-$color-black: #000;
+$shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+$shadow-light: 0 2rem 5rem rgba(0,0,0,.06);
 
 
-// FONT VARIABLES
+// FONT VARIABLES ($f-)
 // $font-primary: 'Nunito', sans-serif;
 // $font-display: 'Josefin Sans', sans-serif;
-$default-font-size: 1.6rem;
+// $default-font-size: 1.6rem;
