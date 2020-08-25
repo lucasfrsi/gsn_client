@@ -32,7 +32,4 @@ document.body.appendChild(app);
 ReactDOM.render(<App />, app);
 
 // TO-DO
-// 1. Set the color & font variables for the project
-//   Important: white/gray/black colors!
-//   The whitish colors can be based on the primary/secondary colors
-// 2. Start minor divisions of components
+// 1. Config babel (browser target)

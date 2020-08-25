@@ -1,0 +1,12 @@
+@use '../../../sass/abstracts/members.scss' as *;
+
+.sidebar {
+  flex: 0 0 20%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: $c-black-1; 
+  color: $c-white-1;
+}

@@ -1,0 +1,12 @@
+@use '../../../sass/abstracts/members.scss' as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 7rem;
+
+  border-bottom: 1px solid $c-white-3;
+  background-color: $c-white; 
+}
