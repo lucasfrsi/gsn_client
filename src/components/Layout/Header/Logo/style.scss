@@ -1,0 +1,28 @@
+.logoBox {
+  display: flex;
+  align-items: center;
+
+  position: relative;
+
+  span {
+    font-family: 'Press Start 2P';
+    font-size: 2rem;
+    text-transform: none;
+    margin-bottom: -1rem;
+    color: #222;
+    cursor: default;
+  }
+}
+
+.logo {
+  display: block;
+  height: 8rem;
+  margin-right: -1.2rem;
+}
+
+.bubble {
+  position: absolute;
+  height: 5.5rem;
+  top: -2.4rem;
+  left: 2.2rem;
+}

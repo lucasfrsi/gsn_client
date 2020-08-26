@@ -1,12 +1,16 @@
 import React from 'react';
 
+import Logo from './Logo';
+import Search from './Search';
+import User from './User';
+
 import styles from './style.scss';
 
 const Header = () => (
   <header className={styles.header}>
-    <div>GamersX {/* <Logo /> */}</div>
-    <div>Search (form) {/* <Search /> */}</div>
-    <div>User (div = ImgAvatar + NicknameSpan) {/* <User /> */}</div>
+    <Logo />
+    <Search />
+    <User />
   </header>
 );
 

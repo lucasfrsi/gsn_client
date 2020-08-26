@@ -1,0 +1,55 @@
+@use '../../../../sass/abstracts/members.scss' as *;
+
+.sideNavItem {
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: .5rem;
+  }
+
+  &::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 3px;
+  background-color: $c-primary;
+  transform: scaleY(0);
+  transition: transform .1s, width .2s cubic-bezier(1,0,0,1) .1s, background-color .05s;
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &:active::before {
+    background-color: $c-primary-l;
+  }
+
+  a:link,
+  a:visited {
+    color: $c-grey-l-2;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    &.selected {
+      color: $c-white-1;
+    }
+  }
+
+  svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor;
+  }
+}
