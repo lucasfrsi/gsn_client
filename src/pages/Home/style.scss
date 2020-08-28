@@ -1,9 +1,15 @@
 @use '../../sass/abstracts/members.scss' as *;
 
 .cover {
-  position: relative;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: minmax(min-content, max-content);
+  row-gap: 0;
+  column-gap: 0;
 
   img {
+    grid-row: 1 / 1;
+    grid-column: 1 / 4;
     max-height: 40rem;
     width: 100%;
     display: block;
@@ -11,15 +17,24 @@
     background-position: center;
   }
   
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
+  .profileAvatar {
+    border-radius: 100%;
+    max-width: 22rem;
+    max-height: 22rem;
     width: 100%;
-    height: 100%;
-    display: inline-block;
-    background: linear-gradient(to top, rgb(#fff, .95) 0%, rgb(#fff, .85) 20%, rgb(#fff, .5) 20%, transparent);
+
+    grid-row: 1 / 1;
+    grid-column: 2 / 3;
+
+    justify-self: center;
+    align-self: end;
+    margin-bottom: -3rem;
+
+    img {
+      display: block;
+      border: 5px solid $c-white;
+      border-radius: 100%;
+    }
   }
 }
 
@@ -31,17 +46,20 @@
   h1 {
     font-size: 2.25rem;
     font-weight: 300;
-    text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 1.5rem 3rem;
+    text-transform: uppercase;
+    padding: 1.5rem 1.5rem 1.5rem 3rem;
+    // margin-right: 2rem;
   }
 
-  .stars {
+  h2 {
+    color: $c-grey-d-1;
+    font-size: 2rem;
+    font-weight: 200;
+    letter-spacing: 1px;
     margin-right: auto;
-    display: flex;
   }
 
-  .starIcon,
   .locationIcon {
     width: 1.75rem;
     height: 1.75rem;
@@ -49,7 +67,7 @@
   }
 
   .location {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     display: flex;
     vertical-align: center;
   }
@@ -78,7 +96,7 @@
   }
 
   .ratingCount {
-    font-size: .8rem;
+    font-size: .9rem;
     text-transform: uppercase;
   }
 
@@ -86,7 +104,7 @@
     border: none;
     color: $c-primary;
     font-size: inherit;
-    border-bottom: 1px solid currentColor;
+    // border-bottom: 1px solid currentColor;
     padding-bottom: 2px;
     display: inline-block;
     background-color: transparent;
@@ -109,18 +127,47 @@
   padding: 4.5rem;
   background-color: $c-white-1;
   border-bottom: 1px solid $c-white-3;
+
+  ul {
+    display: flex;
+    list-style: none;
+
+    li:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    li a svg {
+      height: 2.5rem;
+      width: 2.5rem;
+      fill: $c-grey-d-3;
+      transition: all 0.1s;
+    }
+
+    .socialIconFacebook:hover {
+      fill: $c-facebook;
+    }
+    .socialIconTwitter:hover {
+      fill: $c-twitter;
+    }
+    .socialIconInstagram:hover {
+      fill: $c-instagram;
+    }
+    .socialIconYoutube:hover {
+      fill: $c-youtube;
+    }
+    .socialIconTwitch:hover {
+      fill: $c-twitch;
+    }
+    .socialIconPatreon:hover {
+      fill: $c-patreon;
+    }
+
+  }
 }
 
 .cta {
   padding: 3.5rem 0;
   text-align: center;
-
-  &BookNow {
-    font-size: 2rem;
-    font-weight: 300;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-  }
 
   iframe {
     border: 2px solid $c-grey-l-3;
