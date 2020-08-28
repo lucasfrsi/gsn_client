@@ -1,0 +1,172 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.post {
+  display: flex;
+  flex-direction: row;
+  background-color: $c-white;
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.06);
+  padding: 3rem;
+  border-radius: 20px;
+  cursor: default;
+
+  max-width: 70rem;
+}
+
+.postUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 12rem;
+    border-radius: 50%;
+    margin: 0 3rem 2rem 0;
+  }
+
+  h4 {
+    font-weight: 800;
+    margin-right: 3rem;
+  }
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.postData {
+  display: flex;
+  flex-direction: column;
+}
+
+.postText {
+  text-align: justify;
+  line-height: 1.4;
+}
+
+.postDate {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.postCreated,
+.postEdited {
+  font-size: 1.4rem;
+  color: $c-grey-d-1;
+}
+
+.postInteractions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    fill: $c-grey-d-3;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+}
+
+.postLikeComment {
+  display: flex;
+  align-items: center;
+}
+
+.postLikeBox {
+  display: flex;
+  padding: 0.7rem;
+  border: 2px solid $c-grey-l-1;
+  border-radius: 0.5rem;
+
+  background-image: linear-gradient(105deg, 
+    transparent 0%,
+    transparent 49%,
+    $c-grey-l-1 50%,
+    $c-grey-l-1 51%,
+    transparent 52%,
+  );
+}
+
+.postLike,
+.postDislike {
+  display: flex;
+
+  svg {
+    height: 2rem;
+    width: 2rem;
+
+    &:hover {
+      fill: $c-primary;
+      transform: scale(1.2);
+    }
+
+    &:active {
+      fill: $c-primary-l;
+      transform: scale(1.4);
+    }
+  }
+
+  span {
+    margin-left: 0.4rem;
+    text-align: center;
+
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.postDislike {
+  margin-left: 3rem;
+}
+
+.postDiscussion {
+  display: flex;
+
+  margin-left: 0.3rem;
+  padding: 0.7rem;
+  border: 2px solid $c-grey-l-1;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  span {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-weight: 500;
+  }
+
+  &:hover {
+    border: 2px solid $c-grey-l-2;
+    color: $c-primary;
+  }
+
+  &:active {
+    border: 2px solid $c-grey-l-3;
+    color: $c-primary-l;
+  }
+}
+
+.postEditDelete {
+  display: flex;
+
+  svg {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      fill: $c-primary;
+      transform: scale(1.2);
+    }
+
+    &:active {
+      fill: $c-primary-l;
+      transform: scale(1.4);
+    }
+  }
+
+}

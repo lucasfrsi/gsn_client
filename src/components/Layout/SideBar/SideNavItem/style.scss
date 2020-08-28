@@ -28,6 +28,10 @@
     background-color: $c-primary-l;
   }
 
+  &:hover {
+    color: $c-white-1;
+  }
+
   a:link,
   a:visited {
     color: $c-grey-l-2;

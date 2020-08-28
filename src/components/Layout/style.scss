@@ -4,8 +4,6 @@
   max-width: 144rem;
   margin: 8rem auto;
   box-shadow: 0 2rem 6rem rgba(0,0,0,.3);
-
-  
 }
 
 .content {
@@ -14,6 +12,6 @@
 
 .pages {
   flex: 1;
-  min-height: 70rem;
+  min-height: 70rem; // will remove later
   background-color: $c-white; 
 }

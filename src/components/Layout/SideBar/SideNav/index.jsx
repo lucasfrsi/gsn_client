@@ -15,12 +15,17 @@ const SideNav = () => (
     <SideNavItem
       item="Profile"
       route="/test"
-      svgPath={`${icons}#icon-home`}
+      svgPath={`${icons}#icon-user`}
     />
     <SideNavItem
-      item="Logout"
+      item="Posts"
       route="/test2"
-      svgPath={`${icons}#icon-home`}
+      svgPath={`${icons}#icon-pencil`}
+    />
+    <SideNavItem
+      item="Moments"
+      route="/test3"
+      svgPath={`${icons}#icon-flash`}
     />
   </ul>
 );

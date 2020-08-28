@@ -15,3 +15,5 @@ const Search = () => (
 );
 
 export default Search;
+// prevent default on ENTER key press
+// because a search users page wont be implemented
