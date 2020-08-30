@@ -14,19 +14,20 @@
     align-items: center;
   }
 
-  & > *:hover {
+  & > *:last-child:hover {
     background-color: $c-white-3;
   }
 }
 
 .iconBox {
   position: relative;
+  cursor: default;
 }
 
 .icon {
   height: 2.25rem;
   width: 2.25rem;
-  fill: $c-grey-d-3;
+  fill: $c-grey-l-1;
 }
 
 .notification {

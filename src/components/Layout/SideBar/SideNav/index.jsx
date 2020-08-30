@@ -11,10 +11,11 @@ const SideNav = () => (
       item="Home"
       route="/"
       svgPath={`${icons}#icon-home`}
+      exact
     />
     <SideNavItem
       item="Profile"
-      route="/test"
+      route="/my-profile"
       svgPath={`${icons}#icon-user`}
     />
     <SideNavItem

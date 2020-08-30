@@ -1,6 +1,6 @@
 import React from 'react';
 
-import image from '../../assets/images/avatar.jpg';
+import image from '../../assets/images/avatar2.jpg';
 
 import svg from '../../assets/svg/sprite.svg';
 
@@ -11,7 +11,7 @@ const Post = () => (
 
     <div className={styles.postUser}>
       <img src={image} alt="User" />
-      <h4>Jade Curtiss</h4>
+      <h4>xCloudFFVII</h4>
     </div>
 
     <div className={styles.postContent}>

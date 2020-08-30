@@ -1,6 +1,6 @@
 import React from 'react';
 
-import image from '../../assets/images/avatar.jpg';
+import image from '../../assets/images/avatar2.jpg';
 import nani from '../../assets/images/reactions/nani.png';
 import love from '../../assets/images/reactions/love.png';
 import haha from '../../assets/images/reactions/haha.png';
@@ -35,7 +35,7 @@ const Moment = () => (
         <div className={styles.reactionCount}><span>67</span> Reactions</div>
       </div>
       <div className={styles.momentUserBox}>
-        <p className={styles.momentUserName}>Jade Curtiss</p>
+        <p className={styles.momentUserName}>xCloudFFVII</p>
         <p className={styles.momentUserDate}>Aug 26<sup>th</sup>, 2020</p>
       </div>
       <img src={image} alt="User 1" className={styles.momentUserPhoto} />

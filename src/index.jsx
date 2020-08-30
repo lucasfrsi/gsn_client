@@ -9,9 +9,7 @@ import Layout from './components/Layout';
 
 import './sass/base/main.scss';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const Test2 = React.lazy(() => import('./components/Post'));
-const Test3 = React.lazy(() => import('./components/Moment'));
+const Profile = React.lazy(() => import('./pages/Profile'));
 
 const App = () => (
   <Provider store={appStore}>
@@ -19,9 +17,8 @@ const App = () => (
       <Layout>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/test2" component={Test2} />
-            <Route exact path="/test3" component={Test3} />
+            <Route path="/my-profile" component={Profile} />
+            <Route path="" render={() => <div>Not implemented</div>} />
           </Switch>
         </Suspense>
       </Layout>
