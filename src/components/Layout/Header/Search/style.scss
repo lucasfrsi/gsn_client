@@ -9,49 +9,49 @@
 }
 
 .input {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background-color: $c-white-3;
-    border: none;
-    padding: .7rem 2rem;
-    border-radius: 100px;
-    width: 90%;
-    transition: all .2s;
-    margin-right: -3.25rem;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: $c-white-3;
+  border: none;
+  padding: .7rem 2rem;
+  border-radius: 100px;
+  width: 90%;
+  transition: all .2s;
+  margin-right: -3.25rem;
 
-    &:focus {
-        outline: none;
-        width: 100%;
-        background-color: $c-grey-l-1;
-    }
+  &:focus {
+    outline: none;
+    width: 100%;
+    background-color: $c-grey-l-1;
+  }
 
-    &::-webkit-input-placeholder {
-        font-weight: 100;
-        color: $c-grey-l-3;
-    }
+  &::-webkit-input-placeholder {
+    font-weight: 100;
+    color: $c-grey-l-3;
+  }
 
-    &:focus + .button {
-        background-color: $c-grey-l-1;
-    }
+  &:focus + .button {
+    background-color: $c-grey-l-1;
+  }
 }
 
 
 .button {
-    border: none;
-    background-color: $c-white-3;
+  border: none;
+  background-color: $c-white-3;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 
-    &:active {
-        transform: translateY(2px);
-    }
+  &:active {
+    transform: translateY(2px);
+  }
 }
 
 .icon {
-    height: 2rem;
-    width: 2rem;
-    fill: $c-grey-d-1;
+  height: 2rem;
+  width: 2rem;
+  fill: $c-grey-d-1;
 }

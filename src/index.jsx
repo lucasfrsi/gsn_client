@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import './sass/base/main.scss';
 
 const Profile = React.lazy(() => import('./pages/Profile'));
+const Home = React.lazy(() => import('./pages/Home'));
 
 const App = () => (
   <Provider store={appStore}>
@@ -18,6 +19,7 @@ const App = () => (
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route path="/my-profile" component={Profile} />
+            <Route path="/" exact component={Home} />
             <Route path="" render={() => <div>Not implemented</div>} />
           </Switch>
         </Suspense>
