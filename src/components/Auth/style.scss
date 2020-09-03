@@ -1,0 +1,155 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.localBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.auth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: $c-white;
+  border-radius: 1rem;
+  padding: 4rem;
+
+  z-index: 20;
+
+  color: $c-grey-d-3;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding-bottom: -1rem;
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all .1s;
+
+  &:focus {
+    outline: none;
+    transform: scale(1.2);
+    
+    .closeButtonIcon {
+      fill: $c-primary;
+    }
+  }
+
+  &Icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2rem;
+    height: 2rem;
+    fill: $c-grey-d-3;
+    transition: all .1s;
+    
+    &:hover {
+      fill: $c-primary;
+    }
+  }
+}
+
+.heading {
+  text-align: center;
+  color: $c-primary;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.line {
+  border-bottom: 1px solid $c-grey-l-2;
+  width: 70%;
+  margin: 1.5rem auto 2.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin: 1rem 0;
+  position: relative;
+  border: 1px solid $c-grey-l-2;
+  border-radius: .25rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.inputGroupPrepend {
+  position: absolute;
+  left: 1.5rem;
+  display: inline-flex;
+
+  .inputGroupIcon {
+    fill: $c-grey-m-2;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.inputGroupInput {
+  font-size: 2rem;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  padding: 2rem 1.5rem 1.5rem 5rem;
+  // box-shadow: 1px 2px 5px $c-black;
+  border-radius: .25rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  display: block;
+  transition: all .2s;
+
+  &:focus {
+    outline: none;
+    border-bottom: 3px solid $c-primary;
+    color: $c-primary;
+    box-shadow: 0 2px 1rem $c-grey-d-1;
+  }
+
+  & + .inputGroupLabel {
+    position: absolute;
+    left: 5rem;
+    color: $c-grey-m-2;
+    text-transform: uppercase;
+    transition: all .2s;
+  }
+
+  &:focus + .inputGroupLabel{
+    font-size: 1.2rem;
+    color: $c-grey-d-3;
+    transform: translateY(-1.8rem);
+  }
+
+  &:focus:invalid {
+    border-bottom: 3px solid red; // CHANGE COLOR
+  }
+
+  &:focus:valid {
+    border-bottom: 3px solid greenyellow; // CHANGE COLOR
+  }
+
+  &:not(:placeholder-shown) + .inputGroupLabel {
+    font-size: 1.2rem;
+    transform: translateY(-1.8rem);
+  }
+}
+
+
+
+

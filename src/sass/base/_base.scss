@@ -21,7 +21,7 @@ body {
   min-height: 100vh;
 }
 
-// ::selection {
-//   background-color: $c-primary;
-//   color: $c-white;
-// }
+::selection {
+  background-color: $c-primary;
+  color: $c-white;
+}
