@@ -58,8 +58,8 @@ const Home = () => {
               <p>Join GamersX today.</p>
             </div>
             <div className={styles.connectButtons}>
-              <span className={styles.connectButtonsSignup} onClick={() => openAuthModal(false)}>Sign Up</span>
-              <span className={styles.connectButtonsLogin} onClick={() => openAuthModal(true)}>Log In</span>
+              <span role="button" tabIndex="0" onKeyDown={() => {}} className={styles.connectButtonsSignup} onClick={() => openAuthModal(false)}>Sign Up</span>
+              <span role="button" tabIndex="0" onKeyDown={() => {}} className={styles.connectButtonsLogin} onClick={() => openAuthModal(true)}>Log In</span>
             </div>
           </div>
         </div>

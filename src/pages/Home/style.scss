@@ -103,16 +103,21 @@
   &Signup {
     background-color: $c-primary;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline: none;
       background-color: $c-primary-l;
     }
+
   }
 
   &Login {
     border: 1px solid $c-primary;
     color: $c-primary;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline: none;
       background-color: rgba($c-primary, .15);
       // color: $c-primary;
     }
