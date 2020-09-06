@@ -12,6 +12,11 @@ import './sass/base/main.scss';
 const Profile = React.lazy(() => import('./pages/Profile'));
 const Home = React.lazy(() => import('./pages/Home'));
 
+// useeffect:
+// check for token in local storage
+// if token in LS: set token in header load user
+// if no token: log out from all tabs
+
 const App = () => (
   <Provider store={appStore}>
     <BrowserRouter>

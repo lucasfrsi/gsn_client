@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginRequest } from '../../store/actions/auth';
 
 import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
 
-const Auth = ({ isAuthLogin, close }) => {
+const Auth = ({ isAuthLogin, close, login }) => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [nickname, setNickname] = useState({
@@ -99,11 +101,9 @@ const Auth = ({ isAuthLogin, close }) => {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      // set alert, error
-    } else {
-      // register or login (action)
-    }
+    if (isLogin) login(email.value, password.value);
+    // if login, log in
+    // if not login, sign up
   };
 
   const toggleLogin = (event) => {
@@ -271,6 +271,9 @@ const Auth = ({ isAuthLogin, close }) => {
 Auth.propTypes = {
   isAuthLogin: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default Auth;
+export default connect(null, {
+  login: loginRequest,
+})(Auth);
