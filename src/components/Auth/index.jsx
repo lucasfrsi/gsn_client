@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginRequest } from '../../store/actions/auth';
+import { loginRequest, signupRequest } from '../../store/actions/auth';
+import Alert from '../UI/Alert';
 
 import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
 
-const Auth = ({ isAuthLogin, close, login }) => {
+const Auth = ({ isAuthLogin, close, auth, login, signup }) => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [nickname, setNickname] = useState({
@@ -99,11 +100,10 @@ const Auth = ({ isAuthLogin, close, login }) => {
     }
   };
 
-  const authSubmitHandler = async (event) => {
+  const authSubmitHandler = (event) => {
     event.preventDefault();
     if (isLogin) login(email.value, password.value);
-    // if login, log in
-    // if not login, sign up
+    if (!isLogin) signup(nickname.value, email.value, password.value);
   };
 
   const toggleLogin = (event) => {
@@ -155,6 +155,7 @@ const Auth = ({ isAuthLogin, close, login }) => {
           {isLogin ? 'Log In to GamersX' : 'Join GamersX today'}
         </h2>
         <div className={styles.line} />
+        <Alert alertStyle={styles.errorMessage} />
         <form className={styles.form} onSubmit={authSubmitHandler}>
 
           {isLogin ? null
@@ -272,8 +273,17 @@ Auth.propTypes = {
   isAuthLogin: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  signup: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    message: PropTypes.string,
+  }).isRequired,
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
   login: loginRequest,
+  signup: signupRequest,
 })(Auth);

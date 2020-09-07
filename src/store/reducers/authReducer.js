@@ -1,11 +1,18 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  SIGNUP_SUCCESS,
+  SIGNUP_ERROR,
+  LOADUSER_SUCCESS,
+  LOADUSER_ERROR,
+  LOGOUT,
 } from '../actions/types';
 
 const initialState = {
-  tobedone: true,
-  error: '',
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  loading: true,
+  user: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -13,13 +20,31 @@ const authReducer = (state = initialState, action) => {
 
   switch (type) {
     case LOGIN_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+    case LOADUSER_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: payload.user,
+      };
+    case LOADUSER_ERROR: // Account deleted is the same as these
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
       };
     case LOGIN_ERROR:
-      return {
-        ...state,
-      };
+    case SIGNUP_ERROR:
     default:
       return state;
   }

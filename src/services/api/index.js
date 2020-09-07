@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: 'http://localhost:5000/api',
 });
 
 api.interceptors.response.use(
@@ -17,15 +14,17 @@ api.interceptors.response.use(
   },
 );
 
-export const loginService = ({ email, password }) => api.post('/api/users/login', {
+export default api;
+
+export const loginService = ({ email, password }) => api.post('/auth/login', {
   email,
   password,
 });
 
-export const signupService = ({ nickname, email, password }) => api.post('/api/users/signup', {
+export const signupService = ({ nickname, email, password }) => api.post('/auth/signup', {
   nickname,
   email,
   password,
 });
 
-//  xxx.headers["Authorization"] = "Bearer " + data.token;
+export const loadUserService = () => api.get('/auth');

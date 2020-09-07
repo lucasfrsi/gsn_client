@@ -9,11 +9,19 @@ import {
 import {
   loginSuccess,
   loginError,
+  signupSuccess,
+  signupError,
+  loadUserRequest,
+  loadUserSuccess,
+  loadUserError,
 } from '../actions/auth';
+
+import { setAlert } from '../actions/alert';
 
 import {
   loginService,
   signupService,
+  loadUserService,
 } from '../../services/api';
 
 // LOGIN
@@ -25,8 +33,10 @@ function* login(action) {
       password,
     });
     yield put(loginSuccess(response.data));
+    yield put(loadUserRequest());
   } catch (error) {
-    yield put(loginError(error.response.data));
+    yield put(setAlert(error.response.data));
+    yield put(loginError());
   }
 }
 
@@ -34,49 +44,46 @@ function* watchLoginRequest() {
   yield takeLatest(LOGIN_REQUEST, login);
 }
 
-// CREATE POST
-// function* createPost(action) {
-//   try {
-//     const response = yield call(api.createPost, {
-//       title: action.payload.title,
-//       body: action.payload.body,
-//     });
-//     // eslint-disable-next-line no-console
-//     console.log('[CREATE POST SAGA - API RESPONSE]', response);
-//     yield call(getPosts);
-//   } catch (error) {
-//     yield put(postsErrorAction('An error occurred when trying to create the post.'));
-//   }
-// }
+// SIGNUP
+function* signup(action) {
+  const { nickname, email, password } = action.payload;
+  try {
+    const response = yield call(signupService, {
+      nickname,
+      email,
+      password,
+    });
+    yield put(signupSuccess(response.data));
+    yield put(loadUserRequest());
+  } catch (error) {
+    yield put(setAlert(error.response.data));
+    yield put(signupError());
+  }
+}
 
-// function* watchCreatePostRequest() {
-//   yield takeLatest(CREATE_POST_REQUEST, createPost);
-// }
+function* watchSignupRequest() {
+  yield takeLatest(SIGNUP_REQUEST, signup);
+}
 
-// DELETE POST
-// function* deletePost(postId) {
-//   try {
-//     const response = yield call(api.deletePost, postId);
-//     // eslint-disable-next-line no-console
-//     console.log('[DELETE POST SAGA - API RESPONSE]', response);
-//     yield call(getPosts);
-//   } catch (error) {
-//     yield put(postsErrorAction('An error occurred when trying to delete the post.'));
-//   }
-// }
+// LOAD USER
+function* loadUser() {
+  try {
+    const response = yield call(loadUserService);
+    yield put(loadUserSuccess(response.data));
+  } catch (error) {
+    yield put(loadUserError());
+  }
+}
 
-// function* watchDeletePostRequest() {
-//   while (true) {
-//     const action = yield take(DELETE_POST_REQUEST);
-//     yield call(deletePost, action.payload.postId);
-//   }
-// }
+function* watchLoadUserRequest() {
+  yield takeEvery(LOADUSER_REQUEST, loadUser);
+}
 
 // WATCHERS EXPORT
 const authSaga = [
   fork(watchLoginRequest),
-  // fork(watchDeletePostRequest),
-  // fork(watchCreatePostRequest),
+  fork(watchSignupRequest),
+  fork(watchLoadUserRequest),
 ];
 
 export default authSaga;

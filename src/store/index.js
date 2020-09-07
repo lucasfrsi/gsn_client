@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
+import setAuthToken from '../util/setAuthToken';
+
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
@@ -16,5 +18,16 @@ const appStore = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+
+let currentState = appStore.getState();
+
+appStore.subscribe(() => {
+  const previousState = currentState;
+  currentState = appStore.getState();
+  if (previousState.auth.token !== currentState.auth.token) {
+    const { token } = currentState.auth;
+    setAuthToken(token);
+  }
+});
 
 export default appStore;
