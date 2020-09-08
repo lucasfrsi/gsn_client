@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginRequest, signupRequest } from '../../store/actions/auth';
+import { removeAlert } from '../../store/actions/alert';
 import Alert from '../UI/Alert';
 
 import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
 
-const Auth = ({ isAuthLogin, close, auth, login, signup }) => {
+const Auth = ({ isAuthLogin, close, login, signup, clearError }) => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [nickname, setNickname] = useState({
@@ -127,7 +128,7 @@ const Auth = ({ isAuthLogin, close, auth, login, signup }) => {
       isValid: false,
       isTouched: false,
     });
-
+    clearError();
     setIsLogin((prevState) => !prevState);
     event.target.blur();
   };
@@ -274,16 +275,11 @@ Auth.propTypes = {
   close: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   signup: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    message: PropTypes.string,
-  }).isRequired,
+  clearError: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   login: loginRequest,
   signup: signupRequest,
+  clearError: removeAlert,
 })(Auth);

@@ -16,6 +16,7 @@ api.interceptors.response.use(
 
 export default api;
 
+// AUTH SERVICES
 export const loginService = ({ email, password }) => api.post('/auth/login', {
   email,
   password,
@@ -28,3 +29,5 @@ export const signupService = ({ nickname, email, password }) => api.post('/auth/
 });
 
 export const loadUserService = () => api.get('/auth');
+
+// USER SERVICES
