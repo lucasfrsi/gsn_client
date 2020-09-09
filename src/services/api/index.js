@@ -1,4 +1,7 @@
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
+import appStore from '../../store';
+import { logout } from '../../store/actions/auth';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/api',
@@ -8,7 +11,7 @@ api.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response.status === 401) {
-      // LOG OUT
+      appStore.dispatch(logout());
     }
     return Promise.reject(err);
   },
@@ -30,4 +33,5 @@ export const signupService = ({ nickname, email, password }) => api.post('/auth/
 
 export const loadUserService = () => api.get('/auth');
 
-// USER SERVICES
+// SEARCH SERVICE
+export const searchUserService = (query) => api.get(`/users/search/${query}`);

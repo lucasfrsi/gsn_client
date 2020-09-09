@@ -1,4 +1,4 @@
-import { takeEvery, takeLatest, call, put, fork, take } from 'redux-saga/effects';
+import { takeEvery, takeLatest, call, put, fork } from 'redux-saga/effects';
 
 import {
   LOGIN_REQUEST,
@@ -41,7 +41,7 @@ function* login(action) {
 }
 
 function* watchLoginRequest() {
-  yield takeLatest(LOGIN_REQUEST, login);
+  yield takeLatest(LOGIN_REQUEST, login); // change logic => while(true), not allowing to take multiple requests, and also implement cancellation logic.
 }
 
 // SIGNUP

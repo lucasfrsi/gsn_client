@@ -17,3 +17,5 @@ const Routes = () => (
 );
 
 export default Routes;
+
+// TO-DO: search query box and logout components
