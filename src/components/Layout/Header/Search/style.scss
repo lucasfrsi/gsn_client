@@ -1,29 +1,47 @@
 @use '../../../../sass/abstracts/members.scss' as *;
 
-.search {
+.searchForm {
   flex: 0 0 40%;
 
   display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  background-color: $c-white-2;
+  border-radius: 100px;
+  width: 90%;
+
+  &:focus-within {
+    outline: none;
+    width: 100%;
+    background-color: $c-white-3;
+  }
+}
+
+.inputBox {
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  
+  width: 100%;
 }
 
 .input {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-  background-color: $c-white-3;
+  background-color: transparent;
   border: none;
   padding: .7rem 2rem;
-  border-radius: 100px;
-  width: 90%;
+  
+  
   transition: all .2s;
-  margin-right: -3.25rem;
+  // margin-right: -3.25rem;
 
   &:focus {
     outline: none;
-    width: 100%;
-    background-color: $c-grey-l-1;
+    width: 95%;
   }
 
   &::-webkit-input-placeholder {
@@ -31,27 +49,22 @@
     color: $c-grey-l-3;
   }
 
-  &:focus + .button {
-    background-color: $c-grey-l-1;
-  }
-}
-
-
-.button {
-  border: none;
-  background-color: $c-white-3;
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
 }
 
 .icon {
   height: 2rem;
   width: 2rem;
   fill: $c-grey-d-1;
+  margin-left: auto;
+}
+
+.resultBox {
+  position: absolute;
+  background-color: $c-white-1;
+  top: 4rem;
+  width: 100%;
+}
+
+.resultList {
+  list-style-type: none;
 }

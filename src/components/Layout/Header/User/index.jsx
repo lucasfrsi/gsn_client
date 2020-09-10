@@ -26,7 +26,7 @@ const User = ({ auth }) => {
       <div>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={auth.user.avatar ? auth.user.avatar : defaultAvatar}
+          src={auth.user.avatar || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}
