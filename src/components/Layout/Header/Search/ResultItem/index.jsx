@@ -7,7 +7,7 @@ import defaultAvatar from '../../../../../assets/images/default_avatar.png';
 
 import styles from './style.scss';
 
-const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryString }) => {
+const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryString, onKeyDown }) => {
   const [loading, setLoading] = useState(true);
 
   const highlightQuery = (source, query) => {
@@ -45,7 +45,7 @@ const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryStr
 
   return (
     <li className={styles.resultItem}>
-      <Link to={`/profile/${id}`} className={styles.resultLink} onFocus={onFocus} onClick={onClick}>
+      <Link to={`/profile/${id}`} className={styles.resultLink} onFocus={onFocus} onClick={onClick} onKeyDown={onKeyDown}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
           src={avatar || defaultAvatar}
@@ -71,6 +71,7 @@ ResultItem.propTypes = {
   realName: PropTypes.string,
   onFocus: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
   queryString: PropTypes.string,
 };
 

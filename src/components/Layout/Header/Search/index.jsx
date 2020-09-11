@@ -61,7 +61,43 @@ const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch
   };
 
   const onKeyDownHandler = (event) => {
-    console.log(event.key);
+    const input = document.getElementById('searchInput');
+    const ul = document.getElementById('searchResults');
+
+    if (event.target === input) {
+      if (ul && event.key === 'ArrowUp') {
+        event.preventDefault();
+        ul.lastChild.firstChild.focus();
+      }
+      if (ul && event.key === 'ArrowDown') {
+        event.preventDefault();
+        ul.firstChild.firstChild.focus();
+      }
+      if (event.key === 'Escape') {
+        input.blur();
+        setInputFocused(false);
+        setResultFocused(false);
+      }
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const firstOfList = ul.firstChild;
+      if (event.target.closest('li') === firstOfList) {
+        input.focus();
+      } else {
+        event.target.closest('li').previousSibling.firstChild.focus();
+      }
+    } else if (event.key === 'ArrowDown' || event.key === 'Tab') {
+      event.preventDefault();
+      const lastOfList = ul.lastChild;
+      if (event.target.closest('li') === lastOfList) {
+        input.focus();
+      } else {
+        event.target.closest('li').nextSibling.firstChild.focus();
+      }
+    } else if (event.key === 'Escape') {
+      setInputFocused(false);
+      setResultFocused(false);
+    }
   };
 
   const checkShowResults = () => inputFocused || resultFocused;
@@ -71,9 +107,11 @@ const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch
     <form ref={formRef} className={styles.searchForm} onSubmit={(e) => onSubmitHandler(e)}>
       <div className={styles.inputBox}>
         <input
+          id="searchInput"
           type="text"
           className={styles.input}
           placeholder="Search profiles"
+          autoComplete="off"
           value={query}
           onChange={(e) => onChangeHandler(e)}
           onFocus={() => setInputFocused(true)}
@@ -86,7 +124,7 @@ const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch
       </div>
       <div className={styles.resultBox}>
         {result.length > 0 && checkShowResults() && (
-          <ul id="results" className={styles.resultList}>
+          <ul id="searchResults" className={styles.resultList}>
             {result.map((user) => (
               <ResultItem
                 key={user._id}
@@ -96,6 +134,7 @@ const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch
                 realName={user.profile && user.profile.personalData.realName}
                 onFocus={() => setResultFocused(true)}
                 onClick={() => onClickHandler()}
+                onKeyDown={(e) => onKeyDownHandler(e)}
                 queryString={query}
               />
             ))}
