@@ -10,11 +10,9 @@
 
   background-color: $c-white-2;
   border-radius: 100px;
-  width: 90%;
 
   &:focus-within {
     outline: none;
-    width: 100%;
     background-color: $c-white-3;
   }
 }
@@ -34,14 +32,13 @@
   background-color: transparent;
   border: none;
   padding: .7rem 2rem;
-  
+  width: 95%;
   
   transition: all .2s;
   // margin-right: -3.25rem;
 
   &:focus {
     outline: none;
-    width: 95%;
   }
 
   &::-webkit-input-placeholder {
@@ -55,7 +52,7 @@
   height: 2rem;
   width: 2rem;
   fill: $c-grey-d-1;
-  margin-left: auto;
+  margin: auto 1rem;
 }
 
 .resultBox {
@@ -67,4 +64,10 @@
 
 .resultList {
   list-style-type: none;
+  animation: showList .2s ease-in-out;
+}
+
+@keyframes showList {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

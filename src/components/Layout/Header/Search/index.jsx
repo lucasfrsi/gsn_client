@@ -8,99 +8,99 @@ import ResultItem from './ResultItem';
 import icons from '../../../../assets/svg/sprite.svg';
 import styles from './style.scss';
 
-function useOutsideAlerter(ref, func1, func2) { // UNDERSTAND CODE COMPLETELY
+const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch }) => {
+  const [query, setQuery] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
+  const [resultFocused, setResultFocused] = useState(false);
+
+  const formRef = useRef(null);
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        func1();
-        func2();
+    function handleClickOutsideForm(event) {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setInputFocused(false);
+        setResultFocused(false);
       }
     }
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClickOutsideForm);
+
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click', handleClickOutsideForm);
     };
-  }, [ref, func1, func2]);
-}
+  }, []);
 
-const Search = ({ isAuthenticated, searchUser, result, clearResult, cancelSearch }) => {
-  const [showResults, setShowResults] = useState(false);
-  const [inputFocused, setInputFocused] = useState(false);
-  const inputFocusedRef = useRef(inputFocused);
-  inputFocusedRef.current = inputFocused;
+  useEffect(() => {
+    const trimmedQuery = query.trim();
 
-  const inputValue = document.querySelector(`.${styles.input}`);
+    if (trimmedQuery) {
+      setInputFocused(true);
+      searchUser(trimmedQuery);
+    }
 
-  const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef, setInputFocused, setShowResults);
+    if (trimmedQuery.length === 0) {
+      cancelSearch();
+      clearResult();
+      setInputFocused(false);
+      setResultFocused(false);
+    }
+  }, [cancelSearch, clearResult, query, searchUser]);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
   };
 
-  const onBlurHandler = (event) => {
-    const ul = document.getElementById('results');
-    const lastSearchResult = ul.lastChild ? ul.lastChild.firstChild : null;
-    if (event.target === lastSearchResult) {
-      ul.firstChild.firstChild.focus();
-    }
-    setTimeout(() => {
-      if (inputFocusedRef.current === false) setShowResults(false);
-    });
-  };
-
   const onChangeHandler = (event) => {
-    const query = event.target.value.trim();
-
-    if (query) {
-      searchUser(query);
-      setShowResults(true);
-    }
-
-    if (event.target.value.length === 0) {
-      cancelSearch();
-      clearResult();
-      setShowResults(false);
-      setInputFocused(false);
-    }
+    setQuery(event.target.value);
   };
+
+  const onClickHandler = () => {
+    clearResult();
+    setQuery('');
+    setInputFocused(false);
+    setResultFocused(false);
+  };
+
+  const onKeyDownHandler = (event) => {
+    console.log(event.key);
+  };
+
+  const checkShowResults = () => inputFocused || resultFocused;
 
   return isAuthenticated && (
   <>
-    <form ref={wrapperRef} className={styles.searchForm} onSubmit={(e) => onSubmitHandler(e)}>
+    <form ref={formRef} className={styles.searchForm} onSubmit={(e) => onSubmitHandler(e)}>
       <div className={styles.inputBox}>
         <input
           type="text"
           className={styles.input}
           placeholder="Search profiles"
+          value={query}
           onChange={(e) => onChangeHandler(e)}
-          onFocus={() => setShowResults(true)}
-          onBlur={(e) => onBlurHandler(e)}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setTimeout(() => { setInputFocused(false); })}
+          onKeyDown={(e) => onKeyDownHandler(e)}
         />
         <svg className={styles.icon}>
           <use xlinkHref={`${icons}#icon-magnifying-glass`} />
         </svg>
       </div>
       <div className={styles.resultBox}>
-        <ul id="results" className={styles.resultList}>
-          {result.length > 0 && showResults ? result.map((user) => (
-            <ResultItem
-              key={user._id}
-              id={user._id}
-              avatar={user.avatar}
-              nickname={user.nickname}
-              realName={user.profile && user.profile.personalData.realName}
-              onFocus={() => setInputFocused(true)}
-              onBlur={(e) => onBlurHandler(e)}
-              onClick={() => {
-                setShowResults(false);
-                setInputFocused(false);
-                inputValue.value = ''; // change input value to state, shows last search
-              }}
-            />
-          )) : null}
-        </ul>
+        {result.length > 0 && checkShowResults() && (
+          <ul id="results" className={styles.resultList}>
+            {result.map((user) => (
+              <ResultItem
+                key={user._id}
+                id={user._id}
+                avatar={user.avatar}
+                nickname={user.nickname}
+                realName={user.profile && user.profile.personalData.realName}
+                onFocus={() => setResultFocused(true)}
+                onClick={() => onClickHandler()}
+                queryString={query}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     </form>
   </>
