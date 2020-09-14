@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import Logout from './Logout';
 import LoadingSpinner from '../../../UI/LoadingSpinner';
 
 import styles from './style.scss';
@@ -9,6 +11,7 @@ import defaultAvatar from '../../../../assets/images/default_avatar.png';
 
 const User = ({ auth }) => {
   const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleOnLoad = () => {
     setLoading(false);
@@ -20,10 +23,22 @@ const User = ({ auth }) => {
     img.src = defaultAvatar;
   };
 
-  return (auth.isAuthenticated && auth.user !== null && (
-    <nav className={styles.userNav}>
+  const onMouseEnterHandler = () => {
+    setIsMenuOpen(true);
+  };
 
-      <div>
+  const onMouseLeaveHandler = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (auth.isAuthenticated && auth.user !== null && (
+    <nav
+      className={styles.userNav}
+      onMouseEnter={() => onMouseEnterHandler()}
+      onMouseLeave={() => onMouseLeaveHandler()}
+    >
+
+      <div className={styles.user}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
           src={auth.user.avatar || defaultAvatar}
@@ -37,7 +52,7 @@ const User = ({ auth }) => {
         />
         <span>{auth.user.nickname}</span>
       </div>
-
+      {isMenuOpen ? <Logout close={() => setIsMenuOpen(false)} /> : null}
     </nav>
   ));
 };

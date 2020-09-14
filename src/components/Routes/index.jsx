@@ -18,4 +18,8 @@ const Routes = () => (
 
 export default Routes;
 
-// TO-DO: search query box and logout components
+// TO-DO:
+// Post component
+// Moment component
+// Profile component
+// Home component
