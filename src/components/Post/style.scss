@@ -20,10 +20,17 @@
   flex-direction: column;
   align-items: center;
 
-  img {
+  img,
+  .loadingSpinner {
     width: 12rem;
-    border-radius: 50%;
+    height: 12rem;
     margin: 0 2rem 2rem 0;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
   }
 
   h4 {

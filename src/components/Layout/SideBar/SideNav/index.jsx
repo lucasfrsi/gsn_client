@@ -24,7 +24,7 @@ const SideNav = ({ isAuthenticated }) => (
         />
         <SideNavItem
           item="Posts"
-          route="/test2"
+          route="/posts/5f4299ea964af30c9427fd1c"
           svgPath={`${icons}#icon-pencil`}
         />
         <SideNavItem

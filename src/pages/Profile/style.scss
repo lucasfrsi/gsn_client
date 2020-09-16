@@ -92,6 +92,7 @@
     font-size: 2.25rem;
     font-weight: 300;
     margin-bottom: -3px;
+    text-transform: uppercase;
   }
 
   .playerText {
@@ -188,22 +189,22 @@
     transform: scale(1.25);
   }
 
-  .socialIconFacebook:hover {
+  .facebook:hover {
     fill: $c-facebook;
   }
-  .socialIconTwitter:hover {
+  .twitter:hover {
     fill: $c-twitter;
   }
-  .socialIconInstagram:hover {
+  .instagram:hover {
     fill: $c-instagram;
   }
-  .socialIconYoutube:hover {
+  .youtube:hover {
     fill: $c-youtube;
   }
-  .socialIconTwitch:hover {
+  .twitch:hover {
     fill: $c-twitch;
   }
-  .socialIconPatreon:hover {
+  .patreon:hover {
     fill: $c-patreon;
   }
 
