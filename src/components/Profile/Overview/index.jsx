@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './style.scss';
 
@@ -7,7 +9,7 @@ import svg from '../../../assets/svg/sprite.svg';
 import Post from '../../Post';
 import Moment from '../../Moment';
 
-const Overview = () => (
+const Overview = ({ posts, moments }) => (
   <div className={styles.overview}>
 
     <div className={styles.container}>
@@ -89,16 +91,29 @@ const Overview = () => (
       <h3>Recent Activity</h3>
     </div>
     <div className={styles.recentActivity}>
-      <Post className={styles.recentActivityPost} />
+      {posts.length === 0 ? <p>No Posts</p> : (
+        <Post className={styles.recentActivityPost} />
+      )}
       <Moment />
     </div>
+    {console.log(posts)}
+    {console.log(moments)}
   </div>
 );
 
-export default Overview;
+// Possibilities:
+// User has NO POSTS / MOMENTS
+// User has only ONE POST / MOMENT
+// User has many of both, show the latest (length - 1)
 
-// <div>
-// <h2 className={styles.ctaBookNow}>
-//   TWITCH.TV - LIVE CHANNEL
-// </h2>
-// </div>
+Overview.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moments: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  posts: state.users.user.posts,
+  moments: state.users.user.moments,
+});
+
+export default connect(mapStateToProps)(Overview);

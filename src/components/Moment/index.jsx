@@ -1,6 +1,6 @@
 import React from 'react';
 
-import image from '../../assets/images/avatar2.jpg';
+import image from '../../assets/images/default_avatar.png';
 import nani from '../../assets/images/reactions/nani.png';
 import love from '../../assets/images/reactions/love.png';
 import haha from '../../assets/images/reactions/haha.png';
