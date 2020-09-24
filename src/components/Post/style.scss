@@ -13,6 +13,11 @@
   min-width: 55rem;
 
   margin: 2rem;
+
+  &:hover .postEditDelete {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .postUser {
@@ -42,6 +47,9 @@
 .postContent {
   display: flex;
   flex-direction: column;
+
+  justify-content: space-between;
+  flex: 1;
 }
 
 .postData {
@@ -103,6 +111,10 @@
 .postLike,
 .postDislike {
   display: flex;
+
+  &Active svg {
+    fill: $c-primary;
+  }
 
   svg {
     height: 2rem;
@@ -172,6 +184,9 @@
 
 .postEditDelete {
   display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s ease-in-out;
 
   svg {
     &:not(:last-child) {
