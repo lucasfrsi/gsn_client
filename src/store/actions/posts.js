@@ -5,6 +5,9 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_ERROR,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
+  LIKE_POST_ERROR,
 } from './types';
 
 // REQUESTS
@@ -18,6 +21,14 @@ export const getPostRequest = (postId) => ({
 
 export const getPostsRequest = () => ({
   type: GET_POSTS_REQUEST,
+});
+
+export const likePostRequest = (postId, likeType) => ({
+  type: LIKE_POST_REQUEST,
+  payload: {
+    postId,
+    likeType,
+  },
 });
 
 // SUCCESS AND ERROR
@@ -42,4 +53,15 @@ export const getPostsSuccess = (data) => ({
 
 export const getPostsError = () => ({
   type: GET_POSTS_ERROR,
+});
+
+export const likePostSuccess = (post) => ({
+  type: LIKE_POST_SUCCESS,
+  payload: {
+    post,
+  },
+});
+
+export const likePostError = () => ({
+  type: LIKE_POST_ERROR,
 });

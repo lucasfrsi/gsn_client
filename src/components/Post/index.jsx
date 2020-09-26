@@ -53,20 +53,24 @@ const Post = ({
     img.src = defaultAvatar;
   };
 
+  const handleLike = (likeType) => {
+    console.log(likeType);
+  };
+
   const countComments = () => {
     let count;
     let comment = ' Comments';
 
     if (comments.length === 0) {
-      count = 'No';
+      count = 'NO';
     } else if (comments.length === 1) {
       count = 1;
-      comment = ' Comment';
+      comment = 'Comment';
     } else {
       count = comments.length;
     }
 
-    return <p className={styles.postDiscussionText}><span>{count}</span>{comment}</p>;
+    return <p className={styles.postDiscussionText}><span className={styles.discussionCount}>{count}</span><span className={styles.discussionComment}>{comment}</span></p>;
   };
 
   return (
@@ -115,13 +119,25 @@ const Post = ({
 
             <div className={styles.postLikeComment}>
               <div className={styles.postLikeBox}>
-                <div className={`${styles.postLike} ${isLiked === true ? styles.postLikeActive : null}`}>
+                <div
+                  className={`${styles.postLike} ${isLiked === true ? styles.postLikeActive : null}`}
+                  onClick={() => handleLike('like')}
+                  onKeyDown={() => {}}
+                  role="button"
+                  tabIndex="0"
+                >
                   <svg>
                     <use xlinkHref={`${svg}#icon-thumbs-up`} />
                   </svg>
                   <span>{postLikes}</span>
                 </div>
-                <div className={`${styles.postDislike} ${isLiked === false ? styles.postDislikeActive : null}`}>
+                <div
+                  className={`${styles.postDislike} ${isLiked === false ? styles.postDislikeActive : null}`}
+                  onClick={() => handleLike('dislike')}
+                  onKeyDown={() => {}}
+                  role="button"
+                  tabIndex="0"
+                >
                   <svg>
                     <use xlinkHref={`${svg}#icon-thumbs-down`} />
                   </svg>

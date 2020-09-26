@@ -11,10 +11,10 @@ import Moment from '../../Moment';
 
 const Overview = ({ posts, moments, user }) => {
   const renderLastPost = () => {
-    // const lastPostIndex = posts.length - 1;
-    // const lastPost = posts[lastPostIndex];
-    const lastPost = posts[3];
-    console.log(lastPost);
+    const lastPostIndex = posts.length - 1;
+    const lastPost = posts[lastPostIndex];
+    // const lastPost = posts[3];
+    // console.log(lastPost);
     return (
       <Post
         className={styles.recentActivityPost}
@@ -148,7 +148,7 @@ Overview.propTypes = {
 const mapStateToProps = (state) => ({
   posts: state.users.user.posts,
   moments: state.users.user.moments,
-  user: state.auth.user,
+  user: state.users.user,
 });
 
 export default connect(mapStateToProps)(Overview);

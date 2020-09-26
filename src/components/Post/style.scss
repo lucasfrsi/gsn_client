@@ -116,6 +116,15 @@
     fill: $c-primary;
   }
 
+  &:focus {
+    outline: none;
+  }
+  
+  &:focus svg {
+    fill: $c-primary;
+    transform: scale(1.2);
+  }
+
   svg {
     height: 2rem;
     width: 2rem;
@@ -159,16 +168,26 @@
   cursor: pointer;
   transition: all 0.2s;
 
-  .postDiscussionText, span {
+  .postDiscussionText {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
-  span {
+  .discussionCount {
     height: 2rem;
-    width: 2rem;
+    padding-right: 0.25em;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .discussionComment {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover {
