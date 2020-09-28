@@ -60,6 +60,6 @@ export const createCommentService = (postId, text) => api.post(`/posts/comments/
 export const deleteCommentService = (postId, commentId) => api.delete(`/posts/comments/${postId}/${commentId}`);
 
 // Likes
-export const likePostService = ({ id, likeType }) => api.post(`/posts/likes/${id}`, {
+export const likePostService = ({ postId, likeType }) => api.post(`/posts/likes/${postId}`, {
   likeType,
 });

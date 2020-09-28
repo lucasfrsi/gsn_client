@@ -15,7 +15,12 @@ const usersReducer = (state = initialState, action) => {
     case GET_USER_SUCCESS:
       return {
         ...state,
-        user: payload.user,
+        user: {
+          profile: payload.user.profile,
+          _id: payload.user._id,
+          nickname: payload.user.nickname,
+          avatar: payload.user.avatar,
+        },
         loading: false,
       };
     default:

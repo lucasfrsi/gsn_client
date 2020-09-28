@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { likePostRequest } from '../../store/actions/posts';
 
 import LoadingSpinner from '../UI/LoadingSpinner';
 import defaultAvatar from '../../assets/images/default_avatar.png';
@@ -20,24 +21,28 @@ const Post = ({
   nickname,
   avatar,
   loggedUserId,
+  likePost,
 }) => {
   const [loading, setLoading] = useState(true);
   const [postLikes, setPostLikes] = useState(0);
   const [postDislikes, setPostDislikes] = useState(0);
   const [isLiked, setIsLiked] = useState(null);
+  const [deletionConfirmation, setDeletionConfirmation] = useState(false);
 
   useEffect(() => {
     let likesCount = 0;
     let dislikesCount = 0;
 
-    likes.forEach((item) => {
-      if (item.type === 'like') likesCount += 1;
-      if (item.type === 'dislike') dislikesCount += 1;
-      if (item.user === loggedUserId) {
-        if (item.type === 'like') setIsLiked(true);
-        if (item.type === 'dislike') setIsLiked(false);
-      }
-    });
+    if (likes.length > 0) {
+      likes.forEach((item) => {
+        if (item.type === 'like') likesCount += 1;
+        if (item.type === 'dislike') dislikesCount += 1;
+        if (item.user === loggedUserId) {
+          if (item.type === 'like') setIsLiked(true);
+          if (item.type === 'dislike') setIsLiked(false);
+        }
+      });
+    } else setIsLiked(null);
 
     setPostLikes(likesCount);
     setPostDislikes(dislikesCount);
@@ -54,7 +59,11 @@ const Post = ({
   };
 
   const handleLike = (likeType) => {
-    console.log(likeType);
+    likePost(_id, likeType);
+  };
+
+  const handleDeletion = () => {
+    setDeletionConfirmation(true);
   };
 
   const countComments = () => {
@@ -75,6 +84,7 @@ const Post = ({
 
   return (
     <div className={styles.post}>
+      {deletionConfirmation && <div className={styles.localBackdrop} />}
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
@@ -119,26 +129,24 @@ const Post = ({
 
             <div className={styles.postLikeComment}>
               <div className={styles.postLikeBox}>
-                <div
-                  className={`${styles.postLike} ${isLiked === true ? styles.postLikeActive : null}`}
-                  onClick={() => handleLike('like')}
-                  onKeyDown={() => {}}
-                  role="button"
-                  tabIndex="0"
-                >
-                  <svg>
+                <div className={`${styles.postLike} ${isLiked === true ? styles.postLikeActive : null}`}>
+                  <svg
+                    onClick={() => handleLike('like')}
+                    onKeyDown={() => {}}
+                    role="button"
+                    tabIndex="0"
+                  >
                     <use xlinkHref={`${svg}#icon-thumbs-up`} />
                   </svg>
                   <span>{postLikes}</span>
                 </div>
-                <div
-                  className={`${styles.postDislike} ${isLiked === false ? styles.postDislikeActive : null}`}
-                  onClick={() => handleLike('dislike')}
-                  onKeyDown={() => {}}
-                  role="button"
-                  tabIndex="0"
-                >
-                  <svg>
+                <div className={`${styles.postDislike} ${isLiked === false ? styles.postDislikeActive : null}`}>
+                  <svg
+                    onClick={() => handleLike('dislike')}
+                    onKeyDown={() => {}}
+                    role="button"
+                    tabIndex="0"
+                  >
                     <use xlinkHref={`${svg}#icon-thumbs-down`} />
                   </svg>
                   <span>{postDislikes}</span>
@@ -154,7 +162,12 @@ const Post = ({
                 <svg>
                   <use xlinkHref={`${svg}#icon-edit`} />
                 </svg>
-                <svg>
+                <svg
+                  onClick={() => handleDeletion()}
+                  onKeyDown={() => {}}
+                  role="button"
+                  tabIndex="0"
+                >
                   <use xlinkHref={`${svg}#icon-trash`} />
                 </svg>
               </div>
@@ -180,10 +193,11 @@ Post.propTypes = {
   nickname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   loggedUserId: PropTypes.string.isRequired,
+  likePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   loggedUserId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, { likePost: likePostRequest })(Post);

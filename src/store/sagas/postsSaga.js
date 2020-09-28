@@ -46,9 +46,9 @@ function* likePost(action) {
       postId,
       likeType,
     });
-    console.log(response.data); // STOPPED HERE
-    yield put(likePostSuccess(response.data));
+    yield put(likePostSuccess(response.data.post));
   } catch (error) {
+    console.log(error);
     yield put(likePostError());
   }
 }

@@ -146,8 +146,8 @@ Overview.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  posts: state.users.user.posts,
-  moments: state.users.user.moments,
+  posts: state.posts.posts,
+  moments: state.moments.moments,
   user: state.users.user,
 });
 

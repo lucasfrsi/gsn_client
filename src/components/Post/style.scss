@@ -1,5 +1,16 @@
 @use '../../sass/abstracts/members.scss' as *;
 
+.localBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .6);
+  z-index: 10;
+  border-radius: 20px;
+}
+
 .post {
   display: flex;
   flex-direction: row;
@@ -8,6 +19,8 @@
   padding: 2rem;
   border-radius: 20px;
   cursor: default;
+
+  position: relative;
 
   max-width: 80rem;
   min-width: 55rem;
@@ -116,18 +129,13 @@
     fill: $c-primary;
   }
 
-  &:focus {
-    outline: none;
-  }
-  
-  &:focus svg {
-    fill: $c-primary;
-    transform: scale(1.2);
-  }
-
   svg {
     height: 2rem;
     width: 2rem;
+
+    &:focus {
+      outline: none;
+    }
 
     &:hover {
       fill: $c-primary;
