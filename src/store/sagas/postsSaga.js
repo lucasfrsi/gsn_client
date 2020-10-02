@@ -6,6 +6,9 @@ import {
   LIKE_POST_REQUEST,
   DELETE_POST_REQUEST,
   CREATE_POST_REQUEST,
+  EDIT_POST_REQUEST,
+  CREATE_COMMENT_REQUEST,
+  DELETE_COMMENT_REQUEST,
 } from '../actions/types';
 
 import {
@@ -19,6 +22,12 @@ import {
   deletePostError,
   createPostSuccess,
   createPostError,
+  editPostSuccess,
+  editPostError,
+  createCommentSuccess,
+  createCommentError,
+  deleteCommentSuccess,
+  deleteCommentError,
 } from '../actions/posts';
 
 import {
@@ -27,6 +36,9 @@ import {
   likePostService,
   deletePostService,
   createPostService,
+  editPostService,
+  createCommentService,
+  deleteCommentService,
 } from '../../services/api';
 
 // GET POST BY ID
@@ -36,7 +48,7 @@ function* getPost(action) {
     const response = yield call(getPostByIdService, {
       postId,
     });
-    yield put(getPostSuccess(response.data));
+    yield put(getPostSuccess(response.data.post));
   } catch (error) {
     yield put(getPostError());
   }
@@ -107,12 +119,78 @@ function* watchCreatePost() {
   }
 }
 
+// EDIT POST
+function* editPost(action) {
+  const { postId, text } = action.payload;
+  try {
+    const response = yield call(editPostService, {
+      postId,
+      text,
+    });
+    yield put(editPostSuccess(response.data.post));
+  } catch (error) {
+    yield put(editPostError());
+  }
+}
+
+function* watchEditPost() {
+  while (true) {
+    const action = yield take(EDIT_POST_REQUEST);
+    yield call(editPost, action);
+  }
+}
+
+// CREATE COMMENT
+function* createComment(action) {
+  const { postId, text } = action.payload;
+  try {
+    const response = yield call(createCommentService, {
+      postId,
+      text,
+    });
+    yield put(createCommentSuccess(response.data.comments));
+  } catch (error) {
+    yield put(createCommentError());
+  }
+}
+
+function* watchCreateComment() {
+  while (true) {
+    const action = yield take(CREATE_COMMENT_REQUEST);
+    yield call(createComment, action);
+  }
+}
+
+// DELETE COMMENT
+function* deleteComment(action) {
+  const { postId, commentId } = action.payload;
+  try {
+    yield call(deleteCommentService, {
+      postId,
+      commentId,
+    });
+    yield put(deleteCommentSuccess(commentId));
+  } catch (error) {
+    yield put(deleteCommentError());
+  }
+}
+
+function* watchDeleteComment() {
+  while (true) {
+    const action = yield take(DELETE_COMMENT_REQUEST);
+    yield call(deleteComment, action);
+  }
+}
+
 // WATCHERS EXPORT
 const postsSaga = [
   fork(watchGetPost),
   fork(watchLikePost),
   fork(watchDeletePost),
   fork(watchCreatePost),
+  fork(watchEditPost),
+  fork(watchCreateComment),
+  fork(watchDeleteComment),
 ];
 
 export default postsSaga;

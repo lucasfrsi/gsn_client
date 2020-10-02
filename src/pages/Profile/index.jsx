@@ -31,7 +31,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
     }
     return function cleanUp() {
       // reset state?
-      console.log('executed profile cleanup');
+      // console.log('executed profile cleanup');
     };
   }, [getUserProfile, loggedUserId, match.params.id, match.url]);
 

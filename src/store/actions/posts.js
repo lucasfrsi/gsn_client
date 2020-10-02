@@ -14,6 +14,15 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  EDIT_POST_REQUEST,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_ERROR,
+  CREATE_COMMENT_REQUEST,
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_ERROR,
+  DELETE_COMMENT_REQUEST,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_ERROR,
 } from './types';
 
 // REQUESTS
@@ -48,6 +57,30 @@ export const createPostRequest = (text) => ({
   type: CREATE_POST_REQUEST,
   payload: {
     text,
+  },
+});
+
+export const editPostRequest = (postId, text) => ({
+  type: EDIT_POST_REQUEST,
+  payload: {
+    postId,
+    text,
+  },
+});
+
+export const createCommentRequest = (postId, text) => ({
+  type: CREATE_COMMENT_REQUEST,
+  payload: {
+    postId,
+    text,
+  },
+});
+
+export const deleteCommentRequest = (postId, commentId) => ({
+  type: DELETE_COMMENT_REQUEST,
+  payload: {
+    postId,
+    commentId,
   },
 });
 
@@ -106,4 +139,37 @@ export const createPostSuccess = (post) => ({
 
 export const createPostError = () => ({
   type: CREATE_POST_ERROR,
+});
+
+export const editPostSuccess = (post) => ({
+  type: EDIT_POST_SUCCESS,
+  payload: {
+    post,
+  },
+});
+
+export const editPostError = () => ({
+  type: EDIT_POST_ERROR,
+});
+
+export const createCommentSuccess = (comments) => ({
+  type: CREATE_COMMENT_SUCCESS,
+  payload: {
+    comments,
+  },
+});
+
+export const createCommentError = () => ({
+  type: CREATE_COMMENT_ERROR,
+});
+
+export const deleteCommentSuccess = (comments) => ({
+  type: DELETE_COMMENT_SUCCESS,
+  payload: {
+    comments,
+  },
+});
+
+export const deleteCommentError = () => ({
+  type: DELETE_COMMENT_ERROR,
 });

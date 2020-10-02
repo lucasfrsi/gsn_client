@@ -50,14 +50,18 @@ export const createPostService = ({ text }) => api.post('/posts', {
   text,
 });
 
-export const deletePostService = ({ postId }) => api.delete(`/posts/${postId}`);
-
-// Comments
-export const createCommentService = (postId, text) => api.post(`/posts/comments/${postId}`, {
+export const editPostService = ({ postId, text }) => api.put(`/posts/${postId}`, {
   text,
 });
 
-export const deleteCommentService = (postId, commentId) => api.delete(`/posts/comments/${postId}/${commentId}`);
+export const deletePostService = ({ postId }) => api.delete(`/posts/${postId}`);
+
+// Comments
+export const createCommentService = ({ postId, text }) => api.post(`/posts/comments/${postId}`, {
+  text,
+});
+
+export const deleteCommentService = ({ postId, commentId }) => api.delete(`/posts/comments/${postId}/${commentId}`);
 
 // Likes
 export const likePostService = ({ postId, likeType }) => api.post(`/posts/likes/${postId}`, {

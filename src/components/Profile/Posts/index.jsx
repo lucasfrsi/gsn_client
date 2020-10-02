@@ -8,20 +8,24 @@ import Post from '../../Post';
 import Compose from '../../ComposePost';
 
 const Posts = ({ posts, user, loggedUser }) => {
-  const renderPosts = () => posts.map((post) => (
-    <Post
-      key={post._id}
-      _id={post._id}
-      text={post.text}
-      likes={post.likes}
-      comments={post.comments}
-      createdAt={post.createdAt}
-      updatedAt={post.updatedAt}
-      user={post.user}
-      nickname={user.nickname}
-      avatar={user.avatar}
-    />
-  ));
+  const renderPosts = () => {
+    const postsArray = [...posts];
+    postsArray.reverse();
+    return postsArray.map((post) => (
+      <Post
+        key={post._id}
+        _id={post._id}
+        text={post.text}
+        likes={post.likes}
+        comments={post.comments}
+        createdAt={post.createdAt}
+        updatedAt={post.updatedAt}
+        user={post.user}
+        nickname={user.nickname}
+        avatar={user.avatar}
+      />
+    ));
+  };
 
   return (
     <div className={styles.posts}>
