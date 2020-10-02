@@ -46,11 +46,11 @@ export const getPosts = () => api.get('/posts');
 
 export const getPostByIdService = ({ postId }) => api.get(`/posts/${postId}`);
 
-export const createPostService = (text) => api.post('/posts/', {
+export const createPostService = ({ text }) => api.post('/posts', {
   text,
 });
 
-export const deletePostService = (postId) => api.post(`/posts/${postId}`);
+export const deletePostService = ({ postId }) => api.delete(`/posts/${postId}`);
 
 // Comments
 export const createCommentService = (postId, text) => api.post(`/posts/comments/${postId}`, {

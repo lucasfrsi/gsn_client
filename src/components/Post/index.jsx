@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { likePostRequest } from '../../store/actions/posts';
+import { likePostRequest, deletePostRequest } from '../../store/actions/posts';
 
 import LoadingSpinner from '../UI/LoadingSpinner';
 import defaultAvatar from '../../assets/images/default_avatar.png';
@@ -22,6 +22,7 @@ const Post = ({
   avatar,
   loggedUserId,
   likePost,
+  deletePost,
 }) => {
   const [loading, setLoading] = useState(true);
   const [postLikes, setPostLikes] = useState(0);
@@ -40,7 +41,7 @@ const Post = ({
         if (item.user === loggedUserId) {
           if (item.type === 'like') setIsLiked(true);
           if (item.type === 'dislike') setIsLiked(false);
-        }
+        } else setIsLiked(null);
       });
     } else setIsLiked(null);
 
@@ -62,8 +63,9 @@ const Post = ({
     likePost(_id, likeType);
   };
 
-  const handleDeletion = () => {
-    setDeletionConfirmation(true);
+  const handlePostDeletion = () => {
+    deletePost(_id);
+    setDeletionConfirmation(false);
   };
 
   const countComments = () => {
@@ -84,7 +86,27 @@ const Post = ({
 
   return (
     <div className={styles.post}>
-      {deletionConfirmation && <div className={styles.localBackdrop} />}
+      {deletionConfirmation && (
+        <div className={styles.localBackdrop}>
+          <div className={styles.centeredBox}>
+            <p className={styles.confirmationMessage}>Are you sure you want to delete this post?</p>
+            <div className={styles.buttons}>
+              <button
+                type="button"
+                className={styles.yesButton}
+                onClick={() => handlePostDeletion()}
+              >Yes
+              </button>
+              <button
+                type="button"
+                className={styles.noButton}
+                onClick={() => setDeletionConfirmation(false)}
+              >No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
@@ -163,7 +185,7 @@ const Post = ({
                   <use xlinkHref={`${svg}#icon-edit`} />
                 </svg>
                 <svg
-                  onClick={() => handleDeletion()}
+                  onClick={() => setDeletionConfirmation(true)}
                   onKeyDown={() => {}}
                   role="button"
                   tabIndex="0"
@@ -194,10 +216,14 @@ Post.propTypes = {
   avatar: PropTypes.string.isRequired,
   loggedUserId: PropTypes.string.isRequired,
   likePost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   loggedUserId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps, { likePost: likePostRequest })(Post);
+export default connect(mapStateToProps, {
+  likePost: likePostRequest,
+  deletePost: deletePostRequest,
+})(Post);

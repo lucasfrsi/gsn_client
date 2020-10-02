@@ -8,6 +8,12 @@ import {
   LIKE_POST_REQUEST,
   LIKE_POST_SUCCESS,
   LIKE_POST_ERROR,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
+  CREATE_POST_REQUEST,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_ERROR,
 } from './types';
 
 // REQUESTS
@@ -28,6 +34,20 @@ export const likePostRequest = (postId, likeType) => ({
   payload: {
     postId,
     likeType,
+  },
+});
+
+export const deletePostRequest = (postId) => ({
+  type: DELETE_POST_REQUEST,
+  payload: {
+    postId,
+  },
+});
+
+export const createPostRequest = (text) => ({
+  type: CREATE_POST_REQUEST,
+  payload: {
+    text,
   },
 });
 
@@ -64,4 +84,26 @@ export const likePostSuccess = (post) => ({
 
 export const likePostError = () => ({
   type: LIKE_POST_ERROR,
+});
+
+export const deletePostSuccess = (postId) => ({
+  type: DELETE_POST_SUCCESS,
+  payload: {
+    postId,
+  },
+});
+
+export const deletePostError = () => ({
+  type: DELETE_POST_ERROR,
+});
+
+export const createPostSuccess = (post) => ({
+  type: CREATE_POST_SUCCESS,
+  payload: {
+    post,
+  },
+});
+
+export const createPostError = () => ({
+  type: CREATE_POST_ERROR,
 });

@@ -111,7 +111,7 @@ const Overview = ({ posts, moments, user }) => {
             </div>
           </div>
         </div>
-        <div className={styles.twitch}>
+        {/* <div className={styles.twitch}>
           <div className={styles.heading}>
             <h3>Twitch Channel</h3>
           </div>
@@ -124,7 +124,7 @@ const Overview = ({ posts, moments, user }) => {
             scrolling="no"
             allowFullScreen
           />
-        </div>
+        </div> */}
       </div>
 
       <div className={`${styles.heading} ${styles.endHeading}`}>

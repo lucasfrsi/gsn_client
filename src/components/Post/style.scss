@@ -11,6 +11,58 @@
   border-radius: 20px;
 }
 
+.centeredBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmationMessage {
+  background-color: $c-white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+
+  button {
+    cursor: pointer;
+    background-color: $c-white;
+    padding: 1rem 0;
+    width: 8rem;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+    border-radius: 10px;
+    text-transform: uppercase;
+
+    transition: all .1s linear;
+
+    &:hover {
+      color: $c-white;
+      background-color: $c-primary;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.yesButton {
+  margin-right: 2rem;
+}
+
 .post {
   display: flex;
   flex-direction: row;
@@ -22,8 +74,8 @@
 
   position: relative;
 
-  max-width: 80rem;
-  min-width: 55rem;
+  width: 80rem;
+  // min-width: 55rem;
 
   margin: 2rem;
 
@@ -71,7 +123,12 @@
 }
 
 .postText {
-  text-align: justify;
+  max-width: 60rem;
+  max-height: 10rem;
+  word-wrap: break-word;
+  // text-overflow: ellipsis;
+  // white-space: pre-line;
+  // overflow-y: scroll;
   line-height: 1.4;
 }
 
@@ -228,6 +285,10 @@
     &:active {
       fill: $c-primary-l;
       transform: scale(1.4);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
