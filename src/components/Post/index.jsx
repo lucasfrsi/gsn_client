@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { likePostRequest, deletePostRequest } from '../../store/actions/posts';
 
@@ -174,9 +175,11 @@ const Post = ({
                   <span>{postDislikes}</span>
                 </div>
               </div>
-              <div className={styles.postDiscussion}>
-                {countComments()}
-              </div>
+              <Link to={`/posts/${_id}`}>
+                <div className={styles.postDiscussion}>
+                  {countComments()}
+                </div>
+              </Link>
             </div>
 
             {user === loggedUserId ? (

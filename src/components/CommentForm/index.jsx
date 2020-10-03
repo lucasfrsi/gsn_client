@@ -5,12 +5,12 @@ import { createCommentRequest } from '../../store/actions/posts';
 
 import styles from './style.scss';
 
-const CommentPost = ({ createComment }) => {
+const CommentForm = ({ createComment, postId }) => {
   const [text, setText] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // createComment(text); //POSTID and TEXT
+    createComment(postId, text);
     setText('');
   };
 
@@ -33,8 +33,9 @@ const CommentPost = ({ createComment }) => {
   );
 };
 
-CommentPost.propTypes = {
+CommentForm.propTypes = {
   createComment: PropTypes.func.isRequired,
+  postId: PropTypes.string.isRequired,
 };
 
-export default connect(null, { createComment: createCommentRequest })(CommentPost);
+export default connect(null, { createComment: createCommentRequest })(CommentForm);

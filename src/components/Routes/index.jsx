@@ -6,7 +6,7 @@ import Loading from '../UI/Loading';
 import PrivateRoute from './PrivateRoute';
 
 const Profile = React.lazy(() => import('../../pages/Profile'));
-const Post = React.lazy(() => import('../../components/Post'));
+const Post = React.lazy(() => import('../../pages/Post'));
 const Home = React.lazy(() => import('../../pages/Home'));
 
 const Routes = () => (

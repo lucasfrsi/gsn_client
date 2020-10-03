@@ -89,7 +89,7 @@ export const deleteCommentRequest = (postId, commentId) => ({
 export const getPostSuccess = (data) => ({
   type: GET_POST_SUCCESS,
   payload: {
-    post: data.post,
+    post: data,
   },
 });
 
@@ -163,10 +163,10 @@ export const createCommentError = () => ({
   type: CREATE_COMMENT_ERROR,
 });
 
-export const deleteCommentSuccess = (comments) => ({
+export const deleteCommentSuccess = (commentId) => ({
   type: DELETE_COMMENT_SUCCESS,
   payload: {
-    comments,
+    commentId,
   },
 });
 

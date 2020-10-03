@@ -1,0 +1,77 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.post {
+  display: flex;
+  flex-direction: row;
+  background-color: $c-white;
+  box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
+  padding: 2rem;
+  cursor: default;
+
+  position: relative;
+
+  width: 80rem;
+  // min-width: 55rem;
+
+  margin: 2rem;
+
+  &:hover .postEditDelete {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.postUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img,
+  .loadingSpinner {
+    width: 12rem;
+    height: 12rem;
+    margin: 0 2rem 2rem 0;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  h4 {
+    font-weight: 800;
+    margin-right: 2rem;
+  }
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  flex: 1;
+}
+
+.postData {
+  display: flex;
+  flex-direction: column;
+}
+
+.postText {
+  max-width: 60rem;
+  max-height: 10rem;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.postDate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postCreated,
+.postEdited {
+  font-size: 1.4rem;
+  color: $c-grey-d-1;
+}

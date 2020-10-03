@@ -1,56 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {
-  getPostRequest,
-  editPostRequest,
-} from '../../store/actions/posts';
+import PostItem from '../../components/PostItem';
+import CommentForm from '../../components/CommentForm';
+import CommentItem from '../../components/CommentItem';
+
+import { getPostRequest } from '../../store/actions/posts';
 
 import Loading from '../../components/UI/Loading';
-import LoadingSpinner from '../../components/UI/LoadingSpinner';
 
 import styles from './style.scss';
 
-const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
-  const [avatarIsLoading, setAvatarIsLoading] = useState(true);
-  const [editMode, setEditMode] = useState(false);
-
+const Post = ({ match, loading, post, getPost }) => {
   useEffect(() => {
     getPost(match.params.id);
-    return function cleanUp() {
-      // cleanup
-    };
   }, [getPost, match.params.id]);
 
   return (
-    loading ? <Loading /> : (
-      <>
-        <p>test</p>
-      </>
+    loading || post === null ? <Loading /> : (
+      <div className={styles.postPage}>
+        <PostItem
+          text={post.text}
+          createdAt={post.createdAt}
+          nickname={post.user.nickname}
+          avatar={post.user.avatar}
+          showActions={false}
+        />
+        <CommentForm postId={post._id} />
+        <div className={styles.comments}>
+          {post.comments.map((comment) => (
+            <CommentItem key={comment._id} comment={comment} postId={post._id} />
+          ))}
+        </div>
+      </div>
     )
   );
 };
 
-Profile.propTypes = {
+Post.propTypes = {
   match: PropTypes.shape({
-    url: PropTypes.string.isRequired,
     params: PropTypes.shape().isRequired,
   }).isRequired,
-  getUserProfile: PropTypes.func.isRequired,
-  loggedUserId: PropTypes.string.isRequired,
-  user: PropTypes.shape(),
+  getPost: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-};
-
-Profile.defaultProps = {
-  user: {},
+  post: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  post: state.posts.post,
   loading: state.posts.loading,
-  loggedUserId: state.auth.user._id,
+  post: state.posts.post,
 });
 
-export default connect(mapStateToProps, { getUserProfile: getUserRequest })(Profile);
+export default connect(mapStateToProps, { getPost: getPostRequest })(Post);

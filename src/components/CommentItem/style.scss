@@ -1,0 +1,182 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.localBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .6);
+  z-index: 10;
+  // border-radius: 20px;
+}
+
+.centeredBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmationMessage {
+  background-color: $c-white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+
+  button {
+    cursor: pointer;
+    background-color: $c-white;
+    padding: 1rem 0;
+    width: 8rem;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+    border-radius: 10px;
+    text-transform: uppercase;
+
+    transition: all .1s linear;
+
+    &:hover {
+      color: $c-white;
+      background-color: $c-primary;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.yesButton {
+  margin-right: 2rem;
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+  background-color: $c-white;
+  box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
+  padding: 2rem;
+  cursor: default;
+
+  position: relative;
+
+  width: 80rem;
+  // min-width: 55rem;
+
+  margin: 2rem;
+
+  &:hover .postEditDelete {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.postUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img,
+  .loadingSpinner {
+    width: 12rem;
+    height: 12rem;
+    margin: 0 2rem 2rem 0;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  a,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+    transition: all .2s;
+  }
+
+  a:hover {
+    color: $c-primary;
+  }
+
+  h4 {
+    font-weight: 800;
+    margin-right: 2rem;
+  }
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  flex: 1;
+}
+
+.postData {
+  display: flex;
+  flex-direction: column;
+}
+
+.postText {
+  max-width: 60rem;
+  max-height: 10rem;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.postDate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postCreated,
+.postEdited {
+  font-size: 1.4rem;
+  color: $c-grey-d-1;
+  align-self: center;
+}
+
+.postEditDelete {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+
+  svg {
+    fill: $c-grey-d-3;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+      fill: $c-primary;
+      transform: scale(1.2);
+    }
+
+    &:active {
+      fill: $c-primary-l;
+      transform: scale(1.4);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
