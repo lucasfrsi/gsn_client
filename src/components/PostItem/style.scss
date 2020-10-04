@@ -74,4 +74,98 @@
 .postEdited {
   font-size: 1.4rem;
   color: $c-grey-d-1;
+  align-self: center;
+}
+
+.postEditDelete {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+
+  svg {
+    fill: $c-grey-d-3;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+      fill: $c-primary;
+      transform: scale(1.2);
+    }
+
+    &:active {
+      fill: $c-primary-l;
+      transform: scale(1.4);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+
+  .buttons {
+    margin-top: 1rem;
+    margin-left: auto;
+  }
+
+  input {
+    cursor: pointer;
+    padding: .5rem;
+    width: 8rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid $c-grey-d-1;
+    transition: all .1s ease-in-out;
+  }
+}
+
+.postEditText {
+  flex-grow: 1;
+  height: auto;
+  resize: none;
+  border: 1px solid $c-grey-d-1;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  padding: .8rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.cancelButton,
+.confirmButton {
+  &:hover {
+    border: 1px solid $c-primary;
+    background-color: $c-primary;
+    color: $c-white;
+  }
+
+  &:active {
+    border: 1px solid $c-primary-l;
+    background-color: $c-primary-l;
+    color: $c-white;
+    outline: none;
+  }
+}
+
+.confirmButton {
+  margin-left: 1rem;
+}
+
+.editButtonHidden {
+  svg {
+    visibility: hidden;
+  }
 }

@@ -85,6 +85,12 @@ const Post = ({
     return <p className={styles.postDiscussionText}><span className={styles.discussionCount}>{count}</span><span className={styles.discussionComment}>{comment}</span></p>;
   };
 
+  const formatDate = () => {
+    // Aug 25th at 10:13pm
+    const newDate = new Date(createdAt).toLocaleDateString();
+    return newDate;
+  };
+
   return (
     <div className={styles.post}>
       {deletionConfirmation && (
@@ -138,7 +144,7 @@ const Post = ({
 
             <p className={styles.postCreated}>
               {/* Aug 25th at 10:13pm */}
-              {createdAt}
+              {formatDate()}
             </p>
 
             <p className={styles.postEdited}>
@@ -184,9 +190,6 @@ const Post = ({
 
             {user === loggedUserId ? (
               <div className={styles.postEditDelete}>
-                <svg>
-                  <use xlinkHref={`${svg}#icon-edit`} />
-                </svg>
                 <svg
                   onClick={() => setDeletionConfirmation(true)}
                   onKeyDown={() => {}}

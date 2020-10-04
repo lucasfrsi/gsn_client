@@ -21,6 +21,8 @@ const Post = ({ match, loading, post, getPost }) => {
     loading || post === null ? <Loading /> : (
       <div className={styles.postPage}>
         <PostItem
+          postId={post._id}
+          userId={post.user._id}
           text={post.text}
           createdAt={post.createdAt}
           nickname={post.user.nickname}
