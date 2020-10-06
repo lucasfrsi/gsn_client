@@ -67,3 +67,22 @@ export const deleteCommentService = ({ postId, commentId }) => api.delete(`/post
 export const likePostService = ({ postId, likeType }) => api.post(`/posts/likes/${postId}`, {
   likeType,
 });
+
+// MOMENTS SERVICES
+
+// Moments
+export const getMoments = () => api.get('/moments');
+
+export const createMoment = ({ title, text, image }) => api.post('/moments', {
+  title,
+  text,
+  image,
+});
+// CHANGE TO MULTIPART/FORM-DATA - CHECK HOW IT WORKS
+
+export const deleteMoment = ({ momentId }) => api.delete(`/moments/${momentId}`);
+
+// Reactions
+export const reactMoment = ({ momentId, reactionType }) => api.post(`/moments/react/${momentId}`, {
+  reactionType,
+});
