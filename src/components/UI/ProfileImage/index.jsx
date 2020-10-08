@@ -38,7 +38,7 @@ const ProfileImage = ({ profileImage, customStyle }) => {
 
 ProfileImage.propTypes = {
   profileImage: PropTypes.string.isRequired,
-  customStyle: PropTypes.shape().isRequired,
+  customStyle: PropTypes.string.isRequired,
 };
 
 export default ProfileImage;

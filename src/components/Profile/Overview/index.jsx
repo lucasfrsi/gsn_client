@@ -36,13 +36,13 @@ const Overview = ({ posts, moments, user }) => {
     const lastMoment = moments[lastMomentIndex];
     return (
       <Moment
-        _id={lastMoment._id}
+        momentId={lastMoment._id}
         title={lastMoment.title}
         text={lastMoment.text}
         imageUrl={lastMoment.imageUrl}
         reactions={lastMoment.reactions}
         createdAt={lastMoment.createdAt}
-        user={lastMoment.user}
+        userId={user._id}
         nickname={user.nickname}
         avatar={user.avatar}
       />
