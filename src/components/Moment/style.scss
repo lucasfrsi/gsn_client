@@ -14,6 +14,11 @@
   overflow: hidden;
 
   margin: 2rem;
+
+  &:hover .momentPhotoButton {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .momentHeading {
@@ -27,13 +32,15 @@
 }
 
 .momentPhotoButton {
+  visibility: hidden;
+  opacity: 0;
   flex: 0 0 2rem;
   margin-left: auto;
   width: 2rem;
   height: 2rem;
   fill: $c-primary;
   cursor: pointer;
-  transition: all 0.1s;
+  transition: all 0.2s;
 
   &:hover {
     transform: scale(1.3);
@@ -56,6 +63,7 @@
   grid-template-columns: 1fr max-content 1fr;
   grid-column-gap: 0.2rem;
   align-items: center;
+  margin-top: auto;
 
   font-size: 1.6rem;
   color: $c-grey-l-2;
@@ -146,6 +154,5 @@
 .momentUserPhoto {
   height: 5rem;
   width: 5rem;
-  border-radius: 50%;
   margin-left: 1rem;
 }
