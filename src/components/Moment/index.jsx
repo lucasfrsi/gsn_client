@@ -12,10 +12,20 @@ import like from '../../assets/images/reactions/like.png';
 import love from '../../assets/images/reactions/love.png';
 import nani from '../../assets/images/reactions/nani.png';
 import sob from '../../assets/images/reactions/sob.png';
+import no from '../../assets/images/reactions/no.png';
 
 import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
+
+const reactionTypesMap = {
+  grr,
+  haha,
+  like,
+  love,
+  nani,
+  sob,
+};
 
 const Moment = ({
   momentId,
@@ -83,12 +93,14 @@ const Moment = ({
 
     const reactionsCount = reactions.reduce((counter, { user, type }) => {
       reactionsObject[type] += 1;
+      // eslint-disable-next-line no-param-reassign
       counter += 1;
       return counter;
     }, 0);
 
-    const sortedReactions = Object.entries(reactionsObject);
-    console.log(sortedReactions);
+    const sortedReactions = Object.entries(reactionsObject).sort(([, a], [, b]) => b - a);
+    // Top three reactions to the moment:
+    const [first, second, third] = sortedReactions;
 
     let reactionsNoun = ' Reactions';
     if (reactionsCount === 1) reactionsNoun = ' Reaction';
@@ -96,16 +108,20 @@ const Moment = ({
     return (
       <div className={styles.momentReactionsBox}>
         <div className={styles.momentReactions}>
-          <img src={nani} alt="Nani" className={styles.reactionImg} />
-          <img src={love} alt="Love" className={styles.reactionImg} />
-          <img src={haha} alt="Haha" className={styles.reactionImg} />
+          {first[1] > 0 ? <img src={reactionTypesMap[first[0]]} alt={first[0]} className={styles.reactionImg} /> : null}
+          {second[1] > 0 ? <img src={reactionTypesMap[second[0]]} alt={second[0]} className={styles.reactionImg} /> : null}
+          {third[1] > 0 ? <img src={reactionTypesMap[third[0]]} alt={third[0]} className={styles.reactionImg} /> : null}
+          {reactionsCount === 0 ? <img src={no} alt="no reactions" className={styles.reactionImg} /> : null}
         </div>
         <div className={styles.reactionCount}><span>{reactionsCount === 0 ? 'No' : reactionsCount}</span>{reactionsNoun}</div>
       </div>
     );
   };
 
-  // TO DO: Add delete button for user creator.
+  // TO DOS:
+  // Add delete button for user creator
+  // Show logged user reaction to moment in the place of the like button
+  // Like button for first reaction only shows when user hover the moment component
 
   return (
     <div className={styles.moment}>
