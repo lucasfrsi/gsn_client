@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { deleteMomentRequest, reactMomentRequest } from '../../store/actions/moments';
 
 import ProfileImage from '../UI/ProfileImage';
+import Backdrop from '../UI/Backdrop';
 
 import grr from '../../assets/images/reactions/grr.png';
 import haha from '../../assets/images/reactions/haha.png';
@@ -37,8 +38,13 @@ const Moment = ({
   createdAt,
   nickname,
   avatar,
+  loggedUserId,
+  deleteMoment,
+  reactMoment,
 }) => {
   const [showImage, setShowImage] = useState(false);
+  const [showReactionsOptions, setShowReactionsOptions] = useState(false);
+  const [deletionConfirmation, setDeletionConfirmation] = useState(false);
 
   const formatDate = () => {
     const date = new Date(createdAt).toDateString();
@@ -95,6 +101,11 @@ const Moment = ({
       reactionsObject[type] += 1;
       // eslint-disable-next-line no-param-reassign
       counter += 1;
+
+      if (user === loggedUserId) {
+        // save what reaction logged user did
+      }
+
       return counter;
     }, 0);
 
@@ -108,42 +119,114 @@ const Moment = ({
     return (
       <div className={styles.momentReactionsBox}>
         <div className={styles.momentReactions}>
-          {first[1] > 0 ? <img src={reactionTypesMap[first[0]]} alt={first[0]} className={styles.reactionImg} /> : null}
-          {second[1] > 0 ? <img src={reactionTypesMap[second[0]]} alt={second[0]} className={styles.reactionImg} /> : null}
-          {third[1] > 0 ? <img src={reactionTypesMap[third[0]]} alt={third[0]} className={styles.reactionImg} /> : null}
+          {first[1] > 0 ? <img src={reactionTypesMap[first[0]]} alt={first[0]} className={styles.reactionImg1} /> : null}
+          {second[1] > 0 ? <img src={reactionTypesMap[second[0]]} alt={second[0]} className={styles.reactionImg2} /> : null}
+          {third[1] > 0 ? <img src={reactionTypesMap[third[0]]} alt={third[0]} className={styles.reactionImg3} /> : null}
           {reactionsCount === 0 ? <img src={no} alt="no reactions" className={styles.reactionImg} /> : null}
         </div>
         <div className={styles.reactionCount}><span>{reactionsCount === 0 ? 'No' : reactionsCount}</span>{reactionsNoun}</div>
       </div>
     );
   };
+  // CONSIDER CHANGING TO USE EFFECT + USESTATE for user reaction to have border.
 
-  // TO DOS:
-  // Add delete button for user creator
-  // Show logged user reaction to moment in the place of the like button
-  // Like button for first reaction only shows when user hover the moment component
+  const handleMomentDeletion = () => {
+    deleteMoment(momentId);
+    setDeletionConfirmation(false);
+  };
+
+  let enterTimeout;
+  let leaveTimeout;
+  const handleReactToMoment = () => {
+    clearTimeout(leaveTimeout);
+    enterTimeout = setTimeout(() => {
+      setShowReactionsOptions(true);
+    }, 600);
+  };
+
+  const stopTimeout = () => {
+    clearTimeout(enterTimeout);
+    leaveTimeout = setTimeout(() => {
+      setShowReactionsOptions(false);
+    }, 600);
+  };
+
+  const handleReactionChoice = (reactionType) => {
+    reactMoment(momentId, reactionType);
+    leaveTimeout = setTimeout(() => {
+      setShowReactionsOptions(false);
+    }, 200);
+  };
 
   return (
-    <div className={styles.moment}>
-      <div className={styles.momentHeading}>
-        <p className={styles.momentTitle}>{title}</p>
-        <svg className={styles.momentPhotoButton} onClick={() => setShowImage(true)}>
-          <use xlinkHref={`${svg}#icon-image`} />
-        </svg>
-      </div>
-      <div className={styles.momentText}>{text}</div>
-      <div className={styles.reactToMoment}>
-        <img src={like} alt="Like" />
-      </div>
-      <div className={styles.momentData}>
-        {renderReactions()}
-        <div className={styles.momentUserBox}>
-          <p className={styles.momentUserName}>{nickname}</p> {/* LINK */}
-          {formatDate()}
+    <>
+      {showImage ? (
+        <>
+          <Backdrop />
+          <div className={styles.imageModal}>
+            <svg className={styles.closeModal} onClick={() => setShowImage(false)}>
+              <use xlinkHref={`${svg}#icon-cross`} />
+            </svg>
+          </div>
+        </>
+      ) : null}
+      <div className={styles.moment}>
+        {deletionConfirmation && (
+          <div className={styles.localBackdrop}>
+            <div className={styles.centeredBox}>
+              <p className={styles.confirmationMessage}>Are you sure you want to delete this moment?</p>
+              <div className={styles.buttons}>
+                <button
+                  type="button"
+                  className={styles.yesButton}
+                  onClick={() => handleMomentDeletion()}
+                >Yes
+                </button>
+                <button
+                  type="button"
+                  className={styles.noButton}
+                  onClick={() => setDeletionConfirmation(false)}
+                >No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className={styles.momentHeading}>
+          <p className={styles.momentTitle}>{title}</p>
+          {loggedUserId === userId ? (
+            <svg className={styles.momentDeleteButton} onClick={() => setDeletionConfirmation(true)}>
+              <use xlinkHref={`${svg}#icon-trash`} />
+            </svg>
+          ) : null}
+          <svg className={styles.momentPhotoButton} onClick={() => setShowImage(true)}>
+            <use xlinkHref={`${svg}#icon-image`} />
+          </svg>
         </div>
-        <ProfileImage profileImage={avatar} customStyle={styles.momentUserPhoto} />
+        <div className={styles.momentText}>{text}</div>
+        <div className={styles.reactToMoment} onMouseEnter={() => handleReactToMoment()} onMouseLeave={() => stopTimeout()}>
+          {showReactionsOptions ? (
+            <div className={styles.reactionsOptions}>
+              {Object.entries(reactionTypesMap).map(([key, value]) => (
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                key !== 'like' ? <img className={styles.reactionOption} key={key} src={value} alt={key} onClick={() => handleReactionChoice(key)} onKeyDown={() => {}} /> : null))}
+            </div>
+          ) : null}
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <img className={`${styles.playerReaction} ${styles.reacted}`} src={like} alt="like" onClick={() => handleReactionChoice('like')} onKeyDown={() => {}} />
+        </div>
+        <div className={styles.momentData}>
+          {renderReactions()}
+          <div className={styles.momentUserBox}>
+            <Link to={`/profile/${userId}`}>
+              <p className={styles.momentUserName}>{nickname}</p>
+            </Link>
+            {formatDate()}
+          </div>
+          <ProfileImage profileImage={avatar} customStyle={styles.momentUserPhoto} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -157,6 +240,9 @@ Moment.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   reactions: PropTypes.arrayOf(PropTypes.object).isRequired,
   createdAt: PropTypes.string.isRequired,
+  loggedUserId: PropTypes.string.isRequired,
+  deleteMoment: PropTypes.func.isRequired,
+  reactMoment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
