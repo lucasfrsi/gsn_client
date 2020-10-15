@@ -152,7 +152,7 @@
 
     &:hover {
       transform: scale(1.3);
-      border: none !important;
+      // border: 2px solid $c-primary-l;
     }
   
     &:active {
@@ -295,13 +295,38 @@
   @include absCenter;
   position: fixed;
   z-index: 11;
+
+  .momentImage {
+    max-height: 90vh;
+    max-width: 90vw;
+  }
 }
 
-.visibilityHidden {
-  // visibility: hidden;
+.closeModal {
+  position: absolute;
+  fill: $c-primary;
+  height: 5rem;
+  width: 5rem;
+  right: 0;
+
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+
+  &:active {
+    fill: $c-primary-l;
+  }
 }
 
 .reacted {
   border: 2px solid $c-primary;
   border-radius: 50%;
+}
+
+.imageLoading {
+  height: 5rem;
+  width: 5rem;
 }

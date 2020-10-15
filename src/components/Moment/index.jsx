@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { deleteMomentRequest, reactMomentRequest } from '../../store/actions/mom
 
 import ProfileImage from '../UI/ProfileImage';
 import Backdrop from '../UI/Backdrop';
+import Image from '../UI/Image';
 
 import grr from '../../assets/images/reactions/grr.png';
 import haha from '../../assets/images/reactions/haha.png';
@@ -45,6 +46,36 @@ const Moment = ({
   const [showImage, setShowImage] = useState(false);
   const [showReactionsOptions, setShowReactionsOptions] = useState(false);
   const [deletionConfirmation, setDeletionConfirmation] = useState(false);
+  const [userReaction, setUserReaction] = useState({
+    type: 'like',
+    didUserReact: false,
+  });
+
+  useEffect(() => {
+    reactions.forEach(({ user, type }) => {
+      if (loggedUserId === user) {
+        setUserReaction({
+          type,
+          didUserReact: true,
+        });
+      }
+    });
+  }, [loggedUserId, reactions]);
+
+  const reactionsRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutsideForm(event) {
+      if (reactionsRef.current && !reactionsRef.current.contains(event.target)) {
+        setShowReactionsOptions(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutsideForm);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideForm);
+    };
+  }, []);
 
   const formatDate = () => {
     const date = new Date(createdAt).toDateString();
@@ -101,11 +132,6 @@ const Moment = ({
       reactionsObject[type] += 1;
       // eslint-disable-next-line no-param-reassign
       counter += 1;
-
-      if (user === loggedUserId) {
-        // save what reaction logged user did
-      }
-
       return counter;
     }, 0);
 
@@ -141,32 +167,45 @@ const Moment = ({
     clearTimeout(leaveTimeout);
     enterTimeout = setTimeout(() => {
       setShowReactionsOptions(true);
-    }, 600);
+    }, 800);
   };
 
   const stopTimeout = () => {
     clearTimeout(enterTimeout);
     leaveTimeout = setTimeout(() => {
       setShowReactionsOptions(false);
-    }, 600);
+    }, 400);
   };
 
   const handleReactionChoice = (reactionType) => {
     reactMoment(momentId, reactionType);
-    leaveTimeout = setTimeout(() => {
-      setShowReactionsOptions(false);
-    }, 200);
+    setShowReactionsOptions(false);
+    clearTimeout(enterTimeout);
+  };
+
+  const handleReactionChoice2 = (reactionType) => {
+    reactMoment(momentId, reactionType);
+    setShowReactionsOptions(false);
+    if (userReaction.didUserReact) {
+      setUserReaction({
+        type: 'like',
+        didUserReact: false,
+      });
+    }
+    clearTimeout(enterTimeout);
   };
 
   return (
     <>
       {showImage ? (
         <>
-          <Backdrop />
+          <Backdrop onClick={() => setShowImage(false)} />
           <div className={styles.imageModal}>
             <svg className={styles.closeModal} onClick={() => setShowImage(false)}>
               <use xlinkHref={`${svg}#icon-cross`} />
             </svg>
+            {/* <img className={styles.momentImage} src={imageUrl} alt="moment" /> */}
+            <Image customStyle={styles.momentImage} spinnerSize={styles.imageLoading} image={imageUrl} alt="moment" />
           </div>
         </>
       ) : null}
@@ -204,16 +243,16 @@ const Moment = ({
           </svg>
         </div>
         <div className={styles.momentText}>{text}</div>
-        <div className={styles.reactToMoment} onMouseEnter={() => handleReactToMoment()} onMouseLeave={() => stopTimeout()}>
+        <div ref={reactionsRef} className={styles.reactToMoment} onMouseEnter={() => handleReactToMoment()} onMouseLeave={() => stopTimeout()}>
           {showReactionsOptions ? (
             <div className={styles.reactionsOptions}>
               {Object.entries(reactionTypesMap).map(([key, value]) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                key !== 'like' ? <img className={styles.reactionOption} key={key} src={value} alt={key} onClick={() => handleReactionChoice(key)} onKeyDown={() => {}} /> : null))}
+                key !== userReaction.type ? <img className={styles.reactionOption} key={key} src={value} alt={key} onClick={() => handleReactionChoice(key)} onKeyDown={() => {}} /> : null))}
             </div>
           ) : null}
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-          <img className={`${styles.playerReaction} ${styles.reacted}`} src={like} alt="like" onClick={() => handleReactionChoice('like')} onKeyDown={() => {}} />
+          <img className={`${styles.playerReaction} ${userReaction.didUserReact ? styles.reacted : null}`} src={reactionTypesMap[userReaction.type]} alt={userReaction.type} onClick={() => handleReactionChoice2(userReaction.type)} onKeyDown={() => {}} />
         </div>
         <div className={styles.momentData}>
           {renderReactions()}
