@@ -56,13 +56,8 @@ const NewMoment = ({ createMoment }) => {
           isValid: true,
         });
       }
-    } else {
-      setFile({
-        ...file,
-        isValid: false,
-      });
     }
-  }; // check if user only open but dont select file (gives isValid: false)
+  };
 
   const pickImageHandler = () => {
     filePickerRef.current.click();
@@ -117,48 +112,62 @@ const NewMoment = ({ createMoment }) => {
         <h3>Share a moment with other members of the community!</h3>
       </div>
       <form className={styles.form} onSubmit={momentSubmitHandler}>
-        <label htmlFor="title">
-          Title
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={title.value}
-            onChange={(e) => onChangeHandler(e)}
-          />
-        </label>
-        <label htmlFor="text">
-          Description
-          <input
-            type="text"
-            name="text"
-            id="text"
-            value={text.value}
-            onChange={(e) => onChangeHandler(e)}
-          />
-        </label>
-        <div>
-          <input
-            id="image"
-            name="image"
-            ref={filePickerRef}
-            style={{ display: 'none' }}
-            type="file"
-            accept=".jpg,.png,.jpeg,.bmp"
-            onChange={pickedHandler}
-          />
-          <div className={styles.imageUpload}>
-            <div className={styles.imageUploadPreview}>
-              {previewUrl && <img src={previewUrl} alt="Preview" />}
-              {!previewUrl && <p>Please pick an image.</p>}
-            </div>
-            <button type="button" onClick={pickImageHandler}>
-              PICK IMAGE
-            </button>
+        <div className={styles.formWrapper}>
+          <div className={styles.inputsWrapper}>
+            <label htmlFor="title">
+              <strong>Title</strong>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                value={title.value}
+                autoComplete="off"
+                onChange={(e) => onChangeHandler(e)}
+              />
+              <span
+                className={`${styles.charCounter} ${title.value.length > 50 ? styles.charCounterRed : null}`}
+              >{title.value.length}/50
+              </span>
+            </label>
+            <label htmlFor="text">
+              <strong>Description</strong>
+              <textarea
+                name="text"
+                id="text"
+                value={text.value}
+                onChange={(e) => onChangeHandler(e)}
+              />
+              <span
+                className={`${styles.charCounter} ${text.value.length > 150 ? styles.charCounterRed : null}`}
+              >{text.value.length}/150
+              </span>
+            </label>
           </div>
-          {!file.isValid && <p>Please provide an image.</p>}
+          <div className={styles.imageDiv}>
+            <label htmlFor="image">
+              <strong>Image</strong>
+              <input
+                id="image"
+                name="image"
+                ref={filePickerRef}
+                style={{ display: 'none' }}
+                type="file"
+                accept=".jpg,.png,.jpeg,.bmp"
+                onChange={pickedHandler}
+              />
+            </label>
+            <div className={styles.imageUpload}>
+              <div className={styles.imageUploadPreview}>
+                {previewUrl && <img src={previewUrl} alt="Preview" />}
+                {/* {!previewUrl && <p>Please pick an image.</p>} */}
+                <button className={styles.pickAnImage} type="button" onClick={pickImageHandler}>
+                  PICK IMAGE
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        {isFormValid ? <button type="submit">valid</button> : <p>not valid</p>}
+        <button disabled={!isFormValid} className={styles.submitButton} type="submit">Submit</button>
       </form>
     </div>
   );

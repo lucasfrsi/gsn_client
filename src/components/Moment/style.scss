@@ -93,11 +93,6 @@
   align-items: center;
 }
 
-.momentTitle {
-  flex: 0 1 100%;
-  font-weight: 600;
-}
-
 .momentPhotoButton,
 .momentDeleteButton {
   visibility: hidden;
@@ -123,11 +118,17 @@
   margin-right: .5rem;
 }
 
+.momentTitle {
+  flex: 0 1 100%;
+  font-weight: 600;
+}
+
 .momentText {
   position: relative;
   margin: 1rem 0;
   text-align: justify;
   line-height: 1.4;
+  word-wrap: break-word;
 }
 
 .reactToMoment {

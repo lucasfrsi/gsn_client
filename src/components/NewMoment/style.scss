@@ -1,9 +1,10 @@
 @use '../../sass/abstracts/members.scss' as *;
 
-.compose {
+.createMoment {
   display: flex;
   flex-direction: column;
-  width: 80rem;
+  width: 100%;
+  max-width: 80rem;
 }
 
 .saySomething {
@@ -16,46 +17,82 @@
 .form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
 
+  &Wrapper {
+    display: flex;
+    flex-direction: row;
+    // margin-bottom: 2rem;
+  }
+
+  label {
+    position: relative;
+  }
+
+  input,
   textarea {
+    display: inline-block;
     padding: .8rem;
     font-family: inherit;
     font-size: inherit;
     color: inherit;
-    resize: none;
-    height: 13rem;
     border: none;
     box-shadow: 0 .5rem .5rem rgba(0,0,0,.2);
+    width: 100%;
 
     &:focus {
       outline: none;
     }
   }
+  
+  input {
+    margin: 0 0 2rem;
+  }
+
+  textarea {
+    resize: none;
+    height: 13rem;
+  }
+
+  .charCounter {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &Red {
+      color: red;
+    }
+  }
 }
 
-.submitButton {
-  margin-left: auto;
-  margin-top: 1.5rem;
-  width: 8rem;
-  padding: .5rem;
-  background-color: transparent;
-  color: inherit;
+.inputsWrapper {
+  flex: 1;
+  margin-right: 2rem;
+}
+
+.submitButton,
+.pickAnImage {
   font-family: inherit;
   font-weight: 600;
   font-size: 1.4rem;
-  // text-transform: uppercase;
   border: none;
-  border-radius: .5rem;
   cursor: pointer;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
   transition: all .1s linear;
 
   &:focus {
     outline: none;
   }
+}
 
-  &:hover {
+.submitButton {
+  margin-left: auto;
+  width: 8rem;
+  padding: .5rem;
+  background-color: transparent;
+  color: inherit;
+  border-radius: .5rem;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+
+  &:enabled:hover {
     color: $c-white;
     background-color: $c-primary;
   }
@@ -65,6 +102,34 @@
     color: $c-white;
     background-color: $c-primary-l;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $c-white;
+    background-color: rgba($c-primary, .5);
+  }
+}
+
+.pickAnImage {
+  position: absolute;
+  padding: .5rem;
+  bottom: 0;
+  width: 100%;
+  color: $c-white;
+  background-color: transparent;
+  background-image: linear-gradient(to top, rgba($c-primary, 1), rgba($c-primary, .2));
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    outline: none;
+  }
+}
+
+.imageDiv {
+  margin-left: auto;
 }
 
 .imageUpload {
@@ -75,14 +140,17 @@
 }
 
 .imageUploadPreview {
-  width: 13rem;
-  height: 13rem;
-  border: 1px solid #ccc;
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  // border: 2px solid $c-grey-l-1;
+  background-color: $c-white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin-bottom: 1rem;
+  box-shadow: 0 .5rem .5rem rgba(0,0,0,.2);
 
   img {
     width: 100%;
