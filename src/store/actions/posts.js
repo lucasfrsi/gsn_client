@@ -97,10 +97,10 @@ export const getPostError = () => ({
   type: GET_POST_ERROR,
 });
 
-export const getPostsSuccess = (data) => ({
+export const getPostsSuccess = (posts) => ({
   type: GET_POSTS_SUCCESS,
   payload: {
-    posts: data,
+    posts,
   },
 });
 

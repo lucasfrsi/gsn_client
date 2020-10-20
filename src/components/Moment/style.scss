@@ -77,7 +77,7 @@
   height: 24.8rem;
   border-radius: 20px;
   cursor: default;
-  overflow: hidden;
+  // overflow: hidden;
 
   margin: 2rem;
 
@@ -121,6 +121,9 @@
 .momentTitle {
   flex: 0 1 100%;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .momentText {
@@ -128,6 +131,12 @@
   margin: 1rem 0;
   text-align: justify;
   line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   word-wrap: break-word;
 }
 

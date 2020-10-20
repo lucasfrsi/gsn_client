@@ -42,7 +42,7 @@ export const getUserService = ({ userId }) => api.get(`/users/${userId}`);
 // POSTS SERVICES
 
 // Posts
-export const getPosts = () => api.get('/posts');
+export const getPostsService = () => api.get('/posts');
 
 export const getPostByIdService = ({ postId }) => api.get(`/posts/${postId}`);
 

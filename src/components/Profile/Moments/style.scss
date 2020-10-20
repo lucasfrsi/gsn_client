@@ -4,3 +4,11 @@
   align-content: center;
   align-items: center;
 }
+
+.userMoments {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

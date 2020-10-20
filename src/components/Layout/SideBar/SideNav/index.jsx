@@ -24,12 +24,12 @@ const SideNav = ({ isAuthenticated }) => (
         />
         <SideNavItem
           item="Posts"
-          route="/posts/5f4299ea964af30c9427fd1c"
+          route="/posts"
           svgPath={`${icons}#icon-pencil`}
         />
         <SideNavItem
           item="Moments"
-          route="/test3"
+          route="/moments"
           svgPath={`${icons}#icon-flash`}
         />
       </>

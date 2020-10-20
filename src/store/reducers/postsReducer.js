@@ -1,4 +1,5 @@
 import {
+  GET_POSTS_REQUEST,
   GET_POST_SUCCESS,
   GET_POST_ERROR,
   GET_POSTS_SUCCESS,
@@ -29,6 +30,11 @@ const postsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case GET_POSTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_USER_SUCCESS:
       return {
         ...state,

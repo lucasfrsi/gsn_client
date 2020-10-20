@@ -11,20 +11,24 @@ const Moments = ({ moments, user, loggedUser }) => {
   const renderMoments = () => {
     const momentsArray = [...moments];
     momentsArray.reverse();
-    return momentsArray.map((moment) => (
-      <Moment
-        key={moment._id}
-        momentId={moment._id}
-        userId={user._id}
-        nickname={user.nickname}
-        avatar={user.avatar}
-        title={moment.title}
-        text={moment.text}
-        imageUrl={moment.imageUrl}
-        reactions={moment.reactions}
-        createdAt={moment.createdAt}
-      />
-    ));
+    return (
+      <div className={styles.userMoments}>
+        {momentsArray.map((moment) => (
+          <Moment
+            key={moment._id}
+            momentId={moment._id}
+            userId={user._id}
+            nickname={user.nickname}
+            avatar={user.avatar}
+            title={moment.title}
+            text={moment.text}
+            imageUrl={moment.imageUrl}
+            reactions={moment.reactions}
+            createdAt={moment.createdAt}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (

@@ -32,7 +32,7 @@ import {
 
 import {
   getPostByIdService,
-  getPosts,
+  getPostsService,
   likePostService,
   deletePostService,
   createPostService,
@@ -40,6 +40,20 @@ import {
   createCommentService,
   deleteCommentService,
 } from '../../services/api';
+
+// GET POSTS
+function* getPosts() {
+  try {
+    const response = yield call(getPostsService);
+    yield put(getPostsSuccess(response.data.posts));
+  } catch (error) {
+    yield put(getPostsError());
+  }
+}
+
+function* watchGetPosts() {
+  yield takeEvery(GET_POSTS_REQUEST, getPosts);
+}
 
 // GET POST BY ID
 function* getPost(action) {
@@ -185,6 +199,7 @@ function* watchDeleteComment() {
 // WATCHERS EXPORT
 const postsSaga = [
   fork(watchGetPost),
+  fork(watchGetPosts),
   fork(watchLikePost),
   fork(watchDeletePost),
   fork(watchCreatePost),

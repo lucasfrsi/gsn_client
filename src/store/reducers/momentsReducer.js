@@ -1,4 +1,5 @@
 import {
+  GET_MOMENTS_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_ERROR,
   GET_MOMENTS_SUCCESS,
@@ -20,6 +21,11 @@ const momentsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case GET_MOMENTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_USER_SUCCESS:
       return {
         ...state,
