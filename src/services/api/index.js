@@ -39,6 +39,8 @@ export const searchUserService = (query) => api.get(`/users/search/${query}`);
 // USERS / PROFILE SERVICES
 export const getUserService = ({ userId }) => api.get(`/users/${userId}`);
 
+export const getRandomUserService = () => api.get('/users/random');
+
 // POSTS SERVICES
 
 // Posts

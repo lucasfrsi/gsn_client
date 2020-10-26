@@ -1,0 +1,134 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.featuredMemberCard {
+  max-width: 80rem;
+  max-height: 25rem;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
+  
+  display: flex;
+  align-items: stretch;
+}
+
+.featuredMemberHero {
+  flex: 0 0 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuredMemberImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.featuredMemberContent {
+  flex: 1;
+  background: white;
+  padding: 2.5rem 2rem;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.featuredMemberLabel {
+  flex: 0 0 50px;
+  background: linear-gradient(to bottom, $c-primary-l, $c-primary-d);
+  writing-mode: vertical-rl;
+  color: white;
+  font-size: 18px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuredMemberTitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: .5rem;
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+    margin-right: auto;
+    transition: .2s all;
+
+    &:hover {
+      color: $c-primary;
+    }
+
+    &:active {
+      color: $c-primary-l;
+    }
+  }
+}
+
+.featuredMemberHeading {
+  font-size: 2rem;
+}
+
+.featuredMemberTag {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: white;
+  padding: .2rem .7rem;
+  border-radius: 10rem;
+  margin-right: auto;
+  background-color: rgba($c-primary,.85);
+  margin-bottom: 1rem;
+}
+
+.featuredMemberDescription {
+  font-size: 1.4rem;
+  letter-spacing: .1rem;
+  margin-bottom: auto;
+}
+
+.featuredMemberDetails {
+  display: flex;
+  margin-top: auto;
+}
+
+.featuredMemberDetail {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-right: 20px;
+  font-weight: 700;
+  
+  display: flex;
+  align-items: center;
+
+  &Date {
+    margin-left: auto;
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: flex;
+    color: $c-grey-m-2;
+  }
+}
+
+.countNumber {
+  color: $c-primary;
+}
+
+.platforms {
+  display: flex;
+  align-items: center;
+
+  .platformIcon {
+    height: 2.5rem;
+    width: 2.5rem;
+    fill: $c-grey-l-3;
+
+    &:not(:last-child) {
+      margin-right: .5rem;
+    }
+  }
+}
+
+.loadingSpinnerSize {
+  visibility: hidden;
+}

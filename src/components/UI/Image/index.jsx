@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import LoadingSpinner from '../LoadingSpinner';
-import defaultImage from '../../../assets/images/imagefile.png';
+import defaultMomentImage from '../../../assets/images/default_momentImage.png';
 
 const Image = ({ image, customStyle, spinnerSize, alt }) => {
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const Image = ({ image, customStyle, spinnerSize, alt }) => {
   const handleOnError = (event) => {
     setLoading(false);
     const img = event.target;
-    img.src = defaultImage;
+    img.src = defaultMomentImage;
   };
 
   return (

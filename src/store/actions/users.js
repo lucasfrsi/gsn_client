@@ -2,6 +2,9 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_ERROR,
+  GET_RANDOM_USER_REQUEST,
+  GET_RANDOM_USER_SUCCESS,
+  GET_RANDOM_USER_ERROR,
 } from './types';
 
 // REQUESTS
@@ -11,6 +14,10 @@ export const getUserRequest = (userId) => ({
   payload: {
     userId,
   },
+});
+
+export const getRandomUserRequest = () => ({
+  type: GET_RANDOM_USER_REQUEST,
 });
 
 // SUCCESS AND ERROR
@@ -24,4 +31,15 @@ export const getUserSuccess = (data) => ({
 
 export const getUserError = () => ({
   type: GET_USER_ERROR,
+});
+
+export const getRandomUserSuccess = (randomUser) => ({
+  type: GET_RANDOM_USER_SUCCESS,
+  payload: {
+    randomUser,
+  },
+});
+
+export const getRandomUserError = () => ({
+  type: GET_RANDOM_USER_ERROR,
 });

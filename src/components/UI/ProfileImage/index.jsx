@@ -6,7 +6,7 @@ import defaultAvatar from '../../../assets/images/default_avatar.png';
 
 import styles from './style.scss';
 
-const ProfileImage = ({ profileImage, customStyle }) => {
+const ProfileImage = ({ profileImage, customStyle, spinnerSize = customStyle }) => {
   const [loading, setLoading] = useState(true);
 
   const handleOnLoad = () => {
@@ -21,7 +21,7 @@ const ProfileImage = ({ profileImage, customStyle }) => {
 
   return (
     <>
-      {loading ? <LoadingSpinner size={customStyle} /> : null}
+      {loading ? <LoadingSpinner size={spinnerSize} /> : null}
       <img
         src={profileImage || defaultAvatar}
         alt="User Avatar"
@@ -39,6 +39,7 @@ const ProfileImage = ({ profileImage, customStyle }) => {
 ProfileImage.propTypes = {
   profileImage: PropTypes.string.isRequired,
   customStyle: PropTypes.string.isRequired,
+  spinnerSize: PropTypes.string.isRequired,
 };
 
 export default ProfileImage;

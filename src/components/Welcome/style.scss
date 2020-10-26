@@ -1,0 +1,25 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  &Main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 5rem;
+  }
+
+  &Sec {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1.25rem;
+  }
+}
+
+.featuredUser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
