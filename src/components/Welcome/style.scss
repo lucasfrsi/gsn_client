@@ -1,13 +1,30 @@
-.heading {
+@use '../../sass/abstracts/members.scss' as *;
+
+.welcome {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin: 2rem;
+  height: 100%;
+}
+
+.heading {
+  // display: flex;
+  // justify-content: center;
+  // text-align: center;
   text-align: center;
+  margin-left: 5rem;
 
   &Main {
     display: block;
     font-size: 6rem;
     font-weight: 400;
     letter-spacing: 5rem;
+    color: transparent;
+    background-image: linear-gradient(to right, $c-primary-l, $c-primary-d);
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 
   &Sec {
@@ -15,6 +32,11 @@
     font-size: 2rem;
     font-weight: 800;
     letter-spacing: 1.25rem;
+    margin-left: -3.2rem;
+    color: transparent;
+    background-image: linear-gradient(to right, $c-primary-l, $c-primary-d);
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 }
 

@@ -126,7 +126,9 @@ const Post = ({
             display: loading ? 'none' : 'inline-block',
           }}
         />
-        <h4>{nickname}</h4>
+        <Link to={`/profile/${user}`}>
+          <h4>{nickname}</h4>
+        </Link>
       </div>
 
       <div className={styles.postContent}>
@@ -144,13 +146,13 @@ const Post = ({
 
             <p className={styles.postCreated}>
               {/* Aug 25th at 10:13pm */}
-              {formatDate()}
+              Posted on {formatDate()}
             </p>
 
-            <p className={styles.postEdited}>
-              {/* Edited */}
-              {updatedAt !== createdAt ? 'Edited' : null} {/* WRONG, CHANGE LOGIC */}
-            </p>
+            {/* <p className={styles.postEdited}>
+              // {/* Edited
+              {updatedAt !== createdAt ? 'Edited' : null}
+            </p> */}
 
           </div>
 

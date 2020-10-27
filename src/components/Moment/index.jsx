@@ -243,7 +243,7 @@ const Moment = ({
           </svg>
         </div>
         <div className={styles.momentText}>{text}</div>
-        <div ref={reactionsRef} className={styles.reactToMoment} onMouseEnter={() => handleReactToMoment()} onMouseLeave={() => stopTimeout()}>
+        <div ref={reactionsRef} className={styles.reactToMoment} onMouseEnter={() => handleReactToMoment()} onTouchStart={() => handleReactToMoment()} onMouseLeave={() => stopTimeout()}>
           {showReactionsOptions ? (
             <div className={styles.reactionsOptions}>
               {Object.entries(reactionTypesMap).map(([key, value]) => (

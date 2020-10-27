@@ -69,20 +69,25 @@ const FeaturedMember = ({
           <Link to={`/profile/${_id}`}>
             <h1 className={styles.featuredMemberHeading}>{nickname}</h1>
           </Link>
-          <div className={styles.platforms}>
-            <svg className={styles.platformIcon}>
-              <use xlinkHref={`${svg}#icon-playstation`} />
-            </svg>
-            <svg className={styles.platformIcon}>
-              <use xlinkHref={`${svg}#icon-epicgames`} />
-            </svg>
-          </div>
+          {profile.gamerData.platforms && Object.keys(profile.gamerData.platforms).length > 0 && (
+            <div className={styles.platforms}>
+              {Object.entries(profile.gamerData.platforms).map(([key, value]) => (value
+                ? (
+                  <svg key={key} className={styles.platformIcon}>
+                    <use xlinkHref={`${svg}#icon-${key}`} />
+                  </svg>
+                ) : null))}
+            </div>
+          )}
         </div>
-        <div className={styles.featuredMemberTag}>#casualplayer</div>
+        <div className={styles.tags}>
+          <div className={styles.featuredMemberTag}>#{profile.gamerData.kind && profile.gamerData.kind}player</div>
+          {profile.gamerData.twitchChannel && profile.gamerData.twitchChannel.streamer && <div className={styles.featuredMemberTag}>#streamer</div>}
+        </div>
         <p className={styles.featuredMemberDescription}>{profile.gamerData.bio}</p>
         <div className={styles.featuredMemberDetails}>
-          <p className={styles.featuredMemberDetail}><span className={styles.countNumber}>{posts.length}</span>&nbsp;Posts</p>
-          <p className={styles.featuredMemberDetail}><span className={styles.countNumber}>{moments.length}</span>&nbsp;Moments</p>
+          <p className={styles.featuredMemberDetail}><span className={styles.countNumber}>{posts.length}</span>&nbsp;{posts.length === 1 ? 'Post' : 'Posts'}</p>
+          <p className={styles.featuredMemberDetail}><span className={styles.countNumber}>{moments.length}</span>&nbsp;{moments.length === 1 ? 'Moment' : 'Moments'}</p>
           {formatDate()}
         </div>
       </div>

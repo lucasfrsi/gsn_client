@@ -15,10 +15,10 @@
 
   margin: 2rem;
 
-  &:hover .postEditDelete {
-    visibility: visible;
-    opacity: 1;
-  }
+  // &:hover .postEditDelete {
+  //   visibility: visible;
+  //   opacity: 1;
+  // }
 }
 
 .postUser {
@@ -79,8 +79,8 @@
 
 .postEditDelete {
   display: flex;
-  visibility: hidden;
-  opacity: 0;
+  // visibility: hidden;
+  // opacity: 0;
   transition: all .2s ease-in-out;
 
   svg {

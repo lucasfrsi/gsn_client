@@ -65,6 +65,7 @@ const Overview = ({ posts, moments, user }) => {
             <br />
             <p>Favorite Game: <span>League of Legends</span></p>
             <p>Recently Played: <span>Fortnite</span></p>
+            <p>genres</p>
           </div>
         </div>
         <div className={styles.gaming}>
@@ -111,22 +112,24 @@ const Overview = ({ posts, moments, user }) => {
             </div>
           </div>
         </div>
-        {/* <div className={styles.twitch}>
-          <div className={styles.heading}>
-            <h3>Twitch Channel</h3>
-          </div>
-          <iframe
-            title="twitch"
-            src={`https://player.twitch.tv/?channel=swimstrim&parent=${window.location.hostname}&muted=true`}
-            height="300"
-            width="400"
-            frameBorder="1"
-            scrolling="no"
-            allowFullScreen
-          />
-        </div> */}
       </div>
-
+      <span className={styles.genre}>FPS</span> {/* PAREI AQUI */}
+      {user.profile.gamerData.twitchChannel && (
+        <div className={styles.twitch}>
+          <div className={styles.heading}>
+            <h3>{user.profile.gamerData.twitchChannel.streamer ? 'My' : 'Favorite'} Twitch Channel</h3>
+          </div>
+          <div className={styles.twitchPlayerContainer}>
+            <iframe
+              title="twitch"
+              src={`https://player.twitch.tv/?channel=${user.profile.gamerData.twitchChannel.link}&parent=${window.location.hostname}&muted=true`}
+              frameBorder="1"
+              scrolling="no"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
       <div className={`${styles.heading} ${styles.endHeading}`}>
         <h3>Recent Activity</h3>
       </div>

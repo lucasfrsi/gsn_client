@@ -76,7 +76,7 @@
   color: white;
   padding: .2rem .7rem;
   border-radius: 10rem;
-  margin-right: auto;
+  margin-right: 1rem;
   background-color: rgba($c-primary,.85);
   margin-bottom: 1rem;
 }
@@ -119,8 +119,8 @@
   align-items: center;
 
   .platformIcon {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
     fill: $c-grey-l-3;
 
     &:not(:last-child) {
@@ -131,4 +131,9 @@
 
 .loadingSpinnerSize {
   visibility: hidden;
+}
+
+.tags {
+  display: flex;
+  margin-right: auto;
 }

@@ -81,11 +81,11 @@
 
   margin: 2rem;
 
-  &:hover .momentPhotoButton,
-  &:hover .momentDeleteButton {
-    visibility: visible;
-    opacity: 1;
-  }
+  // &:hover .momentPhotoButton,
+  // &:hover .momentDeleteButton {
+  //   visibility: visible;
+  //   opacity: 1;
+  // }
 }
 
 .momentHeading {
@@ -95,8 +95,8 @@
 
 .momentPhotoButton,
 .momentDeleteButton {
-  visibility: hidden;
-  opacity: 0;
+  // visibility: hidden;
+  // opacity: 0;
   flex: 0 0 2rem;
   width: 2rem;
   height: 2rem;

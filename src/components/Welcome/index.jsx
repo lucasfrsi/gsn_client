@@ -13,12 +13,10 @@ const Welcome = ({ getRandomUser, featuredUser }) => {
   }, [getRandomUser]);
 
   return (
-    <div>
+    <div className={styles.welcome}>
       <div className={styles.heading}>
-        <h1>
-          <span className={styles.headingMain}>GAMERSX</span>
-          <span className={styles.headingSec}>IS WHERE GAMERS HANG OUT</span>
-        </h1>
+        <h1 className={styles.headingMain}>GAMERSX</h1>
+        <h1 className={styles.headingSec}>IS WHERE GAMERS HANG OUT</h1>
       </div>
       <div className={styles.featuredUser}>
         {featuredUser ? <FeaturedMember featuredUser={featuredUser} /> : null}
