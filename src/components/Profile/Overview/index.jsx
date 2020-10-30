@@ -9,7 +9,7 @@ import svg from '../../../assets/svg/sprite.svg';
 import Post from '../../Post';
 import Moment from '../../Moment';
 
-const Overview = ({ posts, moments, user }) => {
+const Overview = ({ posts, moments, user, loggedUser }) => {
   const renderLastPost = () => {
     const lastPostIndex = posts.length - 1;
     const lastPost = posts[lastPostIndex];
@@ -51,70 +51,48 @@ const Overview = ({ posts, moments, user }) => {
 
   return (
     <div className={styles.overview}>
+      {loggedUser._id === user._id ? <button type="button" className={styles.editButton}>Edit Profile</button> : null}
 
-      <div className={styles.container}>
+      {(user.profile.gamerData.bio || (user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0) || (user.profile.gamerData.platforms && user.profile.gamerData.platforms.length > 0)) && (
         <div className={styles.gamerInfo}>
           <div className={styles.heading}>
             <h3>Gamer Info</h3>
           </div>
-          <div className={styles.gamerData}>
-            <h4 className={styles.gamerDataHeading}>BIO</h4>
-            <p>
-              But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure r
-            </p>
-            <br />
-            <p>Favorite Game: <span>League of Legends</span></p>
-            <p>Recently Played: <span>Fortnite</span></p>
-            <p>genres</p>
+          <div className={styles.container}>
+            {user.profile.gamerData.bio && (
+              <div className={styles.subContainer}>
+                <h4>Bio</h4>
+                <span className={styles.bio}>{user.profile.gamerData.bio}</span>
+              </div>
+            )}
+            {user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0 && (
+              <div className={styles.subContainer}>
+                <h4 className={styles.genresHeading}>Favorite Genres</h4>
+                {user.profile.gamerData.genres.map((genre) => (
+                  <span key={genre} className={styles.genre}>{genre}</span>
+                ))}
+              </div>
+            )}
+            {user.profile.gamerData.platforms && Object.keys(user.profile.gamerData.platforms).length > 0 && (
+              <div className={styles.subContainer}>
+                <h4>Platforms</h4>
+                <div className={styles.platform}>
+                  {Object.entries(user.profile.gamerData.platforms).map(([key, value]) => (
+                    value ? (
+                      <div key={key} className={styles.platform}>
+                        <svg className={styles.icon}>
+                          <use xlinkHref={`${svg}#icon-${key}`} />
+                        </svg>
+                        <span className={styles.platformId}>{value}</span>
+                      </div>
+                    ) : null))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
-        <div className={styles.gaming}>
-          <div className={styles.heading}>
-            <h3>Platforms</h3>
-          </div>
-          <div className={styles.gamingData}>
-            {/* <p className={styles.gamingDataTitle}>This gamer is part of the following platforms: </p> */}
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-nintendoswitch`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Nintendo</span> as <span>Cloud</span></p>
-            </div>
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-playstation`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Playstation Network</span> as <span>xCloudyTales</span></p>
-            </div>
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-xbox`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Xbox Live</span> as <span>xCloud#4321</span></p>
-            </div>
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-epicgames`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Epic Games</span> as <span>Cloud</span></p>
-            </div>
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-steam`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Steam</span> as <span>Cloud</span></p>
-            </div>
-            <div className={styles.platform}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${svg}#icon-discord`} />
-              </svg>
-              <p className={styles.gamingDataInfo}><span>Discord</span> as <span>xCloudFF#1234</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span className={styles.genre}>FPS</span> {/* PAREI AQUI */}
-      {user.profile.gamerData.twitchChannel && (
+      )}
+      {user.profile.gamerData.twitchChannel && user.profile.gamerData.twitchChannel.link && (
         <div className={styles.twitch}>
           <div className={styles.heading}>
             <h3>{user.profile.gamerData.twitchChannel.streamer ? 'My' : 'Favorite'} Twitch Channel</h3>
@@ -134,8 +112,13 @@ const Overview = ({ posts, moments, user }) => {
         <h3>Recent Activity</h3>
       </div>
       <div className={styles.recentActivity}>
-        {posts.length === 0 ? <p>No Posts</p> : renderLastPost()}
-        {moments.length === 0 ? <p>No Moments</p> : renderLastMoment()}
+        {/* {posts.length !== 0 && renderLastPost()}
+        {moments.length !== 0 && renderLastMoment()} */}
+        {posts.length === 0 && moments.length === 0 && (
+          <div>
+            This user has not shared any post or moment up to this moment.
+          </div>
+        )}
       </div>
 
     </div>
@@ -146,12 +129,14 @@ Overview.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   moments: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape().isRequired,
+  loggedUser: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
   posts: state.posts.posts,
   moments: state.moments.moments,
   user: state.users.user,
+  loggedUser: state.auth.user,
 });
 
 export default connect(mapStateToProps)(Overview);

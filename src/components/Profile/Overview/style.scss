@@ -3,6 +3,8 @@
 .overview {
   display: flex;
   flex-direction: column;
+  min-height: 30rem;
+  position: relative;
   
   h3 {
     font-size: 1.6rem;
@@ -54,64 +56,56 @@
   flex-direction: row;
   margin-bottom: 3rem;
   justify-content: space-between;
-  align-content: stretch;
-}
-
-.gaming,
-.gamerInfo,
-.twitch {
-
-  flex: 1;
-
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-}
-
-.gamingData {
+  // align-content: stretch;
   background-color: $c-white;
   box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
   border-radius: 1rem;
   padding: 2rem;
 
-  .icon {
-    height: 3rem;
-    width: 3rem;
-    fill: $c-grey-l-3;
-    margin-right: 2rem;
-  }
+  flex-wrap: wrap;
+  width: fit-content;
 
-  &Title {
-    font-weight: 500;
-    margin-bottom: 2rem;
-  }
+  .subContainer {
+    flex: 1 1;
+    min-width: 25rem;
 
-  &Info {
-    display: inline-block;
-  }
-
-  .platform {
-    display: flex;
-    align-items: center;
-    
-    &:not(:last-child) {
+    h4 {
+      text-transform: uppercase;
       margin-bottom: 1rem;
     }
-  }
 
-  span {
-    display: inline-block;
-    color: $c-primary;
-    letter-spacing: 0.05rem;
-
-    &:hover {
-      cursor: pointer;
-      border-bottom: 1px solid $c-primary;
+    .genresHeading {
+      margin-bottom: 0.5rem;
     }
+    
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}
 
+.icon {
+  height: 3rem;
+  width: 3rem;
+  fill: $c-grey-l-3;
+  margin-right: 1rem;
+}
+
+.platform {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  
+  &:not(:last-child) {
+    margin-bottom: 1rem;
   }
 
+  &Id {
+    font-weight: 500;
+  }
 }
+
 
 .gamerData {
   background-color: $c-white;
@@ -142,7 +136,7 @@
   }
 
   iframe {
-    border: 3px solid $c-grey-l-1;
+    border: 2px solid $c-grey-l-1;
     border-radius: 1rem;
     width: 100%;
     height: 100%;
@@ -151,31 +145,48 @@
     left: 0;
     bottom: 0;
     right: 0;
+    box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
   }
 }
 
 .genre {
-  border: 1px solid $c-grey-d-3;
-  border-radius: 30%;
-  padding: .4rem .6rem;
+  cursor: default;
+  display: inline-block;
+  border: 1px solid $c-primary;
+  border-radius: 10rem;
+  padding: .4rem .8rem;
+  margin: .4rem .4rem 0 0;
 
-  margin-right: auto;
+  color: $c-primary;
 }
 
-// .endHeading {
-//   display: grid;
-//   grid-template-columns: max-content 1fr;
-//   grid-column-gap: 2rem;
-//   align-items: center;
+.bio {
+  letter-spacing: .1rem;
+}
 
-//   margin-bottom: 2rem;
+.editButton {
+  position: absolute;
+  right: 0;
+  top: 0;
 
-//   &::after {
-//     content: "";
-//     height: .2rem;
-//     display: block;
-//     background-color: $c-grey-l-1;
-//     border-bottom-right-radius: 50%;
-//     border-top-right-radius: 50%;
-//   }
-// }
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid $c-primary;
+  color: $c-primary;
+  padding: .2rem .8rem;
+  border-radius: .5rem;
+
+  font-weight: 600;
+
+  transition: all .2s;
+
+  &:hover {
+    background-color: $c-primary;
+    color: $c-white;
+  }
+
+  &:active {
+    background-color: $c-primary-l;
+  }
+}

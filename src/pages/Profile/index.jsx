@@ -70,6 +70,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
               display: loading ? 'none' : 'inline-block',
             }}
           />
+          {user._id === loggedUserId ? <button className={styles.coverButton} type="button">Change Cover</button> : null}
           <div className={styles.profileAvatar}>
             {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
             <img
@@ -82,6 +83,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
                 display: loading ? 'none' : 'inline-block',
               }}
             />
+            {user._id === loggedUserId ? <button className={styles.avatarButton} type="button">Change Avatar</button> : null}
           </div>
         </div>
 

@@ -6,6 +6,13 @@
   grid-template-columns: minmax(min-content, max-content);
   row-gap: 0;
   column-gap: 0;
+  position: relative;
+
+  &:hover .coverButton,
+  &:hover .avatarButton {
+    visibility: visible;
+    opacity: 1;
+  }
 
   img {
     grid-row: 1 / 1;
@@ -31,6 +38,7 @@
     justify-self: center;
     align-self: end;
     margin-bottom: -3rem;
+    position: relative;
 
     img,
     .loadingSpinner {
@@ -214,4 +222,41 @@
     fill: $c-patreon;
   }
 
+}
+
+.coverButton,
+.avatarButton {
+  outline: none;
+  border: 1px solid transparent;
+  background-color: rgba($c-primary,.7);
+  color: $c-white;
+  padding: .3rem .9rem;
+  border-radius: .5rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all .2s;
+
+  visibility: hidden;
+  opacity: 0;
+
+  &:hover {
+    background-color: rgba($c-primary, 1);
+  }
+
+  &:active {
+    background-color: rgba($c-primary-l, 1);
+  }
+}
+
+.coverButton {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
+.avatarButton {
+  position: absolute;
+  bottom: 3rem;
+  left: 5.3rem;
 }
