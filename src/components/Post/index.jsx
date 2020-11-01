@@ -117,7 +117,7 @@ const Post = ({
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={avatar || defaultAvatar}
+          src={`http://localhost:5000/${avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}

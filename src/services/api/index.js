@@ -41,6 +41,10 @@ export const getUserService = ({ userId }) => api.get(`/users/${userId}`);
 
 export const getRandomUserService = () => api.get('/users/random');
 
+export const changeAvatarService = ({ formData }) => api.put('/users/avatar', formData);
+
+export const changeCoverService = ({ formData }) => api.put('/users/cover', formData);
+
 // POSTS SERVICES
 
 // Posts

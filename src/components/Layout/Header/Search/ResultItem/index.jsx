@@ -48,7 +48,7 @@ const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryStr
       <Link to={`/profile/${id}`} className={styles.resultLink} onFocus={onFocus} onClick={onClick} onKeyDown={onKeyDown}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={avatar || defaultAvatar}
+          src={`http://localhost:5000/${avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}

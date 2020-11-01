@@ -16,12 +16,14 @@ import icons from '../../assets/svg/sprite.svg';
 import Overview from '../../components/Profile/Overview';
 import Moments from '../../components/Profile/Moments';
 import Posts from '../../components/Profile/Posts';
+import ChangeAvatarOrCover from '../../components/ChangeAvatarOrCover';
 
 import styles from './style.scss';
 
 const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
   const [avatarIsLoading, setAvatarIsLoading] = useState(true);
   const [coverIsLoading, setCoverIsLoading] = useState(true);
+  const [changeAvatar, setChangeAvatar] = useState(null);
 
   useEffect(() => {
     if (match.url === '/my-profile') {
@@ -58,10 +60,16 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
   return (
     loading ? <Loading /> : (
       <>
+        {changeAvatar !== null && changeAvatar === true && (
+          <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
+        )}
+        {changeAvatar !== null && changeAvatar === false && (
+          <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
+        )}
         <div className={styles.cover}>
           {coverIsLoading ? <img src={defaultCover} alt="User Cover" /> : null}
           <img
-            src={user.profile.cover || defaultCover}
+            src={`http://localhost:5000/${user.profile.cover}` || defaultCover}
             alt="User Cover"
             className={styles.userPhoto}
             onLoad={handleOnLoadCover}
@@ -70,11 +78,11 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
               display: loading ? 'none' : 'inline-block',
             }}
           />
-          {user._id === loggedUserId ? <button className={styles.coverButton} type="button">Change Cover</button> : null}
+          {user._id === loggedUserId ? <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>Change Cover</button> : null}
           <div className={styles.profileAvatar}>
             {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
             <img
-              src={user.avatar || defaultAvatar}
+              src={`http://localhost:5000/${user.avatar}` || defaultAvatar}
               alt="User Avatar"
               className={styles.userPhoto}
               onLoad={handleOnLoadAvatar}
@@ -83,7 +91,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
                 display: loading ? 'none' : 'inline-block',
               }}
             />
-            {user._id === loggedUserId ? <button className={styles.avatarButton} type="button">Change Avatar</button> : null}
+            {user._id === loggedUserId ? <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>Change Avatar</button> : null}
           </div>
         </div>
 

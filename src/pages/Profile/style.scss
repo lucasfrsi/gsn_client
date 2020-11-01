@@ -22,6 +22,8 @@
     display: block;
     background-size: cover;
     background-position: center;
+
+    // object-fit: cover;
   }
   
   .profileAvatar {
@@ -48,6 +50,7 @@
       display: block;
       border: 5px solid $c-white;
       border-radius: 50%;
+      object-fit: cover;
     }
   }
 }

@@ -23,7 +23,7 @@ const ProfileImage = ({ profileImage, customStyle, spinnerSize = customStyle }) 
     <>
       {loading ? <LoadingSpinner size={spinnerSize} /> : null}
       <img
-        src={profileImage || defaultAvatar}
+        src={`http://localhost:5000/${profileImage}` || defaultAvatar}
         alt="User Avatar"
         className={`${styles.profileImage} ${customStyle}`}
         onLoad={handleOnLoad}

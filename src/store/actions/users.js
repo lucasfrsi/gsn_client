@@ -5,6 +5,12 @@ import {
   GET_RANDOM_USER_REQUEST,
   GET_RANDOM_USER_SUCCESS,
   GET_RANDOM_USER_ERROR,
+  CHANGE_USER_AVATAR_REQUEST,
+  CHANGE_USER_AVATAR_SUCCESS,
+  CHANGE_USER_AVATAR_ERROR,
+  CHANGE_USER_COVER_REQUEST,
+  CHANGE_USER_COVER_SUCCESS,
+  CHANGE_USER_COVER_ERROR,
 } from './types';
 
 // REQUESTS
@@ -18,6 +24,20 @@ export const getUserRequest = (userId) => ({
 
 export const getRandomUserRequest = () => ({
   type: GET_RANDOM_USER_REQUEST,
+});
+
+export const changeAvatarRequest = (formData) => ({
+  type: CHANGE_USER_AVATAR_REQUEST,
+  payload: {
+    formData,
+  },
+});
+
+export const changeCoverRequest = (formData) => ({
+  type: CHANGE_USER_COVER_REQUEST,
+  payload: {
+    formData,
+  },
 });
 
 // SUCCESS AND ERROR
