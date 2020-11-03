@@ -45,6 +45,8 @@ export const changeAvatarService = ({ formData }) => api.put('/users/avatar', fo
 
 export const changeCoverService = ({ formData }) => api.put('/users/cover', formData);
 
+export const updateProfileService = ({ updatedProfile }) => api.put('/users/profile', updatedProfile);
+
 // POSTS SERVICES
 
 // Posts

@@ -64,6 +64,7 @@ const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }
       isValid: false,
     });
     setPreviewUrl(null);
+    closeModal();
   };
 
   return (

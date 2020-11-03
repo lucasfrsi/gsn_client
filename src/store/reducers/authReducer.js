@@ -6,6 +6,7 @@ import {
   LOADUSER_SUCCESS,
   LOADUSER_ERROR,
   LOGOUT,
+  CHANGE_USER_AVATAR_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -33,6 +34,14 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         loading: false,
         user: payload.user,
+      };
+    case CHANGE_USER_AVATAR_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: payload.avatar,
+        },
       };
     case LOADUSER_ERROR: // Account deleted is the same as these
     case LOGOUT:

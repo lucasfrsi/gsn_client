@@ -1,10 +1,11 @@
-import { take, takeEvery, call, put, fork } from 'redux-saga/effects';
+import { take, takeEvery, takeLatest, call, put, fork } from 'redux-saga/effects';
 
 import {
   GET_USER_REQUEST,
   GET_RANDOM_USER_REQUEST,
   CHANGE_USER_AVATAR_REQUEST,
   CHANGE_USER_COVER_REQUEST,
+  UPDATE_USER_PROFILE_REQUEST,
 } from '../actions/types';
 
 import {
@@ -12,6 +13,12 @@ import {
   getUserError,
   getRandomUserSuccess,
   getRandomUserError,
+  changeAvatarSuccess,
+  changeAvatarError,
+  changeCoverSuccess,
+  changeCoverError,
+  updateProfileSuccess,
+  updateProfileError,
 } from '../actions/users';
 
 import {
@@ -19,6 +26,7 @@ import {
   getRandomUserService,
   changeAvatarService,
   changeCoverService,
+  updateProfileService,
 } from '../../services/api';
 
 // GET USER BY ID
@@ -59,9 +67,9 @@ function* changeAvatar(action) {
     const response = yield call(changeAvatarService, {
       formData,
     });
-    // yield put(getUserSuccess(response.data));
+    yield put(changeAvatarSuccess(response.data.avatar));
   } catch (error) {
-    // yield put(getUserError());
+    yield put(changeAvatarError());
   }
 }
 
@@ -79,9 +87,9 @@ function* changeCover(action) {
     const response = yield call(changeCoverService, {
       formData,
     });
-    // yield put(getUserSuccess(response.data));
+    yield put(changeCoverSuccess(response.data.cover));
   } catch (error) {
-    // yield put(getUserError());
+    yield put(changeCoverError());
   }
 }
 
@@ -92,12 +100,30 @@ function* watchChangeCover() {
   }
 }
 
+// UPDATE USER PROFILE
+function* updateProfile(action) {
+  const { updatedProfile } = action.payload;
+  try {
+    const response = yield call(updateProfileService, {
+      updatedProfile,
+    });
+    yield put(updateProfileSuccess(response.data.profile));
+  } catch (error) {
+    yield put(updateProfileError());
+  }
+}
+
+function* watchUpdateProfile() {
+  yield takeEvery(UPDATE_USER_PROFILE_REQUEST, updateProfile);
+}
+
 // WATCHERS EXPORT
 const usersSaga = [
   fork(watchGetUser),
   fork(watchGetRandomUser),
   fork(watchChangeAvatar),
   fork(watchChangeCover),
+  fork(watchUpdateProfile),
 ];
 
 export default usersSaga;

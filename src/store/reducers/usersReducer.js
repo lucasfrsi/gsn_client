@@ -1,6 +1,9 @@
 import {
   GET_USER_SUCCESS,
   GET_RANDOM_USER_SUCCESS,
+  CHANGE_USER_AVATAR_SUCCESS,
+  CHANGE_USER_COVER_SUCCESS,
+  UPDATE_USER_PROFILE_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +31,36 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         featuredUser: { ...payload.randomUser[0] },
+      };
+    case CHANGE_USER_AVATAR_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: payload.avatar,
+        },
+        loading: false,
+      };
+    case CHANGE_USER_COVER_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          profile: {
+            ...state.user.profile,
+            cover: payload.cover,
+          },
+        },
+        loading: false,
+      };
+    case UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          profile: payload.profile,
+        },
+        loading: false,
       };
     default:
       return state;
