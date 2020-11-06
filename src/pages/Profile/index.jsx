@@ -59,7 +59,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
 
   return (
     loading ? <Loading /> : (
-      <>
+      <div className={styles.profile}>
         {changeAvatar !== null && changeAvatar === true && (
           <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
         )}
@@ -148,7 +148,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
           <Route path={`${match.url}/posts`} exact component={Posts} />
           <Route path={`${match.url}/moments`} exact component={Moments} />
         </div>
-      </>
+      </div>
     )
   );
 };

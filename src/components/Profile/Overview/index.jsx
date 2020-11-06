@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,8 +8,11 @@ import svg from '../../../assets/svg/sprite.svg';
 
 import Post from '../../Post';
 import Moment from '../../Moment';
+import EditProfile from '../EditProfile';
 
 const Overview = ({ posts, moments, user, loggedUser }) => {
+  const [editMode, setEditMode] = useState(false);
+
   const renderLastPost = () => {
     const lastPostIndex = posts.length - 1;
     const lastPost = posts[lastPostIndex];
@@ -51,7 +54,8 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
 
   return (
     <div className={styles.overview}>
-      {loggedUser._id === user._id ? <button type="button" className={styles.editButton}>Edit Profile</button> : null}
+      {editMode ? <EditProfile close={() => setEditMode(false)} /> : null}
+      {loggedUser._id === user._id ? <button type="button" className={styles.editButton} onClick={() => setEditMode(true)}>Edit Profile</button> : null}
 
       {(user.profile.gamerData.bio || (user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0) || (user.profile.gamerData.platforms && user.profile.gamerData.platforms.length > 0)) && (
         <div className={styles.gamerInfo}>

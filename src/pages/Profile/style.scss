@@ -1,5 +1,9 @@
 @use '../../sass/abstracts/members.scss' as *;
 
+.profile {
+  position: relative;
+}
+
 .cover {
   display: grid;
   grid-template-rows: 1fr;

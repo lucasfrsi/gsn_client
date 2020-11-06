@@ -69,7 +69,7 @@ const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }
 
   return (
     <>
-      <Backdrop onClick={() => closeModal()} />
+      <Backdrop onClick={() => closeModal()} local />
       <div className={styles.createMoment}>
         <svg className={styles.closeModal} onClick={() => closeModal()}>
           <use xlinkHref={`${svg}#icon-cross`} />
