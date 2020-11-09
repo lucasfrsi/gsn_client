@@ -70,14 +70,14 @@ const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }
   return (
     <>
       <Backdrop onClick={() => closeModal()} local />
-      <div className={styles.createMoment}>
-        <svg className={styles.closeModal} onClick={() => closeModal()}>
+      <div className={styles.changeImage}>
+        {/* <svg className={styles.closeModal} onClick={() => closeModal()}>
           <use xlinkHref={`${svg}#icon-cross`} />
-        </svg>
+        </svg> */}
         <form className={styles.form} onSubmit={imageSubmitHandler}>
           <div className={styles.imageDiv}>
             <label htmlFor="image">
-              <strong>{isAvatar ? 'Avatar Image' : 'Cover Image'}</strong>
+              <strong>{isAvatar ? 'Update Profile Picture' : 'Update Cover Picture'}</strong>
               <input
                 id="image"
                 name="image"
@@ -89,15 +89,18 @@ const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }
               />
             </label>
             <div className={styles.imageUpload}>
-              <div className={styles.imageUploadPreview}>
+              <div className={`${styles.imageUploadPreview} ${!isAvatar && styles.cover}`}>
                 {previewUrl && <img src={previewUrl} alt="Preview" />}
                 <button className={styles.pickAnImage} type="button" onClick={pickImageHandler}>
-                  PICK IMAGE
+                  Choose File
                 </button>
               </div>
             </div>
           </div>
-          <button disabled={!file.isValid} className={styles.submitButton} type="submit">Submit</button>
+          <div className={styles.buttons}>
+            <button className={styles.cancelButton} type="submit" onClick={() => closeModal()}>Cancel</button>
+            <button disabled={!file.isValid} className={styles.submitButton} type="submit">Save</button>
+          </div>
         </form>
       </div>
     </>
