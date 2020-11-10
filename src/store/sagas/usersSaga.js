@@ -107,14 +107,17 @@ function* updateProfile(action) {
     const response = yield call(updateProfileService, {
       updatedProfile,
     });
-    yield put(updateProfileSuccess(response.data.profile));
+    yield put(updateProfileSuccess(response.data.updatedProfile));
   } catch (error) {
     yield put(updateProfileError());
   }
 }
 
 function* watchUpdateProfile() {
-  yield takeEvery(UPDATE_USER_PROFILE_REQUEST, updateProfile);
+  while (true) {
+    const action = yield take(UPDATE_USER_PROFILE_REQUEST);
+    yield call(updateProfile, action);
+  }
 }
 
 // WATCHERS EXPORT

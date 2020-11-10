@@ -7,7 +7,7 @@ import { updateProfileRequest } from '../../../store/actions/users';
 import styles from './style.scss';
 
 const EditProfile = ({ close, updateProfile, currentProfile }) => {
-  const [profile, setProfile] = useState({
+  const [formData, setFormData] = useState({
     realName: currentProfile.personalData.realName,
     location: currentProfile.personalData.location,
     kind: currentProfile.gamerData.kind,
@@ -23,18 +23,42 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
     },
   });
 
+  const onChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    updateProfile(formData);
+  };
+
   return (
     <div>
       EDIT PROFILE
-      {profile.realName}
-      {profile.location}
-      {profile.kind}
-      {profile.platforms.nintendoswitch}
-      {profile.genres[0]}
-      {profile.streamer}
-      {profile.link}
-      {profile.bio}
-      {profile.social.facebook}
+      <br />
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          placeholder="Real Name"
+          name="realName"
+          value={formData.realName}
+          onChange={onChange}
+        />
+        <input type="submit" />
+      </form>
+      <br />
+      {formData.realName}
+      {formData.location}
+      {formData.kind}
+      {formData.platforms.nintendoswitch}
+      {formData.genres[0]}
+      {formData.streamer}
+      {formData.link}
+      {formData.bio}
+      {formData.social.facebook}
     </div>
   );
 };
