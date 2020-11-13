@@ -81,7 +81,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
                     ))}
                   </div>
                 )}
-                {user.profile.gamerData.platforms && Object.keys(user.profile.gamerData.platforms).length > 0 && (
+                {user.profile.gamerData.platforms && Object.keys(user.profile.gamerData.platforms).length > 0 && ( // check if platforms have value, the div is always showing.
                   <div className={styles.subContainer}>
                     <h4>Platforms</h4>
                     <div className={styles.platform}>

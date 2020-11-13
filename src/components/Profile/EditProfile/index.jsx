@@ -6,6 +6,8 @@ import { updateProfileRequest } from '../../../store/actions/users';
 
 import styles from './style.scss';
 
+const GENRES = ['action', 'adventure', 'rpg', 'simulation', 'strategy', 'sports', 'mmo', 'card', 'fighting', 'platform'];
+
 const EditProfile = ({ close, updateProfile, currentProfile }) => {
   const [formData, setFormData] = useState({
     realName: currentProfile.personalData.realName,
@@ -23,11 +25,38 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
     },
   });
 
+  const [showPlatforms, setShowPlatforms] = useState(false);
+  const [showSocial, setShowSocial] = useState(false);
+
   const onChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const onBooleanChange = (event) => {
+    setFormData({
+      ...formData,
+      streamer: event.target.value === 'true',
+    });
+  };
+
+  const onGenreChange = (event) => {
+    const checkbox = event.target;
+    if (checkbox.checked === true) {
+      setFormData({
+        ...formData,
+        genres: formData.genres.filter((genre) => genre !== checkbox.name),
+      });
+      checkbox.checked = false;
+    } else {
+      setFormData({
+        ...formData,
+        genres: [...formData.genres, checkbox.name],
+      });
+      checkbox.checked = true;
+    }
   };
 
   const onSubmit = (event) => {
@@ -94,6 +123,41 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
           <label htmlFor="none">None</label>
         </div>
         <div className={styles.formGroup}>
+          <p>Are you a streamer?</p>
+          <input
+            type="radio"
+            name="streamer"
+            id="streamerTrue"
+            value="true"
+            onChange={onBooleanChange}
+            checked={formData.streamer === true}
+          />
+          <label htmlFor="streamerTrue">Yes</label>
+          <input
+            type="radio"
+            name="streamer"
+            id="streamerFalse"
+            value="false"
+            onChange={onBooleanChange}
+            checked={formData.streamer === false}
+          />
+          <label htmlFor="streamerFalse">No</label>
+        </div>
+        <div className={styles.formGroup}>
+          {formData.streamer ? <label htmlFor="link">What is your Twitch channel?</label> : <label htmlFor="link">What is your favorite Twitch streamer channel?</label>}
+          <input
+            type="text"
+            placeholder="Twitch Channel Name"
+            id="link"
+            name="link"
+            value={formData.link}
+            onChange={onChange}
+          />
+          <small>(1) Leave this field empty if you don&apos;t want to display the Twitch Player in your page</small>
+          <small>(2) You must only write your channel name, not the entire address (e.g., https://www.twitch.tv/<strong>twitch</strong>)</small>
+          <small>(3) Make sure you spell the channel name right, otherwise it will only display a black screen</small>
+        </div>
+        <div className={styles.formGroup}>
           <label htmlFor="bio">Describe yourself</label>
           <textarea
             placeholder="Do you mind sharing a little about yourself? Max. 250 char"
@@ -102,21 +166,36 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
             value={formData.bio}
             onChange={onChange}
           />
-          <small>This might be what is separating you from finding your duo, right?</small>
+          <small>This might be what is separating you from finding your duo...</small>
         </div>
         <div className={styles.formGroup}>
+          <p>Select your favorite genres</p>
+          {GENRES.map((genre) => (
+            <div key={genre}>
+              <input
+                type="checkbox"
+                name={genre}
+                id={genre}
+                checked={!formData.genres.includes(genre)}
+                onChange={onGenreChange}
+                style={{ display: 'none' }}
+              />
+              <label className={formData.genres.includes(genre) ? styles.selected : styles.notSelected} htmlFor={genre}>{genre}</label>
+            </div>
+          ))}
+        </div>
+        <div className={styles.formGroup}>
+          <p>Platforms</p>
           {/* PLATFORMS: Icon button to show */}
         </div>
         <div className={styles.formGroup}>
+          <p>Social</p>
           {/* SOCIAL: Icon button to show */}
         </div>
         <button type="button" onClick={close}>Cancel</button>
         <input type="submit" value="Submit" />
       </form>
       <br />
-      {formData.streamer}
-      {formData.link}
-      {formData.genres[0]}
       {formData.platforms.nintendoswitch}
       {formData.social.facebook}
     </div>
