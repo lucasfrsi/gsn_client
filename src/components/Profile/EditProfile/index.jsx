@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { updateProfileRequest } from '../../../store/actions/users';
 
+import svg from '../../../assets/svg/sprite.svg';
+
 import styles from './style.scss';
 
 const GENRES = ['action', 'adventure', 'rpg', 'simulation', 'strategy', 'sports', 'mmo', 'card', 'fighting', 'platform'];
@@ -57,6 +59,26 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
       });
       checkbox.checked = true;
     }
+  };
+
+  const onPlatformChange = (event) => {
+    setFormData({
+      ...formData,
+      platforms: {
+        ...formData.platforms,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
+  const onSocialChange = (event) => {
+    setFormData({
+      ...formData,
+      social: {
+        ...formData.social,
+        [event.target.name]: event.target.value,
+      },
+    });
   };
 
   const onSubmit = (event) => {
@@ -186,18 +208,57 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
         </div>
         <div className={styles.formGroup}>
           <p>Platforms</p>
-          {/* PLATFORMS: Icon button to show */}
+          <svg onClick={() => setShowPlatforms(!showPlatforms)} className={`${styles.showIcon} ${showPlatforms && styles.invertShowIcon}`}>
+            <use xlinkHref={`${svg}#icon-chevron-down`} />
+          </svg>
+          {showPlatforms && (
+            Object.entries(formData.platforms).map(([key]) => (
+              <div key={key} className={styles.platform}>
+                <label htmlFor={key}>
+                  <svg className={styles.platformIcon}>
+                    <use xlinkHref={`${svg}#icon-${key}`} />
+                  </svg>
+                </label>
+                <input
+                  type="text"
+                  placeholder={key}
+                  id={key}
+                  name={key}
+                  value={formData.platforms[key]}
+                  onChange={onPlatformChange}
+                />
+              </div>
+            ))
+          )}
         </div>
         <div className={styles.formGroup}>
           <p>Social</p>
-          {/* SOCIAL: Icon button to show */}
+          <svg onClick={() => setShowSocial(!showSocial)} className={`${styles.showIcon} ${showSocial && styles.invertShowIcon}`}>
+            <use xlinkHref={`${svg}#icon-chevron-down`} />
+          </svg>
+          {showSocial && (
+            Object.entries(formData.social).map(([key]) => (
+              <div key={key} className={styles.social}>
+                <label htmlFor={key}>
+                  <svg className={styles[key]}>
+                    <use xlinkHref={`${svg}#icon-${key}`} />
+                  </svg>
+                </label>
+                <input
+                  type="text"
+                  placeholder={key}
+                  id={key}
+                  name={key}
+                  value={formData.social[key]}
+                  onChange={onSocialChange}
+                />
+              </div>
+            ))
+          )}
         </div>
         <button type="button" onClick={close}>Cancel</button>
         <input type="submit" value="Submit" />
       </form>
-      <br />
-      {formData.platforms.nintendoswitch}
-      {formData.social.facebook}
     </div>
   );
 };

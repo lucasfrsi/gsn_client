@@ -1,7 +1,30 @@
+@use '../../../sass/abstracts/members.scss' as *;
+
 .selected {
   color: red;
 }
 
 .notSelected {
   color: black;
+}
+
+.facebook {
+  height: 2rem;
+  width: 2rem;
+  transition: .5s all;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
+}
+
+.showIcon {
+  height: 2rem;
+  width: 2rem;
+  fill: $c-primary;
+  transition: .2s all;
+}
+
+.invertShowIcon {
+  transform: rotate(180deg);
 }
