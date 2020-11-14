@@ -299,7 +299,7 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
                   />
                 </div>
               ))}
-              <small>Example: <strong>www.facebook.com/gamersx</strong></small>
+              <small>Example: <strong>www.facebook.com/gamersx</strong> or <strong>https://facebook.com/gamersx</strong></small>
             </>
           )}
         </div>
