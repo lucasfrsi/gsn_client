@@ -16,8 +16,6 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
   const renderLastPost = () => {
     const lastPostIndex = posts.length - 1;
     const lastPost = posts[lastPostIndex];
-    // const lastPost = posts[3];
-    // console.log(lastPost);
     return (
       <Post
         className={styles.recentActivityPost}
@@ -108,7 +106,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
                 <div className={styles.twitchPlayerContainer}>
                   <iframe
                     title="twitch"
-                    src={`https://player.twitch.tv/?channel=${user.profile.gamerData.twitchChannel.link}&parent=${window.location.hostname}&muted=true`}
+                    src={`https://player.twitch.tv/?channel=${user.profile.gamerData.twitchChannel.link}&parent=${window.location.hostname}&muted=true`} // USE window.location for image src / heroku ?
                     frameBorder="1"
                     scrolling="no"
                     allowFullScreen
@@ -122,6 +120,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
             <div className={styles.recentActivity}>
               {/* {posts.length !== 0 && renderLastPost()}
               {moments.length !== 0 && renderLastMoment()} */}
+              {/* Create a better looking display for when user does not have posts and/or moments. (use emojis like moments) */}
               {posts.length === 0 && moments.length === 0 && (
                 <div>
                   This user has not shared any post or moment up to this moment.
