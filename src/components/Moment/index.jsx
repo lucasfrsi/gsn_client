@@ -150,7 +150,7 @@ const Moment = ({
           {third[1] > 0 ? <img src={reactionTypesMap[third[0]]} alt={third[0]} className={styles.reactionImg3} /> : null}
           {reactionsCount === 0 ? <img src={no} alt="no reactions" className={styles.reactionImg} /> : null}
         </div>
-        <div className={styles.reactionCount}><span>{reactionsCount === 0 ? 'No' : reactionsCount}</span>{reactionsNoun}</div>
+        <div className={styles.reactionCount}><span>{reactionsCount === 0 ? '0' : reactionsCount}</span>{reactionsNoun}</div>
       </div>
     );
   };

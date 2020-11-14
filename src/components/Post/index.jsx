@@ -74,7 +74,7 @@ const Post = ({
     let comment = ' Comments';
 
     if (comments.length === 0) {
-      count = 'NO';
+      count = '0';
     } else if (comments.length === 1) {
       count = 1;
       comment = 'Comment';
