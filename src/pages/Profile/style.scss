@@ -237,7 +237,7 @@
   border: 1px solid transparent;
   background-color: rgba($c-primary,.7);
   color: $c-white;
-  padding: .3rem .9rem;
+  padding: .5rem 1rem;
   border-radius: .5rem;
   font-weight: 600;
   cursor: pointer;
@@ -260,10 +260,22 @@
   position: absolute;
   left: 1rem;
   top: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .avatarButton {
   position: absolute;
   bottom: 3rem;
-  left: 5.3rem;
+  left: 4.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.photoIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: middle;
+  margin-left: .5rem;
+  fill: $c-white;
 }

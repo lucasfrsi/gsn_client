@@ -78,7 +78,14 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
               display: loading ? 'none' : 'inline-block',
             }}
           />
-          {user._id === loggedUserId ? <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>Change Cover</button> : null}
+          {user._id === loggedUserId ? (
+            <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>
+              Change Cover
+              <svg className={styles.photoIcon}>
+                <use xlinkHref={`${icons}#icon-camera`} />
+              </svg>
+            </button>
+          ) : null}
           <div className={styles.profileAvatar}>
             {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
             <img
@@ -91,7 +98,14 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
                 display: loading ? 'none' : 'inline-block',
               }}
             />
-            {user._id === loggedUserId ? <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>Change Avatar</button> : null}
+            {user._id === loggedUserId ? (
+              <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>
+                Change Avatar
+                <svg className={styles.photoIcon}>
+                  <use xlinkHref={`${icons}#icon-camera`} />
+                </svg>
+              </button>
+            ) : null}
           </div>
         </div>
 

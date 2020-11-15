@@ -102,7 +102,8 @@
   }
 
   &Id {
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: .05rem;
   }
 }
 
@@ -167,14 +168,17 @@
 .editButton {
   position: absolute;
   right: 0;
-  top: 0;
+  top: -.7rem;
+
+  display: flex;
+  justify-content: center;
 
   cursor: pointer;
   outline: none;
   background-color: transparent;
   border: 1px solid $c-primary;
   color: $c-primary;
-  padding: .2rem .8rem;
+  padding: .4rem .8rem;
   border-radius: .5rem;
 
   font-weight: 600;
@@ -184,9 +188,32 @@
   &:hover {
     background-color: $c-primary;
     color: $c-white;
+
+    .editIcon {
+      fill: $c-white;
+    }
   }
 
   &:active {
     background-color: $c-primary-l;
+  }
+}
+
+.editIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: $c-primary;
+  margin-left: .4rem;
+  transition: all .2s;
+}
+
+.noActivity {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
   }
 }

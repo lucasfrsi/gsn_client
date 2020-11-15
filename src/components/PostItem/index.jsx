@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { editPostRequest } from '../../store/actions/posts';
 
@@ -64,7 +65,9 @@ const PostItem = ({
             display: loading ? 'none' : 'inline-block',
           }}
         />
-        <h4>{nickname}</h4>
+        <Link to={`/profile/${userId}`}>
+          <h4>{nickname}</h4>
+        </Link>
       </div>
 
       <div className={styles.postContent}>

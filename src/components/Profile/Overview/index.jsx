@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './style.scss';
 
+import noactivity from '../../../assets/images/noactivity.png';
 import svg from '../../../assets/svg/sprite.svg';
 
 import Post from '../../Post';
@@ -50,6 +51,18 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
     );
   };
 
+  const areObjectKeysEmpty = (object) => {
+    const objectAsArray = Object.entries(object);
+
+    const result = objectAsArray.reduce((acc, [, value]) => {
+      // eslint-disable-next-line no-param-reassign
+      if (value !== '') acc += 1;
+      return acc;
+    }, 0);
+
+    return (result === 0);
+  };
+
   useEffect(() => () => setEditMode(false), [user]);
 
   return (
@@ -58,7 +71,14 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
       {
         !editMode && (
           <>
-            {loggedUser._id === user._id ? <button type="button" className={styles.editButton} onClick={() => setEditMode(true)}>Edit Profile</button> : null}
+            {loggedUser._id === user._id ? (
+              <button type="button" className={styles.editButton} onClick={() => setEditMode(true)}>
+                Edit Profile
+                <svg className={styles.editIcon}>
+                  <use xlinkHref={`${svg}#icon-cog`} />
+                </svg>
+              </button>
+            ) : null}
             {(user.profile.gamerData.bio || (user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0) || (user.profile.gamerData.platforms && user.profile.gamerData.platforms.length > 0)) && (
             <div className={styles.gamerInfo}>
               <div className={styles.heading}>
@@ -79,7 +99,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
                     ))}
                   </div>
                 )}
-                {user.profile.gamerData.platforms && Object.keys(user.profile.gamerData.platforms).length > 0 && ( // check if platforms have value, the div is always showing.
+                {user.profile.gamerData.platforms && !areObjectKeysEmpty(user.profile.gamerData.platforms) && (
                   <div className={styles.subContainer}>
                     <h4>Platforms</h4>
                     <div className={styles.platform}>
@@ -106,7 +126,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
                 <div className={styles.twitchPlayerContainer}>
                   <iframe
                     title="twitch"
-                    src={`https://player.twitch.tv/?channel=${user.profile.gamerData.twitchChannel.link}&parent=${window.location.hostname}&muted=true`} // USE window.location for image src / heroku ?
+                    src={`https://player.twitch.tv/?channel=${user.profile.gamerData.twitchChannel.link}&parent=${window.location.hostname}&muted=true`}
                     frameBorder="1"
                     scrolling="no"
                     allowFullScreen
@@ -118,12 +138,16 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
               <h3>Recent Activity</h3>
             </div>
             <div className={styles.recentActivity}>
-              {/* {posts.length !== 0 && renderLastPost()}
-              {moments.length !== 0 && renderLastMoment()} */}
-              {/* Create a better looking display for when user does not have posts and/or moments. (use emojis like moments) */}
+              {posts.length !== 0 && renderLastPost()}
+              {moments.length !== 0 && renderLastMoment()}
               {posts.length === 0 && moments.length === 0 && (
-                <div>
-                  This user has not shared any post or moment up to this moment.
+                <div className={styles.noActivity}>
+                  <img src={noactivity} alt="no activity" />
+                  {user._id === loggedUser._id ? (
+                    <p>You haven&apos;t shared any posts or moments yet.</p>
+                  ) : (
+                    <p>This user hasn&apos;t shared any posts or moments yet.</p>
+                  )}
                 </div>
               )}
             </div>

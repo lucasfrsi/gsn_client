@@ -3,6 +3,17 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
+
+  min-height: 28rem;
+}
+
+.noActivity {
+  text-align: center;
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
 }
 
 .userMoments {
