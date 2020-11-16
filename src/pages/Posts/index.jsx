@@ -41,6 +41,7 @@ const Posts = ({ getPosts, posts, loading }) => {
               user={post.user._id}
               nickname={post.user.nickname}
               avatar={post.user.avatar}
+              customStyle={styles.margin}
             />
           ))
         ) : null}

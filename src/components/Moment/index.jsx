@@ -42,6 +42,7 @@ const Moment = ({
   loggedUserId,
   deleteMoment,
   reactMoment,
+  customStyle,
 }) => {
   const [showImage, setShowImage] = useState(false);
   const [showReactionsOptions, setShowReactionsOptions] = useState(false);
@@ -209,7 +210,7 @@ const Moment = ({
           </div>
         </>
       ) : null}
-      <div className={styles.moment}>
+      <div className={`${styles.moment} ${customStyle}`}>
         {deletionConfirmation && (
           <div className={styles.localBackdrop}>
             <div className={styles.centeredBox}>
@@ -282,6 +283,11 @@ Moment.propTypes = {
   loggedUserId: PropTypes.string.isRequired,
   deleteMoment: PropTypes.func.isRequired,
   reactMoment: PropTypes.func.isRequired,
+  customStyle: PropTypes.string,
+};
+
+Moment.defaultProps = {
+  customStyle: null,
 };
 
 const mapStateToProps = (state) => ({

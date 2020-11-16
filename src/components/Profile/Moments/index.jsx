@@ -28,6 +28,7 @@ const Moments = ({ moments, user, loggedUser }) => {
               imageUrl={moment.imageUrl}
               reactions={moment.reactions}
               createdAt={moment.createdAt}
+              customStyle={styles.margin}
             />
           ))}
         </div>

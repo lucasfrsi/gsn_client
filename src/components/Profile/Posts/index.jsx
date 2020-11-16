@@ -28,6 +28,7 @@ const Posts = ({ posts, user, loggedUser }) => {
               user={post.user}
               nickname={user.nickname}
               avatar={user.avatar}
+              customStyle={styles.margin}
             />
           ))}
         </div>

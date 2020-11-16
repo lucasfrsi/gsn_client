@@ -24,6 +24,7 @@ const Post = ({
   loggedUserId,
   likePost,
   deletePost,
+  customStyle,
 }) => {
   const [loading, setLoading] = useState(true);
   const [postLikes, setPostLikes] = useState(0);
@@ -92,7 +93,7 @@ const Post = ({
   };
 
   return (
-    <div className={styles.post}>
+    <div className={`${styles.post} ${customStyle}`}>
       {deletionConfirmation && (
         <div className={styles.localBackdrop}>
           <div className={styles.centeredBox}>
@@ -225,6 +226,11 @@ Post.propTypes = {
   loggedUserId: PropTypes.string.isRequired,
   likePost: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
+  customStyle: PropTypes.string,
+};
+
+Post.defaultProps = {
+  customStyle: null,
 };
 
 const mapStateToProps = (state) => ({

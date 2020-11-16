@@ -41,6 +41,7 @@ const Moments = ({ getMoments, moments, loading }) => {
               createdAt={moment.createdAt}
               avatar={moment.user.avatar}
               nickname={moment.user.nickname}
+              customStyle={styles.margin}
             />
           ))
         ) : null}

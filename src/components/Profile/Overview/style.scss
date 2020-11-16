@@ -44,11 +44,6 @@
 .recentActivity {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-
-  &Post {
-    margin-right: 2rem;
-  }
 }
 
 .container {
@@ -216,4 +211,8 @@
     font-size: 1.6rem;
     font-weight: 500;
   }
+}
+
+.margin {
+  margin-left: 2rem;
 }

@@ -47,6 +47,7 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
         userId={user._id}
         nickname={user.nickname}
         avatar={user.avatar}
+        customStyle={styles.margin}
       />
     );
   };
