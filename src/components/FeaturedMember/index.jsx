@@ -17,6 +17,7 @@ const FeaturedMember = ({
     posts,
     profile,
   },
+  loading,
 }) => {
   const formatDate = () => {
     const date = new Date(createdAt).toDateString();
@@ -98,6 +99,7 @@ const FeaturedMember = ({
 
 FeaturedMember.propTypes = {
   featuredUser: PropTypes.shape().isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FeaturedMember;

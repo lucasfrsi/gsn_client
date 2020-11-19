@@ -1,5 +1,7 @@
 import {
+  GET_USER_REQUEST,
   GET_USER_SUCCESS,
+  GET_RANDOM_USER_REQUEST,
   GET_RANDOM_USER_SUCCESS,
   CHANGE_USER_AVATAR_SUCCESS,
   CHANGE_USER_COVER_SUCCESS,
@@ -16,6 +18,12 @@ const usersReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case GET_USER_REQUEST:
+    case GET_RANDOM_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_USER_SUCCESS:
       return {
         ...state,
@@ -31,6 +39,7 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         featuredUser: { ...payload.randomUser[0] },
+        loading: false,
       };
     case CHANGE_USER_AVATAR_SUCCESS:
       return {

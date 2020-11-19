@@ -7,19 +7,18 @@ import FeaturedMember from '../FeaturedMember';
 
 import styles from './style.scss';
 
-const Welcome = ({ getRandomUser, featuredUser }) => {
+const Welcome = ({ getRandomUser, featuredUser, loading }) => {
   useEffect(() => {
     getRandomUser();
   }, [getRandomUser]);
 
   return (
     <div className={styles.welcome}>
-      <div className={styles.heading}>
-        <h1 className={styles.headingMain}>GAMERSX</h1>
-        <h1 className={styles.headingSec}>IS WHERE GAMERS HANG OUT</h1>
+      <div>
+        
       </div>
       <div className={styles.featuredUser}>
-        {featuredUser ? <FeaturedMember featuredUser={featuredUser} /> : null}
+        {featuredUser ? <FeaturedMember featuredUser={featuredUser} loading={loading} /> : null}
       </div>
     </div>
   );
@@ -28,10 +27,12 @@ const Welcome = ({ getRandomUser, featuredUser }) => {
 Welcome.propTypes = {
   getRandomUser: PropTypes.func.isRequired,
   featuredUser: PropTypes.shape().isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   featuredUser: state.users.featuredUser,
+  loading: state.users.loading,
 });
 
 export default connect(mapStateToProps, {
