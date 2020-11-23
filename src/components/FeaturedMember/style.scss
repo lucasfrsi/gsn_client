@@ -2,7 +2,7 @@
 
 .featuredMemberCard {
   max-width: 80rem;
-  max-height: 25rem;
+  height: 24rem;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
@@ -136,4 +136,10 @@
 .tags {
   display: flex;
   margin-right: auto;
+}
+
+.greyMark {
+  color: $c-grey-l-1 !important;
+  background-color: $c-grey-l-1 !important;
+  border-radius: 1rem;
 }

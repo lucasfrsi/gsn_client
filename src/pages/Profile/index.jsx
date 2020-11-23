@@ -59,110 +59,112 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
 
   return (
     loading ? <Loading /> : (
-      <div className={styles.profile}>
-        {changeAvatar !== null && changeAvatar === true && (
-          <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
-        )}
-        {changeAvatar !== null && changeAvatar === false && (
-          <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
-        )}
-        <div className={styles.cover}>
-          {coverIsLoading ? <img src={defaultCover} alt="User Cover" /> : null}
-          <img
-            src={`http://localhost:5000/${user.profile.cover}` || defaultCover}
-            alt="User Cover"
-            className={styles.userPhoto}
-            onLoad={handleOnLoadCover}
-            onError={handleOnErrorCover}
-            style={{
-              display: loading ? 'none' : 'inline-block',
-            }}
-          />
-          {user._id === loggedUserId ? (
-            <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>
-              Change Cover
-              <svg className={styles.photoIcon}>
-                <use xlinkHref={`${icons}#icon-camera`} />
-              </svg>
-            </button>
-          ) : null}
-          <div className={styles.profileAvatar}>
-            {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
+      user && (
+        <div className={styles.profile}>
+          {changeAvatar !== null && changeAvatar === true && (
+            <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
+          )}
+          {changeAvatar !== null && changeAvatar === false && (
+            <ChangeAvatarOrCover isAvatar={changeAvatar} closeModal={() => setChangeAvatar(null)} />
+          )}
+          <div className={styles.cover}>
+            {coverIsLoading ? <img src={defaultCover} alt="User Cover" /> : null}
             <img
-              src={`http://localhost:5000/${user.avatar}` || defaultAvatar}
-              alt="User Avatar"
+              src={`http://localhost:5000/${user.profile.cover}` || defaultCover}
+              alt="User Cover"
               className={styles.userPhoto}
-              onLoad={handleOnLoadAvatar}
-              onError={handleOnErrorAvatar}
+              onLoad={handleOnLoadCover}
+              onError={handleOnErrorCover}
               style={{
                 display: loading ? 'none' : 'inline-block',
               }}
             />
             {user._id === loggedUserId ? (
-              <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>
-                Change Avatar
+              <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>
+                Change Cover
                 <svg className={styles.photoIcon}>
                   <use xlinkHref={`${icons}#icon-camera`} />
                 </svg>
               </button>
             ) : null}
-          </div>
-        </div>
-
-        <div className={styles.overview}>
-
-          <h1>{user.nickname}</h1>
-          <h2>{user.profile.personalData && user.profile.personalData.realName ? user.profile.personalData.realName : null}</h2>
-
-          {user.profile.personalData && user.profile.personalData.location && (
-            <div className={styles.location}>
-              <svg className={styles.locationIcon}>
-                <use xlinkHref={`${icons}#icon-location-pin`} />
-              </svg>
-              <p className={styles.locationName}>{user.profile.personalData.location}</p>
+            <div className={styles.profileAvatar}>
+              {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
+              <img
+                src={`http://localhost:5000/${user.avatar}` || defaultAvatar}
+                alt="User Avatar"
+                className={styles.userPhoto}
+                onLoad={handleOnLoadAvatar}
+                onError={handleOnErrorAvatar}
+                style={{
+                  display: loading ? 'none' : 'inline-block',
+                }}
+              />
+              {user._id === loggedUserId ? (
+                <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>
+                  Change Avatar
+                  <svg className={styles.photoIcon}>
+                    <use xlinkHref={`${icons}#icon-camera`} />
+                  </svg>
+                </button>
+              ) : null}
             </div>
-          )}
-
-          <div className={styles.kindOfPlayer}>
-            <div className={styles.playerType}>{user.profile.gamerData.kind ? user.profile.gamerData.kind : 'PLAYER'}</div>
-            <div className={styles.playerText}>{user.profile.gamerData.kind ? 'Player' : null}</div>
           </div>
-        </div>
 
-        <div className={styles.detail}>
+          <div className={styles.overview}>
 
-          <div className={styles.header}>
-            <ul className={styles.headerMenu}>
-              <li className={styles.headerItem}>
-                <NavLink to={`${match.url}`} exact className={styles.headerLink} activeClassName={styles.active}>Overview</NavLink>
-              </li>
-              <li className={styles.headerItem}>
-                <NavLink to={`${match.url}/posts`} exact className={styles.headerLink} activeClassName={styles.active}>Posts</NavLink>
-              </li>
-              <li className={styles.headerItem}>
-                <NavLink to={`${match.url}/moments`} exact className={styles.headerLink} activeClassName={styles.active}>Moments</NavLink>
-              </li>
-            </ul>
-            {user.profile.social && Object.keys(user.profile.social).length > 0 ? (
-              <ul className={styles.socialLinks}>
-                {Object.entries(user.profile.social).map(([key, value]) => (value
-                  ? (
-                    <li key={key}>
-                      <a href={value} target="_blank" rel="noopener noreferrer">
-                        <svg className={styles[key]}>
-                          <use xlinkHref={`${icons}#icon-${key}`} />
-                        </svg>
-                      </a>
-                    </li>
-                  ) : null))}
+            <h1>{user.nickname}</h1>
+            <h2>{user.profile.personalData && user.profile.personalData.realName ? user.profile.personalData.realName : null}</h2>
+
+            {user.profile.personalData && user.profile.personalData.location && (
+              <div className={styles.location}>
+                <svg className={styles.locationIcon}>
+                  <use xlinkHref={`${icons}#icon-location-pin`} />
+                </svg>
+                <p className={styles.locationName}>{user.profile.personalData.location}</p>
+              </div>
+            )}
+
+            <div className={styles.kindOfPlayer}>
+              <div className={styles.playerType}>{user.profile.gamerData.kind ? user.profile.gamerData.kind : 'PLAYER'}</div>
+              <div className={styles.playerText}>{user.profile.gamerData.kind ? 'Player' : null}</div>
+            </div>
+          </div>
+
+          <div className={styles.detail}>
+
+            <div className={styles.header}>
+              <ul className={styles.headerMenu}>
+                <li className={styles.headerItem}>
+                  <NavLink to={`${match.url}`} exact className={styles.headerLink} activeClassName={styles.active}>Overview</NavLink>
+                </li>
+                <li className={styles.headerItem}>
+                  <NavLink to={`${match.url}/posts`} exact className={styles.headerLink} activeClassName={styles.active}>Posts</NavLink>
+                </li>
+                <li className={styles.headerItem}>
+                  <NavLink to={`${match.url}/moments`} exact className={styles.headerLink} activeClassName={styles.active}>Moments</NavLink>
+                </li>
               </ul>
-            ) : null}
+              {user.profile.social && Object.keys(user.profile.social).length > 0 ? (
+                <ul className={styles.socialLinks}>
+                  {Object.entries(user.profile.social).map(([key, value]) => (value
+                    ? (
+                      <li key={key}>
+                        <a href={value} target="_blank" rel="noopener noreferrer">
+                          <svg className={styles[key]}>
+                            <use xlinkHref={`${icons}#icon-${key}`} />
+                          </svg>
+                        </a>
+                      </li>
+                    ) : null))}
+                </ul>
+              ) : null}
+            </div>
+            <Route path={`${match.url}/`} exact component={Overview} />
+            <Route path={`${match.url}/posts`} exact component={Posts} />
+            <Route path={`${match.url}/moments`} exact component={Moments} />
           </div>
-          <Route path={`${match.url}/`} exact component={Overview} />
-          <Route path={`${match.url}/posts`} exact component={Posts} />
-          <Route path={`${match.url}/moments`} exact component={Moments} />
         </div>
-      </div>
+      )
     )
   );
 };
