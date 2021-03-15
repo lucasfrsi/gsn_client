@@ -26,9 +26,7 @@
     "react/jsx-one-expression-per-line": 0,
     "object-curly-newline": 0,
     "max-len": "off",
-    "no-underscore-dangle": ["error", { 
-      "allow": ["_id"]
-    }],
+    "no-underscore-dangle": "off",
     "jsx-a11y/label-has-associated-control": [ 2, {
       "labelComponents": ["CustomLabel"],
       "labelAttributes": ["inputLabel"],

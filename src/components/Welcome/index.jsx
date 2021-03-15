@@ -14,8 +14,14 @@ const Welcome = ({ getRandomUser, featuredUser, loading }) => {
 
   return (
     <div className={styles.welcome}>
-      <div>
-        
+      <div className={styles.wrapper}>
+        <div className={styles.leftSide}>
+          <h1>Welcome to <span>GamersX</span></h1>
+          <h2>Have fun</h2>
+        </div>
+        <div className={styles.rightSide}>
+          CAROUSEL
+        </div>
       </div>
       <div className={styles.featuredUser}>
         {featuredUser ? <FeaturedMember featuredUser={featuredUser} loading={loading} /> : null}

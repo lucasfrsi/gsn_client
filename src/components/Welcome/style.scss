@@ -3,41 +3,36 @@
 .welcome {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   margin: 2rem;
   height: 100%;
 }
 
-.heading {
-  // display: flex;
-  // justify-content: center;
-  // text-align: center;
-  text-align: center;
-  margin-left: 5rem;
+.wrapper {
+  display: flex;
+  margin-bottom: auto;
+}
 
-  &Main {
-    display: block;
-    font-size: 6rem;
+.leftSide {
+  flex: 0 0 50%;
+  text-shadow: 0 .3rem .3rem rgba(0,0,0,.2);
+
+  h1 {
+    font-size: 5rem;
     font-weight: 400;
-    letter-spacing: 5rem;
-    color: transparent;
-    background-image: linear-gradient(to right, $c-primary-l, $c-primary-d);
-    background-clip: text;
-    -webkit-background-clip: text;
+
+    span {
+      color: $c-primary;
+    }
   }
 
-  &Sec {
-    display: block;
+  h2 {
     font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 1.25rem;
-    margin-left: -3.2rem;
-    color: transparent;
-    background-image: linear-gradient(to right, $c-primary-l, $c-primary-d);
-    background-clip: text;
-    -webkit-background-clip: text;
   }
+}
+
+.rightSide {
+  flex: 0 0 50%;
 }
 
 .featuredUser {

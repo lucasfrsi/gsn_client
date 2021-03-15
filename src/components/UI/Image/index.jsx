@@ -23,7 +23,7 @@ const Image = ({ image, customStyle, spinnerSize, alt }) => {
       <img
         src={`http://localhost:5000/${image}`}
         alt={alt}
-        className={`${customStyle}`}
+        className={customStyle}
         onLoad={handleOnLoad}
         onError={handleOnError}
         style={{
