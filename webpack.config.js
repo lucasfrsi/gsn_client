@@ -1,30 +1,34 @@
-/* eslint-disable */
+/* eslint-disable global-require */
 const path = require('path');
 const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-module.exports = {
-  // mode: passed as a CLI argument ( --mode development || --mode production )
-  entry: './src/index.jsx',
+const config = {
+  mode: isDevelopment ? 'development' : 'production',
+
+  entry: path.join(__dirname, 'src', 'index.jsx'),
+
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/'
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: '[name].[contenthash].js',
+    chunkFilename: 'chunks/[contenthash].js',
+    assetModuleFilename: 'images/[contenthash:8][ext]',
+    clean: true,
   },
+
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'babel-loader',
       },
       {
         test: /\.s[ac]ss$/i,
@@ -33,59 +37,104 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
+              importLoaders: 2,
               modules: {
                 localIdentName: '[local]_[hash:base64:6]',
               },
-              sourceMap: isDevelopment,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  'postcss-flexbugs-fixes',
+                  [
+                    'postcss-preset-env',
+                    {
+                      autoprefixer: {
+                        flexbox: 'no-2009',
+                      },
+                      stage: 3,
+                    },
+                  ],
+                ],
+              },
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: isDevelopment,
               implementation: require('sass'),
               sassOptions: {
-                fiber: require('fibers')
-              }
+                fiber: require('fibers'),
+              },
             },
           },
-        ]
+        ],
       },
       {
-        test: /\.(png|svg|jpe?g|gif)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[hash:base64:8].[ext]',
-            outputPath: 'images',
-          },
-        }]
-      }
-    ]
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        type: 'asset/resource',
+      },
+    ],
   },
+
   resolve: {
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss'],
+    symlinks: false,
   },
-  devServer: {
+
+  optimization: {
+    runtimeChunk: 'single',
+    moduleIds: 'deterministic',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendors',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+        },
+      },
+    },
+    minimizer: [
+      '...',
+      new CssMinimizerPlugin(),
+    ],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'GamersX',
+      meta: {
+        viewport: 'width=device-width, initial-scale=1',
+      },
+      favicon: path.join(__dirname, 'src', 'assets', 'favicon.png'),
+    }),
+    new CompressionPlugin(),
+    new webpack.DefinePlugin({ __webpack_devmode__: isDevelopment }),
+  ],
+};
+
+if (isDevelopment) {
+  config.target = 'web';
+
+  config.devServer = {
     contentBase: './dist',
     hot: true,
+    clientLogLevel: 'silent',
     historyApiFallback: true,
-  },
-  devtool: isDevelopment ? 'source-map' : false,
-  optimization: {
-    minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
-    }),
-    new HtmlWebpackPlugin({
-      title: 'gsn_client',
-      favicon: __dirname + '/src/assets/favicon.png'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new CompressionPlugin(),
-    new CleanWebpackPlugin()
-  ]
-};
+    compress: true,
+  };
+
+  config.devtool = 'eval-source-map';
+} else {
+  config.target = 'browserslist';
+
+  config.plugins.push(new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+    chunkFilename: 'chunks/[id].[contenthash].css',
+  }));
+}
+
+module.exports = config;
