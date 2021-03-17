@@ -1,16 +1,22 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { getRandomUserRequest } from '../../store/actions/users';
 
 import FeaturedMember from '../FeaturedMember';
 
 import styles from './style.scss';
 
-const Welcome = ({ getRandomUser, featuredUser, loading }) => {
+const Welcome = () => {
+  const { featuredUser, loading } = useSelector((state) => ({
+    featuredUser: state.users.featuredUser,
+    loading: state.users.loading,
+  }), shallowEqual);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getRandomUser();
-  }, [getRandomUser]);
+    dispatch(getRandomUserRequest());
+  }, [dispatch]);
 
   return (
     <div className={styles.welcome}>
@@ -30,17 +36,4 @@ const Welcome = ({ getRandomUser, featuredUser, loading }) => {
   );
 };
 
-Welcome.propTypes = {
-  getRandomUser: PropTypes.func.isRequired,
-  featuredUser: PropTypes.shape().isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  featuredUser: state.users.featuredUser,
-  loading: state.users.loading,
-});
-
-export default connect(mapStateToProps, {
-  getRandomUser: getRandomUserRequest,
-})(Welcome);
+export default Welcome;

@@ -87,7 +87,7 @@ const FeaturedMember = ({
           )}
         </div>
         <div className={styles.tags}>
-          <div className={`${styles.featuredMemberTag} ${loading && styles.greyMark}`}>{profile.gamerData.kind && profile.gamerData.kind}#player</div>
+          <div className={`${styles.featuredMemberTag} ${loading && styles.greyMark}`}>#{profile.gamerData.kind && profile.gamerData.kind}player</div>
           {profile.gamerData.twitchChannel && profile.gamerData.twitchChannel.streamer && <div className={`${styles.featuredMemberTag} ${loading && styles.greyMark}`}>#streamer</div>}
         </div>
         <p className={`${styles.featuredMemberDescription} ${loading && styles.greyMark}`}>{loading ? 'LoadingLoadingLoading' : profile.gamerData.bio}</p>

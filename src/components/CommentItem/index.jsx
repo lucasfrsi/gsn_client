@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import { deleteCommentRequest } from '../../store/actions/posts';
 
@@ -14,10 +14,15 @@ import styles from './style.scss';
 const CommentItem = ({
   postId,
   comment: { _id, text, user, date },
-  deleteComment,
-  loggedUser,
-  postUser,
 }) => {
+  const dispatch = useDispatch();
+  const deleteComment = (p, c) => dispatch(deleteCommentRequest(p, c));
+
+  const { loggedUser, postUser } = useSelector((state) => ({
+    loggedUser: state.auth.user._id,
+    postUser: state.posts.post.user._id,
+  }), shallowEqual);
+
   const [loading, setLoading] = useState(true);
   const [deletionConfirmation, setDeletionConfirmation] = useState(false);
 
@@ -121,14 +126,6 @@ const CommentItem = ({
 CommentItem.propTypes = {
   postId: PropTypes.string.isRequired,
   comment: PropTypes.shape().isRequired,
-  deleteComment: PropTypes.func.isRequired,
-  loggedUser: PropTypes.string.isRequired,
-  postUser: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  loggedUser: state.auth.user._id,
-  postUser: state.posts.post.user._id,
-});
-
-export default connect(mapStateToProps, { deleteComment: deleteCommentRequest })(CommentItem);
+export default CommentItem;

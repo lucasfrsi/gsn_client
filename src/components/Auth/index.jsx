@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginRequest, signupRequest } from '../../store/actions/auth';
 import { removeAlert } from '../../store/actions/alert';
 import Alert from '../UI/Alert';
@@ -9,7 +9,12 @@ import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
 
-const Auth = ({ isAuthLogin, close, login, signup, clearError }) => {
+const Auth = ({ isAuthLogin, close }) => {
+  const dispatch = useDispatch();
+  const login = (e, p) => dispatch(loginRequest(e, p));
+  const signup = (n, e, p) => dispatch(signupRequest(n, e, p));
+  const clearError = () => dispatch(removeAlert());
+
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [nickname, setNickname] = useState({
@@ -273,13 +278,6 @@ const Auth = ({ isAuthLogin, close, login, signup, clearError }) => {
 Auth.propTypes = {
   isAuthLogin: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  signup: PropTypes.func.isRequired,
-  clearError: PropTypes.func.isRequired,
 };
 
-export default connect(null, {
-  login: loginRequest,
-  signup: signupRequest,
-  clearError: removeAlert,
-})(Auth);
+export default Auth;

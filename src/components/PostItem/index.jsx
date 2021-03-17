@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { editPostRequest } from '../../store/actions/posts';
@@ -18,9 +18,12 @@ const PostItem = ({
   avatar,
   postId,
   userId,
-  loggedUserId,
-  editPost,
 }) => {
+  const loggedUserId = useSelector((state) => state.auth.user._id);
+
+  const dispatch = useDispatch();
+  const editPost = (p, t) => dispatch(editPostRequest(p, t));
+
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [editText, setEditText] = useState(text);
@@ -141,12 +144,6 @@ PostItem.propTypes = {
   avatar: PropTypes.string.isRequired,
   postId: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
-  loggedUserId: PropTypes.string.isRequired,
-  editPost: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  loggedUserId: state.auth.user._id,
-});
-
-export default connect(mapStateToProps, { editPost: editPostRequest })(PostItem);
+export default PostItem;

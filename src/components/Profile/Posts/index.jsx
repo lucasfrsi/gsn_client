@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import styles from './style.scss';
 
@@ -9,7 +8,13 @@ import noactivity from '../../../assets/images/noactivity.png';
 import Post from '../../Post';
 import Compose from '../../ComposePost';
 
-const Posts = ({ posts, user, loggedUser }) => {
+const Posts = () => {
+  const { posts, user, loggedUser } = useSelector((state) => ({
+    posts: state.posts.posts,
+    user: state.users.user,
+    loggedUser: state.auth.user,
+  }), shallowEqual);
+
   const renderPosts = () => {
     const postsArray = [...posts];
     postsArray.reverse();
@@ -54,16 +59,4 @@ const Posts = ({ posts, user, loggedUser }) => {
   );
 };
 
-Posts.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  user: PropTypes.shape().isRequired,
-  loggedUser: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  posts: state.posts.posts,
-  user: state.users.user,
-  loggedUser: state.auth.user,
-});
-
-export default connect(mapStateToProps)(Posts);
+export default Posts;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { updateProfileRequest } from '../../../store/actions/users';
@@ -18,7 +18,11 @@ const PLATFORMS = {
   discord: 'Discord Username & Tag',
 };
 
-const EditProfile = ({ close, updateProfile, currentProfile }) => {
+const EditProfile = ({ close }) => {
+  const currentProfile = useSelector((state) => state.users.user.profile);
+  const dispatch = useDispatch();
+  const updateProfile = (p) => dispatch(updateProfileRequest(p));
+
   const [formData, setFormData] = useState({
     realName: currentProfile.personalData.realName,
     location: currentProfile.personalData.location,
@@ -314,14 +318,6 @@ const EditProfile = ({ close, updateProfile, currentProfile }) => {
 
 EditProfile.propTypes = {
   close: PropTypes.func.isRequired,
-  updateProfile: PropTypes.func.isRequired,
-  currentProfile: PropTypes.shape().isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentProfile: state.users.user.profile,
-});
-
-export default connect(mapStateToProps, {
-  updateProfile: updateProfileRequest,
-})(EditProfile);
+export default EditProfile;

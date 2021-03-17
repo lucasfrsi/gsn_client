@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import styles from './style.scss';
 
@@ -9,7 +8,13 @@ import noactivity from '../../../assets/images/noactivity.png';
 import Moment from '../../Moment';
 import Compose from '../../NewMoment';
 
-const Moments = ({ moments, user, loggedUser }) => {
+const Moments = () => {
+  const { moments, user, loggedUser } = useSelector((state) => ({
+    moments: state.moments.moments,
+    user: state.users.user,
+    loggedUser: state.auth.user,
+  }), shallowEqual);
+
   const renderMoments = () => {
     const momentsArray = [...moments];
     momentsArray.reverse();
@@ -54,16 +59,4 @@ const Moments = ({ moments, user, loggedUser }) => {
   );
 };
 
-Moments.propTypes = {
-  moments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  user: PropTypes.shape().isRequired,
-  loggedUser: PropTypes.shape().isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  moments: state.moments.moments,
-  user: state.users.user,
-  loggedUser: state.auth.user,
-});
-
-export default connect(mapStateToProps)(Moments);
+export default Moments;

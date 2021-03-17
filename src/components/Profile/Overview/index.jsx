@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import styles from './style.scss';
 
@@ -11,7 +10,14 @@ import Post from '../../Post';
 import Moment from '../../Moment';
 import EditProfile from '../EditProfile';
 
-const Overview = ({ posts, moments, user, loggedUser }) => {
+const Overview = () => {
+  const { posts, moments, user, loggedUser } = useSelector((state) => ({
+    posts: state.posts.posts,
+    moments: state.moments.moments,
+    user: state.users.user,
+    loggedUser: state.auth.user,
+  }), shallowEqual);
+
   const [editMode, setEditMode] = useState(false);
 
   const renderLastPost = () => {
@@ -159,18 +165,4 @@ const Overview = ({ posts, moments, user, loggedUser }) => {
   );
 };
 
-Overview.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  user: PropTypes.shape().isRequired,
-  loggedUser: PropTypes.shape().isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  posts: state.posts.posts,
-  moments: state.moments.moments,
-  user: state.users.user,
-  loggedUser: state.auth.user,
-});
-
-export default connect(mapStateToProps)(Overview);
+export default Overview;

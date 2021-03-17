@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { likePostRequest, deletePostRequest } from '../../store/actions/posts';
 
 import LoadingSpinner from '../UI/LoadingSpinner';
@@ -17,15 +17,17 @@ const Post = ({
   likes,
   comments,
   createdAt,
-  updatedAt,
   user,
   nickname,
   avatar,
-  loggedUserId,
-  likePost,
-  deletePost,
   customStyle,
 }) => {
+  const loggedUserId = useSelector((state) => state.auth.user._id);
+
+  const dispatch = useDispatch();
+  const likePost = (p, l) => dispatch(likePostRequest(p, l));
+  const deletePost = (p) => dispatch(deletePostRequest(p));
+
   const [loading, setLoading] = useState(true);
   const [postLikes, setPostLikes] = useState(0);
   const [postDislikes, setPostDislikes] = useState(0);
@@ -219,13 +221,9 @@ Post.propTypes = {
   likes: PropTypes.arrayOf(PropTypes.object).isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   createdAt: PropTypes.string.isRequired,
-  updatedAt: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   nickname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  loggedUserId: PropTypes.string.isRequired,
-  likePost: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
   customStyle: PropTypes.string,
 };
 
@@ -233,11 +231,4 @@ Post.defaultProps = {
   customStyle: null,
 };
 
-const mapStateToProps = (state) => ({
-  loggedUserId: state.auth.user._id,
-});
-
-export default connect(mapStateToProps, {
-  likePost: likePostRequest,
-  deletePost: deletePostRequest,
-})(Post);
+export default Post;

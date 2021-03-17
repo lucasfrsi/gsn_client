@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createPostRequest } from '../../store/actions/posts';
 
 import styles from './style.scss';
 
-const ComposePost = ({ createPost }) => {
+const ComposePost = () => {
+  const dispatch = useDispatch();
+  const createPost = (t) => dispatch(createPostRequest(t));
+
   const [text, setText] = useState('');
 
   const handleSubmit = (event) => {
@@ -33,8 +35,4 @@ const ComposePost = ({ createPost }) => {
   );
 };
 
-ComposePost.propTypes = {
-  createPost: PropTypes.func.isRequired,
-};
-
-export default connect(null, { createPost: createPostRequest })(ComposePost);
+export default ComposePost;

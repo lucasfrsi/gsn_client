@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import { changeAvatarRequest, changeCoverRequest } from '../../store/actions/users';
 
 import Backdrop from '../UI/Backdrop';
-import svg from '../../assets/svg/sprite.svg';
-
 import styles from './style.scss';
 
-const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }) => {
+const ChangeAvatarOrCover = ({ isAvatar, closeModal }) => {
+  const dispatch = useDispatch();
+  const changeAvatar = (f) => dispatch(changeAvatarRequest(f));
+  const changeCover = (f) => dispatch(changeCoverRequest(f));
+
   const [file, setFile] = useState({
     value: null,
     isValid: false,
@@ -108,13 +109,8 @@ const ChangeAvatarOrCover = ({ changeAvatar, changeCover, isAvatar, closeModal }
 };
 
 ChangeAvatarOrCover.propTypes = {
-  changeAvatar: PropTypes.func.isRequired,
-  changeCover: PropTypes.func.isRequired,
   isAvatar: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
-export default connect(null, {
-  changeAvatar: changeAvatarRequest,
-  changeCover: changeCoverRequest,
-})(ChangeAvatarOrCover);
+export default ChangeAvatarOrCover;

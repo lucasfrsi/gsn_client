@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { createMomentRequest } from '../../store/actions/moments';
 
 import styles from './style.scss';
 
-const NewMoment = ({ createMoment }) => {
+const NewMoment = () => {
+  const dispatch = useDispatch();
+  const createMoment = (f) => dispatch(createMomentRequest(f));
+
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [title, setTitle] = useState({
@@ -173,10 +175,4 @@ const NewMoment = ({ createMoment }) => {
   );
 };
 
-NewMoment.propTypes = {
-  createMoment: PropTypes.func.isRequired,
-};
-
-export default connect(null, {
-  createMoment: createMomentRequest,
-})(NewMoment);
+export default NewMoment;

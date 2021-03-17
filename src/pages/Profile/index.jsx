@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -20,12 +20,21 @@ import ChangeAvatarOrCover from '../../components/ChangeAvatarOrCover';
 
 import styles from './style.scss';
 
-const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
+const Profile = ({ match }) => {
+  const { user, loading, loggedUserId } = useSelector((state) => ({
+    user: state.users.user,
+    loading: state.users.loading,
+    loggedUserId: state.auth.user._id,
+  }), shallowEqual);
+  const dispatch = useDispatch();
+
   const [avatarIsLoading, setAvatarIsLoading] = useState(true);
   const [coverIsLoading, setCoverIsLoading] = useState(true);
   const [changeAvatar, setChangeAvatar] = useState(null);
 
   useEffect(() => {
+    const getUserProfile = (u) => dispatch(getUserRequest(u));
+
     if (match.url === '/my-profile') {
       getUserProfile(loggedUserId);
     } else {
@@ -35,7 +44,7 @@ const Profile = ({ match, getUserProfile, loggedUserId, user, loading }) => {
       // reset state?
       // console.log('executed profile cleanup');
     };
-  }, [getUserProfile, loggedUserId, match.params.id, match.url]);
+  }, [dispatch, loggedUserId, match.params.id, match.url]);
 
   const handleOnLoadAvatar = () => {
     setAvatarIsLoading(false);
@@ -174,20 +183,6 @@ Profile.propTypes = {
     url: PropTypes.string.isRequired,
     params: PropTypes.shape().isRequired,
   }).isRequired,
-  getUserProfile: PropTypes.func.isRequired,
-  loggedUserId: PropTypes.string.isRequired,
-  user: PropTypes.shape(),
-  loading: PropTypes.bool.isRequired,
 };
 
-Profile.defaultProps = {
-  user: {},
-};
-
-const mapStateToProps = (state) => ({
-  user: state.users.user,
-  loading: state.users.loading,
-  loggedUserId: state.auth.user._id,
-});
-
-export default connect(mapStateToProps, { getUserProfile: getUserRequest })(Profile);
+export default Profile;

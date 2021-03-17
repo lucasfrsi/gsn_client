@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { removeAlert } from '../../../store/actions/alert';
 
-const Alert = ({ alert, alertStyle, reset }) => {
+const Alert = ({ alertStyle }) => {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
   useEffect(() => function cleanup() {
+    const reset = () => dispatch(removeAlert());
     reset();
-  }, [reset]);
+  }, [dispatch]);
 
   return (
     alert.data !== null && (
@@ -19,17 +23,7 @@ const Alert = ({ alert, alertStyle, reset }) => {
 };
 
 Alert.propTypes = {
-  alert: PropTypes.shape({
-    data: PropTypes.shape({
-      message: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
   alertStyle: PropTypes.string.isRequired,
-  reset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  alert: state.alert,
-});
-
-export default connect(mapStateToProps, { reset: removeAlert })(Alert);
+export default Alert;

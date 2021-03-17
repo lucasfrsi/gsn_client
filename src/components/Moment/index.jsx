@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { deleteMomentRequest, reactMomentRequest } from '../../store/actions/moments';
@@ -39,11 +39,14 @@ const Moment = ({
   createdAt,
   nickname,
   avatar,
-  loggedUserId,
-  deleteMoment,
-  reactMoment,
   customStyle,
 }) => {
+  const loggedUserId = useSelector((state) => state.auth.user._id);
+
+  const dispatch = useDispatch();
+  const deleteMoment = (m) => dispatch(deleteMomentRequest(m));
+  const reactMoment = (m, r) => dispatch(reactMomentRequest(m, r));
+
   const [showImage, setShowImage] = useState(false);
   const [showReactionsOptions, setShowReactionsOptions] = useState(false);
   const [deletionConfirmation, setDeletionConfirmation] = useState(false);
@@ -129,7 +132,7 @@ const Moment = ({
       sob: 0,
     };
 
-    const reactionsCount = reactions.reduce((counter, { user, type }) => {
+    const reactionsCount = reactions.reduce((counter, { type }) => {
       reactionsObject[type] += 1;
       // eslint-disable-next-line no-param-reassign
       counter += 1;
@@ -280,9 +283,6 @@ Moment.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   reactions: PropTypes.arrayOf(PropTypes.object).isRequired,
   createdAt: PropTypes.string.isRequired,
-  loggedUserId: PropTypes.string.isRequired,
-  deleteMoment: PropTypes.func.isRequired,
-  reactMoment: PropTypes.func.isRequired,
   customStyle: PropTypes.string,
 };
 
@@ -290,11 +290,4 @@ Moment.defaultProps = {
   customStyle: null,
 };
 
-const mapStateToProps = (state) => ({
-  loggedUserId: state.auth.user._id,
-});
-
-export default connect(mapStateToProps, {
-  deleteMoment: deleteMomentRequest,
-  reactMoment: reactMomentRequest,
-})(Moment);
+export default Moment;

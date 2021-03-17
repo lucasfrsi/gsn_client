@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PostItem from '../../components/PostItem';
 import CommentForm from '../../components/CommentForm';
@@ -12,10 +12,16 @@ import Loading from '../../components/UI/Loading';
 
 import styles from './style.scss';
 
-const Post = ({ match, loading, post, getPost }) => {
+const Post = ({ match }) => {
+  const dispatch = useDispatch();
+  const { loading, post } = useSelector((state) => ({
+    loading: state.posts.loading,
+    post: state.posts.post,
+  }), shallowEqual);
+
   useEffect(() => {
-    getPost(match.params.id);
-  }, [getPost, match.params.id]);
+    dispatch(getPostRequest(match.params.id));
+  }, [dispatch, match.params.id]);
 
   return (
     loading || post === null ? <Loading /> : (
@@ -44,14 +50,6 @@ Post.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape().isRequired,
   }).isRequired,
-  getPost: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  post: PropTypes.shape().isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  post: state.posts.post,
-});
-
-export default connect(mapStateToProps, { getPost: getPostRequest })(Post);
+export default Post;

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { getMomentsRequest } from '../../store/actions/moments';
 
@@ -10,10 +9,16 @@ import Moment from '../../components/Moment';
 
 import styles from './style.scss';
 
-const Moments = ({ getMoments, moments, loading }) => {
+const Moments = () => {
+  const dispatch = useDispatch();
+  const { moments, loading } = useSelector((state) => ({
+    moments: state.moments.moments,
+    loading: state.moments.loading,
+  }), shallowEqual);
+
   useEffect(() => {
-    getMoments();
-  }, [getMoments]);
+    dispatch(getMomentsRequest());
+  }, [dispatch]);
 
   return (
     <div className={styles.postsPage}>
@@ -50,17 +55,4 @@ const Moments = ({ getMoments, moments, loading }) => {
   );
 };
 
-Moments.propTypes = {
-  getMoments: PropTypes.func.isRequired,
-  moments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  moments: state.moments.moments,
-  loading: state.moments.loading,
-});
-
-export default connect(mapStateToProps, {
-  getMoments: getMomentsRequest,
-})(Moments);
+export default Moments;
