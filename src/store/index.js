@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -6,7 +7,7 @@ import setAuthToken from '../util/setAuthToken';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-const composeEnhancers = (__webpack_devmode__ === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
+const composeEnhancers = (__webpack_devmode__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
