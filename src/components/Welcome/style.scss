@@ -35,6 +35,7 @@
   p {
     font-size: 1.8rem;
     color: $c-grey-d-2;
+    text-align: justify;
 
     &:last-of-type {
       margin-top: 1rem;
@@ -61,11 +62,16 @@
 
   // padding: 2rem;
   // box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+
+  img {
+    max-width: 35rem;
+    height: auto;
+  }
 }
 
 .text {
   flex: 1 0 60%;
-  padding: 2rem 0;
+  padding: 1rem 0;
   
   h1 {
     font-size: 2rem;
@@ -74,11 +80,13 @@
 
   p {
     line-height: 1.4;
+    margin-bottom: 1rem;
   }
 }
 
 .left {
   margin-right: 2rem;
+  text-align: right;
 }
 
 .right {
@@ -102,9 +110,33 @@
 hr {
   align-self: center;
   width: 85%;
-  margin: 4rem 0;
+  margin: 6rem 0 4rem;
 
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba($c-primary, 0.75), rgba(0, 0, 0, 0));
+}
+
+.gettingStarted {
+  max-width: 80%;
+  text-align: center;
+  margin-bottom: 6rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  align-self: center;
+  
+
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 400;
+    color: $c-grey-d-5;
+  }
+
+  img {
+    width: 6rem;
+    height: auto;
+  }
 }

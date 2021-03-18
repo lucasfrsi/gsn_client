@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import ProfileImage from '../UI/ProfileImage';
 import svg from '../../assets/svg/sprite.svg';
 import defaultAvatar from '../../assets/images/default_avatar.png';
-import featured from '../../assets/images/featured.png';
 
 import styles from './style.scss';
 
@@ -102,7 +101,6 @@ const FeaturedMember = ({
       </div>
       <div className={styles.featuredMemberLabel}>
         Featured Member
-        <img src={featured} alt="featured" />
       </div>
     </figure>
   );
