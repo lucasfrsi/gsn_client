@@ -4,14 +4,30 @@
   max-width: 144rem;
   margin: 8rem auto;
   box-shadow: 0 2rem 6rem rgba(0,0,0,.3);
+
+  @include respond(mw1440) {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    box-shadow: none;
+  }
 }
 
 .content {
   display: flex;
+
+  @include respond(mw1440) {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .pages {
   flex: 1;
   min-height: 70rem;
   background-color: $c-white;
+
+  @include respond(mw1440) {
+    min-height: 100vh;
+  }
 }

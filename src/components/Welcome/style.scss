@@ -6,6 +6,10 @@
 
   margin: 4rem;
   height: 100%;
+
+  @include respond(mw1440) {
+    height: auto;
+  }
 }
 
 .wrapper {
