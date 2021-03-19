@@ -1,5 +1,12 @@
+@use '../../../../sass/abstracts/members.scss' as *;
+
 .sideNav {
   font-size: 1.4rem;
   list-style: none;
   margin-top: 3.5rem;
+
+  @include respond(mw1000) {
+    margin-top: 0;
+    display: flex;
+  }
 }

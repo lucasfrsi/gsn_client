@@ -21,10 +21,20 @@
 .header {
   display: flex;
   justify-content: space-between;
+
+  @include respond(mw1280) {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 }
 
 .heading {
   flex: 0 1 30rem;
+
+  @include respond(mw1280) {
+    flex: 0 1 auto;
+    margin-bottom: 4rem;
+  }
 
   h1 {
     font-size: 2.5rem;
@@ -69,13 +79,13 @@
 
   img {
     max-width: 35rem;
-    height: auto;
+    height: 100%;
   }
 }
 
 .text {
-  flex: 1 0 60%;
-  padding: 1rem 0;
+  flex: 1 1 60%;
+  // padding: 1rem 0;
   
   h1 {
     font-size: 2rem;
@@ -109,6 +119,11 @@
   justify-content: flex-end;
 
   margin-left: 2rem;
+
+  @include respond(mw1280) {
+    margin: 0;
+    align-self: center;
+  }
 }
 
 hr {

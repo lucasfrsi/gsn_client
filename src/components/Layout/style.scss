@@ -20,6 +20,10 @@
     width: 100%;
     height: 100%;
   }
+
+  @include respond(mw1000) {
+    flex-direction: column;
+  }
 }
 
 .pages {

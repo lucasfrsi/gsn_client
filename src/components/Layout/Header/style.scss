@@ -4,8 +4,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 
-  height: 7rem;
+  // height: 7rem;
+
+  // @include respond(mw768) {
+  //   height: 11rem;
+  // }
 
   border-bottom: 1px solid $c-white-3;
   background-color: $c-white; 

@@ -9,6 +9,12 @@
   
   display: flex;
   align-items: stretch;
+
+  @include respond(mw800) {
+    flex-direction: column;
+    height: auto;
+    max-width: 40rem;
+  }
 }
 
 .featuredMemberHero {
@@ -28,6 +34,10 @@
   flex: 1;
   background: white;
   padding: 2.5rem 2rem;
+
+  @include respond(mw800) {
+    padding: 2rem;
+  }
   
   display: flex;
   flex-direction: column;
@@ -43,6 +53,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include respond(mw800) {
+    writing-mode: horizontal-tb;
+    order: -1;
+  }
 }
 
 .featuredMemberTitle {
@@ -85,6 +100,10 @@
   font-size: 1.4rem;
   letter-spacing: .1rem;
   margin-bottom: auto;
+
+  @include respond(mw800) {
+    margin-bottom: 2rem;
+  }
 }
 
 .featuredMemberDetails {
@@ -107,6 +126,7 @@
     font-weight: 400;
     display: flex;
     color: $c-grey-m-2;
+    white-space: nowrap;
   }
 }
 
@@ -136,6 +156,10 @@
 .tags {
   display: flex;
   margin-right: auto;
+
+  @include respond(mw800) {
+    margin-bottom: 1rem;
+  }
 }
 
 .greyMark {

@@ -11,6 +11,13 @@
   background-color: $c-white-2;
   border-radius: 100px;
 
+  @include respond(mw800) {
+    order: 1;
+    flex: 0 0 100%;
+    border-radius: 0;
+    margin-bottom: 1rem;
+  }
+
   &:focus-within {
     outline: none;
     background-color: $c-white-3;

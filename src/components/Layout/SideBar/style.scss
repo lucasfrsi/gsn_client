@@ -9,6 +9,10 @@
 
   background-color: $c-black-1; 
   color: $c-white-1;
+
+  @include respond(mw1000) {
+    // flex-direction: row;
+  }
 }
 
 .logo {
@@ -16,4 +20,8 @@
   color: $c-grey-l-3;
   text-align: center;
   padding: 2.5rem;
+
+  @include respond(mw1000) {
+    display: none;
+  }
 }

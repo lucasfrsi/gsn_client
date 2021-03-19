@@ -14,10 +14,10 @@ import gettingStarted from '../../assets/images/featured.png';
 import styles from './style.scss';
 
 const Welcome = () => {
-  const { featuredUser, loading, nickname } = useSelector((state) => ({
+  const { featuredUser, loading, user } = useSelector((state) => ({
     featuredUser: state.users.featuredUser,
     loading: state.users.loading,
-    nickname: state.auth.user.nickname,
+    user: state.auth.user,
   }), shallowEqual);
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Welcome = () => {
         <div className={styles.header}>
           <div className={styles.heading}>
             <div className={styles.welcomeTxt}>
-              <h1>Welcome <span>{nickname || ''}</span></h1>
+              <h1>Welcome <span>{user ? user.nickname : ''}</span></h1>
               <img src={welcome} alt="welcome" />
             </div>
             <p>Check the sections below to know more about the GamersX features and how to get started, or simply navigate through the menu.</p>
