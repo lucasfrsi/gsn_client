@@ -13,14 +13,17 @@
 //   @if $breakpoint == phone {
 //       @media only screen and (max-width: 37.5em) { @content };    //600px
 //   }
-//   @if $breakpoint == tab-port {
-//       @media only screen and (max-width: 56.25em) { @content };     //900px
-//   }
+  @if $breakpoint == mw550 {
+    @media only screen and (max-width: 34.375em) { @content };
+  }
   @if $breakpoint == mw800 {
     @media only screen and (max-width: 50em) { @content };
   }
   @if $breakpoint == mw1000 {
     @media only screen and (max-width: 62.5em) { @content };
+  }
+  @if $breakpoint == mw1100 {
+    @media only screen and (max-width: 68.75em) { @content };
   }
   @if $breakpoint == mw1280 {
     @media only screen and (max-width: 80em) { @content };

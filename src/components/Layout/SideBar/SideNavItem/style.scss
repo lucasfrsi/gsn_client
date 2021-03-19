@@ -58,6 +58,11 @@
       padding: 2rem;
     }
 
+    @include respond(mw550) {
+      flex-direction: column;
+      padding: 1rem;
+    }
+
     &.selected {
       color: $c-white-1;
     }
@@ -68,5 +73,10 @@
     height: 1.75rem;
     margin-right: 2rem;
     fill: currentColor;
+
+    @include respond(mw550) {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
   }
 }

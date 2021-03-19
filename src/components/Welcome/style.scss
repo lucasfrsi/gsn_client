@@ -10,6 +10,10 @@
   @include respond(mw1440) {
     height: auto;
   }
+
+  @include respond(mw800) {
+    margin: 2rem;
+  }
 }
 
 .wrapper {
@@ -25,6 +29,7 @@
   @include respond(mw1280) {
     flex-direction: column;
     justify-content: flex-end;
+    align-items: center;
   }
 }
 
@@ -33,6 +38,7 @@
 
   @include respond(mw1280) {
     flex: 0 1 auto;
+    max-width: 80rem;
     margin-bottom: 4rem;
   }
 
@@ -51,6 +57,10 @@
     color: $c-grey-d-2;
     text-align: justify;
 
+    @include respond(mw1280) {
+      text-align: center;
+    }
+
     &:last-of-type {
       margin-top: 1rem;
     }
@@ -61,6 +71,10 @@
   display: flex;
   align-items: flex-end;
   margin: 0 0 1rem;
+
+  @include respond(mw1280) {
+    justify-content: center;
+  }
 
   img {
     margin-left: 1rem;
@@ -74,12 +88,22 @@
   align-self: center;
   margin-bottom: 6rem;
 
+  @include respond(mw1100) {
+    flex-direction: column;
+  }
+
   // padding: 2rem;
   // box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
 
   img {
     max-width: 35rem;
     height: 100%;
+
+    @include respond(mw1100) {
+      max-width: 100%;
+      align-self: center;
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -105,6 +129,15 @@
 
 .right {
   margin-left: 2rem;
+}
+
+.left,
+.right {
+  @include respond(mw1100) {
+    margin: 1rem 0 0;
+    text-align: left;
+    order: 1;
+  }
 }
 
 .image {
