@@ -174,4 +174,14 @@
   img {
     border-radius: 0 !important;
   }
+
+  @include respond(mw800) {
+    width: 42rem !important;
+    height: 14rem !important;
+  }
+
+  @include respond(mw450) {
+    width: 30rem !important;
+    height: 12rem !important;
+  }
 }

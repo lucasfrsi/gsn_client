@@ -37,6 +37,7 @@ const Post = ({ match }) => {
         />
         <CommentForm postId={post._id} />
         <div className={styles.comments}>
+          <h1>Comments</h1>
           {post.comments.map((comment) => (
             <CommentItem key={comment._id} comment={comment} postId={post._id} />
           ))}

@@ -36,7 +36,12 @@
     // max-height: 22rem;
     width: 22rem;
     height: 22rem;
-    // width: 100%;
+    
+    @include respond(mw850) {
+      width: 16rem;
+      height: 16rem;
+      margin-bottom: -1.5rem;
+    }
 
     grid-row: 1 / 1;
     grid-column: 2 / 3;
@@ -70,6 +75,14 @@
     letter-spacing: 1px;
     padding: 1.5rem 1.5rem 1.5rem 3rem;
     // margin-right: 2rem;
+
+    @include respond(mw800) {
+      padding: 0;
+    }
+
+    @include respond(mw450) {
+      font-size: 2rem;
+    }
   }
 
   h2 {
@@ -78,22 +91,51 @@
     font-weight: 200;
     letter-spacing: 1px;
     margin-right: auto;
+
+    @include respond(mw800) {
+      padding: 0;
+      margin: 0 0 0 1.5rem;
+    }
+
+    @include respond(mw450) {
+      font-size: 1.5rem;
+      margin: 0 0 0 1rem;
+    }
   }
 
   .locationIcon {
     width: 1.75rem;
     height: 1.75rem;
     fill: $c-primary;
+
+    @include respond(mw450) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   .location {
     font-size: 1.4rem;
     display: flex;
     vertical-align: center;
+
+    @include respond(mw800) {
+      // align-self: flex-end;
+      margin: 1rem 0 1rem 1.2rem;
+    }
+
+    @include respond(mw450) {
+      margin: .5rem 0 1rem 1.2rem;
+      font-size: 1.2rem;
+    }
   }
 
   .locationIcon {
     margin-right: .5rem;
+
+    @include respond(mw450) {
+      margin-right: .25rem;
+    }
   }
 
   .kindOfPlayer {
@@ -107,6 +149,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @include respond(mw800) {
+      margin-left: 0;
+    }
   }
 
   .playerType {
@@ -129,6 +175,29 @@
   }
 }
 
+.meta {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+
+  @include respond(mw800) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.names {
+  display: flex;
+  align-items: center;
+
+  @include respond(mw800) {
+    margin: 1.5rem 1.5rem 0;
+  }
+}
+
 .detail {
   display: flex;
   flex-direction: column;
@@ -137,12 +206,20 @@
   padding: 2.0rem;
   background-color: $c-white-1;
   border-bottom: 1px solid $c-white-3;
+
+  @include respond(mw450) {
+    padding: 1.5rem;
+  }
 }
 
 .header {
   display: flex;
   flex-direction: row;
   margin-bottom: 3rem;
+
+  @include respond(mw600) {
+    flex-direction: column;
+  }
 }
 
 .headerMenu {
@@ -194,6 +271,10 @@
 
   display: flex;
   list-style: none;
+
+  @include respond(mw600) {
+    margin: 1rem 0 0;
+  }
 
   li:not(:last-of-type) {
     margin-right: 1rem;
@@ -247,6 +328,15 @@
   visibility: hidden;
   opacity: 0;
 
+  @include respond(mw850) {
+    visibility: visible;
+    opacity: 1;
+
+    span {
+      display: none;
+    }
+  }
+
   &:hover {
     background-color: rgba($c-primary, 1);
   }
@@ -270,6 +360,11 @@
   left: 4.2rem;
   display: flex;
   justify-content: center;
+
+  @include respond(mw850) {
+    bottom: 1.4rem;
+    left: 6rem;
+  }
 }
 
 .photoIcon {
@@ -278,4 +373,9 @@
   vertical-align: middle;
   margin-left: .5rem;
   fill: $c-white;
+
+  @include respond(mw850) {
+    margin-left: 0;
+  }
+  
 }

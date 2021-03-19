@@ -18,7 +18,8 @@
 }
 
 .formGroup {
-  .description {
+  .description,
+  .descriptionNoMargin {
     font-weight: bold;
     display: block;
     margin-bottom: .8rem;
@@ -160,6 +161,7 @@
 
 .genres {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .genre {
@@ -167,7 +169,7 @@
   border-radius: 1rem;
   cursor: pointer;
   padding: .4rem .8rem;
-  margin: 0 0.4rem 0 0;
+  margin: 1rem 0.4rem 0 0;
   // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
 
   transition: all .2s;
@@ -289,4 +291,8 @@
 .smallDescription {
   margin-top: -.5rem;
   margin-bottom: 1.5rem;
+}
+
+.descriptionNoMargin {
+  margin-bottom: 0 !important;
 }

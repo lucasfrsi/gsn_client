@@ -23,13 +23,13 @@ const Moments = () => {
   return (
     <div className={styles.postsPage}>
       <h1>MOMENTS</h1>
-      <h2>Gamers&apos; favorite moments are all found here!</h2>
+      <h2>Check all the gamers&apos; favorite moments!</h2>
       <h3>
         Click&nbsp;
         <Link to="/my-profile/moments">
           here
         </Link>
-        &nbsp;to share yours!
+        &nbsp;to share yours.
       </h3>
       {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
       <div className={styles.postsList}>

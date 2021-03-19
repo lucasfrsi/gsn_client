@@ -43,7 +43,8 @@
 
 .recentActivity {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -55,10 +56,11 @@
   background-color: $c-white;
   box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 0 2rem 2rem;
 
   flex-wrap: wrap;
-  width: fit-content;
+  // width: fit-content;
+  width: 100%;
 
   .subContainer {
     flex: 1 1;
@@ -66,7 +68,7 @@
 
     h4 {
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin: 2rem 0 1rem;
     }
 
     .genresHeading {
@@ -177,6 +179,7 @@
   border-radius: .5rem;
 
   font-weight: 600;
+  font-size: 1.4rem;
 
   transition: all .2s;
 
@@ -214,5 +217,10 @@
 }
 
 .margin {
-  margin-left: 2rem;
+  margin: 0 0 3.5rem !important;
+
+  @include respond(mw450) {
+    margin: 2rem -2rem !important;
+    width: 100% !important;
+  }
 }

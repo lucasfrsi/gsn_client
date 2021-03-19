@@ -90,7 +90,7 @@ const Profile = ({ match }) => {
             />
             {user._id === loggedUserId ? (
               <button className={styles.coverButton} type="button" onClick={() => setChangeAvatar(false)}>
-                Change Cover
+                <span>Change Cover</span>
                 <svg className={styles.photoIcon}>
                   <use xlinkHref={`${icons}#icon-camera`} />
                 </svg>
@@ -110,7 +110,7 @@ const Profile = ({ match }) => {
               />
               {user._id === loggedUserId ? (
                 <button className={styles.avatarButton} type="button" onClick={() => setChangeAvatar(true)}>
-                  Change Avatar
+                  <span>Change Avatar</span>
                   <svg className={styles.photoIcon}>
                     <use xlinkHref={`${icons}#icon-camera`} />
                   </svg>
@@ -120,18 +120,20 @@ const Profile = ({ match }) => {
           </div>
 
           <div className={styles.overview}>
-
-            <h1>{user.nickname}</h1>
-            <h2>{user.profile.personalData && user.profile.personalData.realName ? user.profile.personalData.realName : null}</h2>
-
-            {user.profile.personalData && user.profile.personalData.location && (
+            <div className={styles.meta}>
+              <div className={styles.names}>
+                <h1>{user.nickname}</h1>
+                <h2>{user.profile.personalData && user.profile.personalData.realName ? user.profile.personalData.realName : null}</h2>
+              </div>
+              {user.profile.personalData && user.profile.personalData.location && (
               <div className={styles.location}>
                 <svg className={styles.locationIcon}>
                   <use xlinkHref={`${icons}#icon-location-pin`} />
                 </svg>
                 <p className={styles.locationName}>{user.profile.personalData.location}</p>
               </div>
-            )}
+              )}
+            </div>
 
             <div className={styles.kindOfPlayer}>
               <div className={styles.playerType}>{user.profile.gamerData.kind ? user.profile.gamerData.kind : 'PLAYER'}</div>

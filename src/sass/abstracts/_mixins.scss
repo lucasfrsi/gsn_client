@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 @mixin absCenter {
   position: absolute;
   top: 50%;
@@ -5,19 +7,54 @@
   transform: translate(-50%, -50%);
 }
 
+@mixin styled-scrollbar {
+  // Scrollbar
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: rgba($c-grey-d-1, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: rgba($c-grey-d-2, 0.3); 
+  }
+
+  // &:hover::-webkit-scrollbar-track
+  ::-webkit-scrollbar-track:hover {
+    background-color: rgba($c-grey-d-1, 0.3);
+  }
+
+  // &:hover::-webkit-scrollbar-thumb
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba($c-grey-d-2, 0.6); 
+  }
+}
+
 // MEDIA QUERY MANAGER
 // ORDER: Base + typography > general layout + grid > page layout > components
 // 1em = 16px
 
 @mixin respond($breakpoint) {
-//   @if $breakpoint == phone {
-//       @media only screen and (max-width: 37.5em) { @content };    //600px
-//   }
+  @if $breakpoint == mw450 {
+    @media only screen and (max-width: 28.125em) { @content };
+  }
   @if $breakpoint == mw550 {
     @media only screen and (max-width: 34.375em) { @content };
   }
+  @if $breakpoint == mw600 {
+    @media only screen and (max-width: 37.5em) { @content };
+  }
   @if $breakpoint == mw800 {
     @media only screen and (max-width: 50em) { @content };
+  }
+  @if $breakpoint == mw850 {
+    @media only screen and (max-width: 53.125em) { @content };
   }
   @if $breakpoint == mw1000 {
     @media only screen and (max-width: 62.5em) { @content };

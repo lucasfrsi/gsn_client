@@ -23,13 +23,13 @@ const Posts = () => {
   return (
     <div className={styles.postsPage}>
       <h1>POSTS</h1>
-      <h2>Here you find all the posts created by the community.</h2>
+      <h2>Here you will will find all the posts created by the community.</h2>
       <h3>
-        Do you want to share your thoughts? Click&nbsp;
+        Write your own post by clicking&nbsp;
         <Link to="/my-profile/posts">
           here
         </Link>
-        &nbsp;to create a post!
+        .
       </h3>
       {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
       <div className={styles.postsList}>
@@ -46,7 +46,7 @@ const Posts = () => {
               user={post.user._id}
               nickname={post.user.nickname}
               avatar={post.user.avatar}
-              customStyle={styles.margin}
+              // customStyle={styles.margin}
             />
           ))
         ) : null}

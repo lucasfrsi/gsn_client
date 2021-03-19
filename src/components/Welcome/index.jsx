@@ -42,7 +42,6 @@ const Welcome = () => {
             {featuredUser ? <FeaturedMember featuredUser={featuredUser} loading={loading} /> : null}
           </div>
         </div>
-        <hr />
         <div className={styles.gettingStarted}>
           <h1>Getting Started</h1>
           <img src={gettingStarted} alt="getting started" />
@@ -59,6 +58,7 @@ const Welcome = () => {
             </p>
           </div>
         </div>
+        <hr />
         <div className={styles.row}>
           <div className={`${styles.text} ${styles.left}`}>
             <h1>Moments</h1>
@@ -70,6 +70,7 @@ const Welcome = () => {
           </div>
           <img src={momentExample} alt="moment example" />
         </div>
+        <hr />
         <div className={styles.row}>
           <img src={postExample} alt="moment example" />
           <div className={`${styles.text} ${styles.right}`}>
@@ -79,6 +80,7 @@ const Welcome = () => {
             </p>
           </div>
         </div>
+        <hr />
         <div className={styles.row}>
           <div className={`${styles.text} ${styles.left}`}>
             <h1>Heroku and Default Images</h1>

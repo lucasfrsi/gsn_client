@@ -25,7 +25,7 @@ const Overview = () => {
     const lastPost = posts[lastPostIndex];
     return (
       <Post
-        className={styles.recentActivityPost}
+        customStyle={styles.margin}
         _id={lastPost._id}
         text={lastPost.text}
         likes={lastPost.likes}
@@ -53,7 +53,6 @@ const Overview = () => {
         userId={user._id}
         nickname={user.nickname}
         avatar={user.avatar}
-        customStyle={styles.margin}
       />
     );
   };

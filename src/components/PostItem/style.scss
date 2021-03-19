@@ -11,14 +11,11 @@
   position: relative;
 
   width: 80rem;
-  // min-width: 55rem;
-
   margin: 2rem;
 
-  // &:hover .postEditDelete {
-  //   visibility: visible;
-  //   opacity: 1;
-  // }
+  @include respond(mw850) {
+    width: 95%;
+  }
 }
 
 .postUser {
@@ -31,6 +28,12 @@
     width: 12rem;
     height: 12rem;
     margin: 0 2rem 2rem 0;
+
+    @include respond(mw550) {
+      width: 8rem;
+      height: 8rem;
+      margin: 0 2rem 2rem 0;
+    }
   }
 
   img {
@@ -71,9 +74,11 @@
 
 .postText {
   max-width: 60rem;
-  max-height: 10rem;
+  min-height: 10rem;
   word-wrap: break-word;
   line-height: 1.4;
+  flex-grow: 1;
+  margin-bottom: 1rem;
 }
 
 .postDate {

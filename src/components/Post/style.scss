@@ -75,8 +75,17 @@
   position: relative;
 
   width: 80rem;
-  // min-width: 64rem;
-  // margin: 2rem;
+  margin: 2rem;
+
+  @include styled-scrollbar;
+
+  @include respond(mw850) {
+    width: 95%;
+  }
+
+  @include respond(mw450) {
+    padding: 1.5rem;
+  }
 }
 
 .postUser {
@@ -84,11 +93,19 @@
   flex-direction: column;
   align-items: center;
 
+  flex: 0 1;
+
   img,
   .loadingSpinner {
     width: 12rem;
     height: 12rem;
     margin: 0 2rem 2rem 0;
+
+    @include respond(mw550) {
+      width: 8rem;
+      height: 8rem;
+      margin: 0 2rem 2rem 0;
+    }
   }
 
   img {
@@ -128,12 +145,12 @@
 }
 
 .postText {
-  max-width: 57rem;
   max-height: 15rem;
   word-wrap: break-word;
-  // text-overflow: ellipsis;
-  // white-space: pre-line;
-  // overflow-y: scroll;
+  overflow-y: auto;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  padding-right: 1rem;
   line-height: 1.4;
 }
 

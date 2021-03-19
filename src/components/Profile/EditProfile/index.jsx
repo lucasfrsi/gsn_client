@@ -223,7 +223,7 @@ const EditProfile = ({ close }) => {
           <small>This might be what is keeping you from finding your duo</small>
         </div>
         <div className={styles.formGroup}>
-          <p className={styles.description}>Select your favorite genres</p>
+          <p className={styles.descriptionNoMargin}>Select your favorite genres</p>
           <div className={styles.genres}>
             {GENRES.map((genre) => (
               <div key={genre}>
