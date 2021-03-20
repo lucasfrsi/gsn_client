@@ -1,0 +1,46 @@
+@use '../../sass/abstracts/members.scss' as *;
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  @include respond(mw1000) {
+    margin-top: 10rem;
+  }
+
+  span {
+    font-family: $f-secondary;
+    color: $c-primary;
+    font-size: 5rem;
+
+    margin-top: 1rem;
+  }
+
+  p {
+    font-family: $f-secondary;
+    color: $c-grey-d-5;
+    font-size: 3rem;
+    letter-spacing: -0.2rem;
+  }
+}
+
+.set {
+  position: relative;
+}
+
+.char,
+.bubble {
+  width: 10rem;
+}
+
+.bubble {
+  position: absolute;
+  bottom: 6.5rem;
+  right: -6.5rem;
+  transform: rotate(-15deg);
+}
