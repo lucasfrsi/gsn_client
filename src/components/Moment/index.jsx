@@ -15,6 +15,7 @@ import love from '../../assets/images/reactions/love.png';
 import nani from '../../assets/images/reactions/nani.png';
 import sob from '../../assets/images/reactions/sob.png';
 import no from '../../assets/images/reactions/no.png';
+import defaultAvatar from '../../assets/images/default_avatar.png';
 
 import svg from '../../assets/svg/sprite.svg';
 
@@ -266,7 +267,11 @@ const Moment = ({
             </Link>
             {formatDate()}
           </div>
-          <ProfileImage profileImage={avatar} customStyle={styles.momentUserPhoto} />
+          {avatar ? (
+            <ProfileImage profileImage={avatar} spinnerSize={styles.momentUserPhoto} customStyle={styles.momentUserPhoto} />
+          ) : (
+            <img src={defaultAvatar} alt="default avatar" className={styles.momentUserPhoto} />
+          )}
         </div>
       </div>
     </>

@@ -68,7 +68,11 @@ const FeaturedMember = ({
   return (
     <figure className={styles.featuredMemberCard}>
       <div className={styles.featuredMemberHero}>
-        <ProfileImage profileImage={loading ? defaultAvatar : avatar} customStyle={styles.featuredMemberImg} spinnerSize={styles.loadingSpinnerSize} />
+        {loading ? (
+          <img src={defaultAvatar} alt="default avatar" className={styles.featuredMemberImg} />
+        ) : (
+          <ProfileImage profileImage={avatar} customStyle={styles.featuredMemberImg} spinnerSize={styles.loadingSpinnerSize} />
+        )}
       </div>
       <div className={styles.featuredMemberContent}>
         <div className={styles.featuredMemberTitle}>

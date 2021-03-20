@@ -42,4 +42,4 @@ document.body.appendChild(app);
 ReactDOM.render(<App />, app);
 
 // TO-DO
-// 1. Config babel (browser target)
+// 1. Check console logs, and fix
