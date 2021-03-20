@@ -10,6 +10,7 @@ const Profile = React.lazy(() => import('../../pages/Profile'));
 const Posts = React.lazy(() => import('../../pages/Posts'));
 const Post = React.lazy(() => import('../../pages/Post'));
 const Moments = React.lazy(() => import('../../pages/Moments'));
+const NotFound = React.lazy(() => import('../../pages/NotFound'));
 
 const Routes = () => (
   <Suspense fallback={<Loading />}>
@@ -20,7 +21,7 @@ const Routes = () => (
       <PrivateRoute path="/posts" component={Posts} />
       <PrivateRoute path="/moments" component={Moments} />
       <Route exact path="/" component={Home} />
-      <Route path="" render={() => <div>404</div>} /> {/* ADD 404 PAGE COMPONENT */}
+      <Route path="" component={NotFound} />
     </Switch>
   </Suspense>
 );

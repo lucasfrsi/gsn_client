@@ -26,6 +26,11 @@
   max-width: 50rem;
 
   color: $c-grey-d-3;
+
+  @include respond(mw550) {
+    width: 90%;
+    top: 45%;
+  }
 }
 
 .closeButton {

@@ -1,3 +1,5 @@
+@use '../../../../sass/abstracts/members.scss' as *;
+
 .logoBox {
   display: flex;
   align-items: center;
@@ -25,4 +27,8 @@
   height: 5.5rem;
   top: -2.4rem;
   left: 2.2rem;
+
+  @include respond(mw1440) {
+    display: none;
+  }
 }
