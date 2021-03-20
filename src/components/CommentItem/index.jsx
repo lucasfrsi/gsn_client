@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import defaultUrl from '../../config/defaultUrl';
 
 import { deleteCommentRequest } from '../../store/actions/posts';
 
@@ -73,7 +74,7 @@ const CommentItem = ({
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={`http://localhost:5000/${user.avatar}` || defaultAvatar}
+          src={`${defaultUrl}${user.avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}

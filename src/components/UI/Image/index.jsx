@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import defaultUrl from '../../../config/defaultUrl';
 
 import LoadingSpinner from '../LoadingSpinner';
 import defaultMomentImage from '../../../assets/images/default_momentImage.png';
@@ -21,7 +22,7 @@ const Image = ({ image, customStyle, spinnerSize, alt }) => {
     <>
       {loading ? <LoadingSpinner size={spinnerSize} /> : null}
       <img
-        src={`http://localhost:5000/${image}`}
+        src={`${defaultUrl}${image}`}
         alt={alt}
         className={customStyle}
         onLoad={handleOnLoad}

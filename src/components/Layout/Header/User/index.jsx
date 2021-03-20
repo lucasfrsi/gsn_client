@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import defaultUrl from '../../../../config/defaultUrl';
 
 import Logout from './Logout';
 import LoadingSpinner from '../../../UI/LoadingSpinner';
@@ -41,7 +42,7 @@ const User = ({ auth }) => {
       <div className={styles.user}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={`http://localhost:5000/${auth.user.avatar}` || defaultAvatar}
+          src={`${defaultUrl}${auth.user.avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import defaultUrl from '../../config/defaultUrl';
 
 import { getUserRequest } from '../../store/actions/users';
 
@@ -79,7 +80,7 @@ const Profile = ({ match }) => {
           <div className={styles.cover}>
             {coverIsLoading ? <img src={defaultCover} alt="User Cover" /> : null}
             <img
-              src={`http://localhost:5000/${user.profile.cover}` || defaultCover}
+              src={`${defaultUrl}${user.profile.cover}` || defaultCover}
               alt="User Cover"
               className={styles.userPhoto}
               onLoad={handleOnLoadCover}
@@ -99,7 +100,7 @@ const Profile = ({ match }) => {
             <div className={styles.profileAvatar}>
               {avatarIsLoading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
               <img
-                src={`http://localhost:5000/${user.avatar}` || defaultAvatar}
+                src={`${defaultUrl}${user.avatar}` || defaultAvatar}
                 alt="User Avatar"
                 className={styles.userPhoto}
                 onLoad={handleOnLoadAvatar}

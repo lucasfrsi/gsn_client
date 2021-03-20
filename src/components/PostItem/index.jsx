@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import defaultUrl from '../../config/defaultUrl';
 
 import { editPostRequest } from '../../store/actions/posts';
 
@@ -59,7 +60,7 @@ const PostItem = ({
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={`http://localhost:5000/${avatar}` || defaultAvatar}
+          src={`${defaultUrl}${avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}
