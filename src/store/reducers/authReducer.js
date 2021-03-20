@@ -2,6 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
   LOADUSER_SUCCESS,
@@ -22,6 +23,7 @@ const authReducer = (state = initialState, action) => {
 
   switch (type) {
     case LOGIN_REQUEST:
+    case SIGNUP_REQUEST:
       return {
         ...state,
         loading: true,

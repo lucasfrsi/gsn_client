@@ -6,10 +6,10 @@ import styles from './style.scss';
 const LoadingSpinner = ({ size }) => (
   <div className={size}>
     <div className={styles.ldsRing}>
-      <div style={{ border: '3px solid white', borderColor: 'white transparent transparent transparent;' }} />
-      <div style={{ border: '3px solid white', borderColor: 'white transparent transparent transparent;' }} />
-      <div style={{ border: '3px solid white', borderColor: 'white transparent transparent transparent;' }} />
-      <div style={{ border: '3px solid white', borderColor: 'white transparent transparent transparent;' }} />
+      <div />
+      <div />
+      <div />
+      <div />
     </div>
   </div>
 );
@@ -17,6 +17,5 @@ const LoadingSpinner = ({ size }) => (
 LoadingSpinner.propTypes = {
   size: PropTypes.string.isRequired,
 };
-// border: ;
-// border-color: $c-primary transparent transparent transparent;
+
 export default LoadingSpinner;

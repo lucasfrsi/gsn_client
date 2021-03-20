@@ -183,6 +183,8 @@
 
   transition: all .2s;
 
+  max-height: 5.8rem;
+
   &:disabled {
     cursor: not-allowed;
     background-color: rgba($c-primary, .5);
@@ -219,7 +221,12 @@
 }
 
 .spinnerSize {
-  width: 4rem;
-  height: 4rem;
-  // margin: 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto;
+  
+  div div {
+    border: 4px solid $c-white;
+    border-color: $c-white transparent transparent transparent;
+  }
 }
