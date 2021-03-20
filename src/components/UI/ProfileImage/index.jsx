@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import defaultUrl from '../../../config/defaultUrl';
 
 import LoadingSpinner from '../LoadingSpinner';
 import defaultAvatar from '../../../assets/images/default_avatar.png';
@@ -23,7 +24,7 @@ const ProfileImage = ({ profileImage, customStyle, spinnerSize = customStyle }) 
     <>
       {loading ? <LoadingSpinner size={spinnerSize} /> : null}
       <img
-        src={`http://localhost:5000/${profileImage}` || defaultAvatar}
+        src={`${defaultUrl}${profileImage}` || defaultAvatar}
         alt="User Avatar"
         className={`${styles.profileImage} ${customStyle}`}
         onLoad={handleOnLoad}

@@ -1,9 +1,10 @@
 import axios from 'axios';
 import appStore from '../../store';
 import { logout } from '../../store/actions/auth';
+import defaultUrl from '../../config/defaultUrl';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: `${defaultUrl}api`,
 });
 
 api.interceptors.response.use(

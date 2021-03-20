@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import defaultUrl from '../../../../../config/defaultUrl';
 
 import LoadingSpinner from '../../../../UI/LoadingSpinner';
 import defaultAvatar from '../../../../../assets/images/default_avatar.png';
@@ -12,6 +13,7 @@ const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryStr
 
   const highlightQuery = (source, query) => {
     const defaultHighlight = (s) => <span className={styles.bold}>{s}</span>;
+    // eslint-disable-next-line no-useless-escape
     const escapeRegex = (v) => v.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
 
     const res = [];
@@ -48,7 +50,7 @@ const ResultItem = ({ id, avatar, nickname, realName, onFocus, onClick, queryStr
       <Link to={`/profile/${id}`} className={styles.resultLink} onFocus={onFocus} onClick={onClick} onKeyDown={onKeyDown}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={`http://localhost:5000/${avatar}` || defaultAvatar}
+          src={`${defaultUrl}${avatar}` || defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}

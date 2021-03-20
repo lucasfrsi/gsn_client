@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePostRequest, deletePostRequest } from '../../store/actions/posts';
+import defaultUrl from '../../config/defaultUrl';
 
 import LoadingSpinner from '../UI/LoadingSpinner';
 import defaultAvatar from '../../assets/images/default_avatar.png';
@@ -120,7 +121,7 @@ const Post = ({
       <div className={styles.postUser}>
         {loading ? <LoadingSpinner size={styles.loadingSpinner} /> : null}
         <img
-          src={avatar ? `http://localhost:5000/${avatar}` : defaultAvatar}
+          src={avatar ? `${defaultUrl}${avatar}` : defaultAvatar}
           alt="User"
           className={styles.userPhoto}
           onLoad={handleOnLoad}
