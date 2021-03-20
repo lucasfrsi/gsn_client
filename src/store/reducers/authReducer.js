@@ -1,4 +1,5 @@
 import {
+  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   SIGNUP_SUCCESS,
@@ -12,7 +13,7 @@ import {
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
-  loading: true,
+  loading: false,
   user: null,
 };
 
@@ -20,6 +21,11 @@ const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
       return {

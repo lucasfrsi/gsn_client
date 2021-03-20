@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest, signupRequest } from '../../store/actions/auth';
 import { removeAlert } from '../../store/actions/alert';
 import Alert from '../UI/Alert';
 
+import Spinner from '../UI/LoadingSpinner';
 import svg from '../../assets/svg/sprite.svg';
 
 import styles from './style.scss';
 
 const Auth = ({ isAuthLogin, close }) => {
+  const loading = useSelector((state) => state.auth.loading);
+
   const dispatch = useDispatch();
   const login = (e, p) => dispatch(loginRequest(e, p));
   const signup = (n, e, p) => dispatch(signupRequest(n, e, p));
@@ -258,7 +261,10 @@ const Auth = ({ isAuthLogin, close }) => {
             )}
           {/* Passwords do not match. Please try again. */}
 
-          <button type="submit" disabled={!isFormValid} className={styles.formButton}>{isLogin ? 'Log In' : 'Sign Up'}</button>
+          <button type="submit" disabled={!isFormValid} className={styles.formButton}>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {loading ? (<Spinner size={styles.spinnerSize} />) : (isLogin ? 'Log In' : 'Sign Up')}
+          </button>
         </form>
 
         <div className={styles.authToggle}>
