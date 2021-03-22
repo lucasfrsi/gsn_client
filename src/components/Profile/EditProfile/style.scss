@@ -260,6 +260,7 @@
     transition: all .2s;
     font-weight: 500;
     box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    max-height: 3.1rem;
   }
   
   .cancel {
@@ -286,6 +287,15 @@
       background-color: #e2164f;
     }
   }
+
+  .delete {
+    color: $c-white;
+    background-color: #f00;
+
+    &:hover {
+      background-color: rgb(223, 4, 4);
+    }
+  }
 }
 
 .smallDescription {
@@ -295,4 +305,113 @@
 
 .descriptionNoMargin {
   margin-bottom: 0 !important;
+}
+
+// Delete Confirmation
+
+.deleteConfirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: $c-white;
+  border-radius: .5rem;
+  padding: 5rem 2rem 2rem;
+
+  z-index: 20;
+
+  max-width: 60rem;
+
+  @include respond(mw450) {
+    width: 70%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .closeButton {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all .1s;
+  
+    &:focus {
+      outline: none;
+      transform: scale(1.2);
+      
+      .closeButtonIcon {
+        fill: $c-primary;
+      }
+    }
+
+    &:disabled {
+      cursor: default;
+      .closeButtonIcon {
+        fill: rgba($c-grey-d-3, 0.5);
+      }
+    }
+  
+    &Icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 2rem;
+      height: 2rem;
+      fill: $c-grey-d-3;
+      transition: all .1s;
+      
+      &:hover {
+        fill: $c-primary;
+      }
+    }
+  }
+
+  .message {
+    color: $c-grey-d-6;
+    margin-bottom: 2rem;
+
+    &:last-of-type {
+      margin-bottom: 3rem;
+    }
+  }
+
+  .choiceButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 3.4rem;
+
+    button {
+      cursor: pointer;
+      color: $c-white;
+      background-color: $c-primary;
+      padding: 1rem 0;
+      width: 8rem;
+      border: none;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: .1rem;
+      border-radius: 10px;
+      text-transform: uppercase;
+      box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+
+      transition: all .1s linear;
+
+      &:hover {
+        background-color: $c-primary-d;
+      }
+    }
+  }
+
+  .spinnerSize {
+    width: 3rem;
+    height: 3rem;
+  }
 }

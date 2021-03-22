@@ -14,6 +14,9 @@ import {
   UPDATE_USER_PROFILE_REQUEST,
   UPDATE_USER_PROFILE_SUCCESS,
   UPDATE_USER_PROFILE_ERROR,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
 } from './types';
 
 // REQUESTS
@@ -48,6 +51,10 @@ export const updateProfileRequest = (updatedProfile) => ({
   payload: {
     updatedProfile,
   },
+});
+
+export const deleteUserRequest = () => ({
+  type: DELETE_USER_REQUEST,
 });
 
 // SUCCESS AND ERROR
@@ -105,4 +112,12 @@ export const updateProfileSuccess = (profile) => ({
 
 export const updateProfileError = () => ({
   type: UPDATE_USER_PROFILE_ERROR,
+});
+
+export const deleteUserSuccess = () => ({
+  type: DELETE_USER_SUCCESS,
+});
+
+export const deleteUserError = () => ({
+  type: DELETE_USER_ERROR,
 });
