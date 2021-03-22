@@ -6,6 +6,8 @@ import {
   CHANGE_USER_AVATAR_SUCCESS,
   CHANGE_USER_COVER_SUCCESS,
   UPDATE_USER_PROFILE_SUCCESS,
+  DELETE_USER_SUCCESS,
+  LOGOUT,
 } from '../actions/types';
 
 const initialState = {
@@ -70,6 +72,13 @@ const usersReducer = (state = initialState, action) => {
           profile: payload.profile,
         },
         loading: false,
+      };
+    case DELETE_USER_SUCCESS:
+    case LOGOUT:
+      return {
+        loading: true,
+        featuredUser: null,
+        user: null,
       };
     default:
       return state;

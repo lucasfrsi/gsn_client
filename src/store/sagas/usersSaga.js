@@ -6,6 +6,7 @@ import {
   CHANGE_USER_AVATAR_REQUEST,
   CHANGE_USER_COVER_REQUEST,
   UPDATE_USER_PROFILE_REQUEST,
+  DELETE_USER_REQUEST,
 } from '../actions/types';
 
 import {
@@ -19,6 +20,8 @@ import {
   changeCoverError,
   updateProfileSuccess,
   updateProfileError,
+  deleteUserSuccess,
+  deleteUserError,
 } from '../actions/users';
 
 import {
@@ -27,6 +30,7 @@ import {
   changeAvatarService,
   changeCoverService,
   updateProfileService,
+  deleteUserService,
 } from '../../services/api';
 
 // GET USER BY ID
@@ -120,6 +124,23 @@ function* watchUpdateProfile() {
   }
 }
 
+// DELETE USER
+function* deleteUser() {
+  try {
+    yield call(deleteUserService);
+    yield put(deleteUserSuccess());
+  } catch (error) {
+    yield put(deleteUserError());
+  }
+}
+
+function* watchDeleteUser() {
+  while (true) {
+    yield take(DELETE_USER_REQUEST);
+    yield call(deleteUser);
+  }
+}
+
 // WATCHERS EXPORT
 const usersSaga = [
   fork(watchGetUser),
@@ -127,6 +148,7 @@ const usersSaga = [
   fork(watchChangeAvatar),
   fork(watchChangeCover),
   fork(watchUpdateProfile),
+  fork(watchDeleteUser),
 ];
 
 export default usersSaga;

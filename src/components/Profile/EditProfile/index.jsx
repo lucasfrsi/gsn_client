@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { updateProfileRequest } from '../../../store/actions/users';
+import { updateProfileRequest, deleteUserRequest } from '../../../store/actions/users';
 
 import svg from '../../../assets/svg/sprite.svg';
+import Backdrop from '../../UI/Backdrop';
+import LoadingSpinner from '../../UI/LoadingSpinner';
 
 import styles from './style.scss';
 
@@ -20,8 +22,12 @@ const PLATFORMS = {
 
 const EditProfile = ({ close }) => {
   const currentProfile = useSelector((state) => state.users.user.profile);
+  const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
   const updateProfile = (p) => dispatch(updateProfileRequest(p));
+  const deleteUser = () => dispatch(deleteUserRequest());
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   const [formData, setFormData] = useState({
     realName: currentProfile.personalData.realName,
@@ -100,6 +106,27 @@ const EditProfile = ({ close }) => {
 
   return (
     <div className={styles.editProfile}>
+      {deleteConfirmation ? (
+        <>
+          <Backdrop />
+          <div role="presentation" className={styles.deleteConfirmation}>
+            <button type="button" disabled={loading} className={styles.closeButton} onClick={() => setDeleteConfirmation(false)}>
+              <svg className={styles.closeButtonIcon}>
+                <use xlinkHref={`${svg}#icon-cross`} />
+              </svg>
+            </button>
+            <span className={styles.message}>
+              Deleting your account will not only delete your profile but also all of your posts, moments and interactions, and once deleted there is no going back.
+            </span>
+            <span className={styles.message}>
+              <strong>Are you sure you want to proceed?</strong>
+            </span>
+            <div className={styles.choiceButtons}>
+              {loading ? <LoadingSpinner size={styles.spinnerSize} /> : <button type="button" onClick={deleteUser}>Delete</button>}
+            </div>
+          </div>
+        </>
+      ) : null}
       <h1>Edit Profile</h1>
       <h2>Add some changes to your profile</h2>
       <form className={styles.form} onSubmit={onSubmit}>
@@ -308,6 +335,7 @@ const EditProfile = ({ close }) => {
           )}
         </div>
         <div className={styles.buttons}>
+          <button className={styles.delete} type="button" onClick={() => setDeleteConfirmation(true)}>Delete Account</button>
           <button className={styles.cancel} type="button" onClick={close}>Cancel</button>
           <input disabled={formData.bio.length > 250} className={styles.submit} type="submit" value="Submit" />
         </div>

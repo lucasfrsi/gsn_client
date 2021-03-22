@@ -10,6 +10,8 @@ import {
   DELETE_MOMENT_ERROR,
   REACT_MOMENT_SUCCESS,
   REACT_MOMENT_ERROR,
+  LOGOUT,
+  DELETE_USER_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -55,6 +57,12 @@ const momentsReducer = (state = initialState, action) => {
         ...state,
         moments: state.moments.map((moment) => (moment._id === payload.moment._id ? { ...moment, reactions: payload.moment.reactions } : moment)),
         loading: false,
+      };
+    case LOGOUT:
+    case DELETE_USER_SUCCESS:
+      return {
+        loading: true,
+        moments: [],
       };
     case GET_USER_ERROR:
     case GET_MOMENTS_ERROR:

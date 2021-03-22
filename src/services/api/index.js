@@ -49,6 +49,8 @@ export const updateProfileService = ({ updatedProfile }) => api.put('/users/prof
   profile: updatedProfile,
 });
 
+export const deleteUserService = () => api.delete('/users');
+
 // POSTS SERVICES
 
 // Posts

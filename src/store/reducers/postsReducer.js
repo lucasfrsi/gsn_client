@@ -18,6 +18,8 @@ import {
   CREATE_COMMENT_ERROR,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_ERROR,
+  LOGOUT,
+  DELETE_USER_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -82,6 +84,13 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         post: { ...state.post, comments: state.post.comments.filter((comment) => comment._id !== payload.commentId) },
+      };
+    case DELETE_USER_SUCCESS:
+    case LOGOUT:
+      return {
+        loading: true,
+        post: null,
+        posts: [],
       };
     case GET_USER_ERROR:
     case LIKE_POST_ERROR:

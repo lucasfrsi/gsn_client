@@ -9,6 +9,9 @@ import {
   LOADUSER_ERROR,
   LOGOUT,
   CHANGE_USER_AVATAR_SUCCESS,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +27,7 @@ const authReducer = (state = initialState, action) => {
   switch (type) {
     case LOGIN_REQUEST:
     case SIGNUP_REQUEST:
+    case DELETE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -52,6 +56,7 @@ const authReducer = (state = initialState, action) => {
         },
       };
     case LOADUSER_ERROR: // Account deleted is the same as these
+    case DELETE_USER_SUCCESS:
     case LOGOUT:
       return {
         ...state,
@@ -62,6 +67,7 @@ const authReducer = (state = initialState, action) => {
       };
     case LOGIN_ERROR:
     case SIGNUP_ERROR:
+    case DELETE_USER_ERROR:
       return {
         ...state,
         loading: false,
