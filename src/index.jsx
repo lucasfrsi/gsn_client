@@ -40,10 +40,3 @@ const app = document.createElement('div');
 document.body.appendChild(app);
 
 ReactDOM.render(<App />, app);
-
-// TO-DO
-// 1. Check console logs, and fix
-// 2. If no bio and no genres, and only platforms, it doesn't show.
-// 3. Welcome images getting stretched (height, maybe set to auto)
-// 4. Character count for Title and Description in moment creation is broken
-// 5. Only load images that has cover or profile, otherwise fallback to default (avoid 404s)
