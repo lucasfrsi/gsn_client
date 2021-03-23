@@ -85,7 +85,7 @@ const Overview = () => {
                 </svg>
               </button>
             ) : null}
-            {(user.profile.gamerData.bio || (user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0) || (user.profile.gamerData.platforms && user.profile.gamerData.platforms.length > 0)) && (
+            {(user.profile.gamerData.bio || (user.profile.gamerData.genres && user.profile.gamerData.genres.length > 0) || (user.profile.gamerData.platforms && !areObjectKeysEmpty(user.profile.gamerData.platforms))) && (
             <div className={styles.gamerInfo}>
               <div className={styles.heading}>
                 <h3>Gamer Info</h3>
