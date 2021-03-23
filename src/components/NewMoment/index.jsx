@@ -118,31 +118,35 @@ const NewMoment = () => {
           <div className={styles.inputsWrapper}>
             <label htmlFor="title">
               <strong>Title</strong>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                value={title.value}
-                autoComplete="off"
-                onChange={(e) => onChangeHandler(e)}
-              />
-              <span
-                className={`${styles.charCounter} ${title.value.length > 50 ? styles.charCounterRed : null}`}
-              >{title.value.length}/50
-              </span>
+              <div className={styles.inputWrapper}>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  value={title.value}
+                  autoComplete="off"
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                <span
+                  className={`${styles.charCounter} ${styles.charCounterTitle} ${title.value.length > 50 ? styles.charCounterRed : null}`}
+                >{title.value.length}/50
+                </span>
+              </div>
             </label>
             <label htmlFor="text">
               <strong>Description</strong>
-              <textarea
-                name="text"
-                id="text"
-                value={text.value}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              <span
-                className={`${styles.charCounter} ${text.value.length > 150 ? styles.charCounterRed : null}`}
-              >{text.value.length}/150
-              </span>
+              <div className={styles.inputWrapper}>
+                <textarea
+                  name="text"
+                  id="text"
+                  value={text.value}
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                <span
+                  className={`${styles.charCounter} ${text.value.length > 150 ? styles.charCounterRed : null}`}
+                >{text.value.length}/150
+                </span>
+              </div>
             </label>
           </div>
           <div className={styles.imageDiv}>

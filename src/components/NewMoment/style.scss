@@ -14,6 +14,10 @@
   color: $c-white;
 }
 
+.inputWrapper {
+  position: relative;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -55,8 +59,13 @@
 
   .charCounter {
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 1rem;
+    right: 1rem;
+
+    &Title {
+      bottom: 2.8rem;
+      right: 1rem;
+    }
 
     &Red {
       color: red;
